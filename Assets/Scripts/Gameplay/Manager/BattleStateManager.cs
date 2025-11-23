@@ -1,0 +1,143 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace ShabuStudio.Gameplay
+{
+    public class BattleStateManager : MonoBehaviour
+    {
+        public static BattleStateManager Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+        
+        [Header("State Info")]
+        private BattleState currentState;
+        
+        [Header("References")]
+        public CombatEntity playerUnit;
+        public EnemyCombatEntity enemyUnit;
+        [SerializeField] private ActionBar actionBar;
+        [SerializeField] private ActionManager actionManager;
+        [SerializeField] private HandManager handManager;
+        [SerializeField] private DeckManager deckManager;
+        [SerializeField] private CombatManager combatManager;
+
+
+        private void Start()
+        {
+            Invoke("StartInitialize", 0.1f);
+        }
+
+        void StartInitialize()
+        {
+            ChangeState(BattleState.Initialize);
+        }
+
+        public void ChangeState(BattleState newState)
+        {
+            currentState = newState;
+            Debug.Log($"State Changed to {newState}");
+
+            switch (newState)
+            {
+                case  BattleState.Initialize:
+                    HandleInitialize();
+                    break;
+                case BattleState.Start:
+                    HandleStart();
+                    break;
+                case BattleState.DrawPhase:
+                    StartCoroutine(HandleDrawPhase());
+                    break;
+                case BattleState.ActionSetupPhase:
+                    HandleActionSetupPhase();
+                    break;
+                case BattleState.ActionPhase:
+                    StartCoroutine(HandleActionPhase());
+                    break;
+                case BattleState.EndPhase:
+                    HandleEndPhase();
+                    break;
+            }
+        }
+
+        void HandleInitialize()
+        {
+            actionBar.Initialize();
+            deckManager.Initialize();
+            combatManager.Initialize();
+            handManager.Initialize(deckManager);
+            actionManager.Initialize(actionBar,combatManager);
+            
+            ChangeState(BattleState.Start);
+        }
+
+        void HandleStart()
+        {
+            actionBar.ResetAllCost();   
+            
+            //Will have start turn effect in the future
+            ChangeState(BattleState.DrawPhase);
+        }
+        
+        IEnumerator HandleDrawPhase()
+        {
+            yield return StartCoroutine(handManager.DrawCardToMax()); //Wait Until Player draw all card.
+            ChangeState(BattleState.ActionSetupPhase);
+        }
+
+        void HandleActionSetupPhase()
+        {
+            StartCoroutine(enemyUnit.StartActionSetup(actionBar));
+            actionManager.playButton.gameObject.SetActive(true);
+            handManager.SetHandCardInteractable(true);
+        }
+
+        IEnumerator HandleActionPhase()
+        {
+            yield return StartCoroutine(actionManager.StartActionSequence());
+            ChangeState(BattleState.EndPhase);
+        }
+
+        void HandleEndPhase()
+        {
+            if (enemyUnit.isDead)
+            {
+                ChangeState(BattleState.Win);
+                return;
+            }
+            
+            if (playerUnit.isDead)
+            {
+                ChangeState(BattleState.Lose);
+                return;
+            }
+            
+            ChangeState(BattleState.Start);
+        }
+
+        public void StartActionSequence()
+        {
+            ChangeState(BattleState.ActionPhase);
+            actionManager.playButton.gameObject.SetActive(false);
+            handManager.SetHandCardInteractable(false);
+            handManager.RemovePlayedCard();
+        }
+    }
+
+    public enum BattleState
+    {
+        Initialize, //First Time Scene load setup
+        Start, //Setup object, Reduce cooldown, Apply any start turn effect
+        DrawPhase,
+        ActionSetupPhase,
+        ActionPhase,
+        EndPhase,
+        Win,
+        Lose
+    }
+}
