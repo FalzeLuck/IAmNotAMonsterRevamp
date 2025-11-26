@@ -45,7 +45,7 @@ namespace ShabuStudio.Gameplay
                 CardData card = hand[index];
                 int speed = Random.Range(card.cardMinSpeed, card.cardMaxSpeed + 1);
 
-                if (!actionBar.InsertCard(card, speed, ActionOwner.Enemy))
+                if (!actionBar.InsertCard(card, speed, this, out _))
                 {
                     yield break;
                 }

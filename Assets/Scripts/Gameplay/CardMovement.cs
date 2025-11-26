@@ -14,8 +14,10 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private Vector3 _hoverLocalScale = new Vector3(1.1f, 1.1f, 1.1f);
         private float _startYPosition;
         [SerializeField] private float _hoverYOffset = 0.1f;
+        [SerializeField] private Vector3 _cannotClickOffset = new Vector3(10f, 10f, 10f);
         [SerializeField] private float _transitionSpeed = 0.3f;
         [SerializeField] private CardDisplay cardDisplay;
+        [SerializeField] private ActionDisplay _actionDisplay;
         private CardData cardData;
         private ActionBar actionBar;
 
@@ -53,32 +55,55 @@ namespace ShabuStudio.Gameplay
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (!isInteractable) return;
+            
+            //Action Display relate to this card
+            if (_isLocked)
+            {
+                _actionDisplay?.StartHighlight();
+            }
+            
             if (_currentState == 0)
             {
                 cardDisplay.UpdateCardOrder(999 + defaultCardOrder);
                 transform.DOScale(_hoverLocalScale, _transitionSpeed).SetEase(Ease.OutBack);
                 _currentState = 1;
+                
+                
             }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (!isInteractable) return;
+            
+            //Action Display relate to this card
+            if (_isLocked)
+            {
+                _actionDisplay?.StopHighlight();
+            }
             if (_currentState == 1)
             {
                 cardDisplay.UpdateCardOrder(defaultCardOrder);
                 transform.DOScale(_startLocalScale, _transitionSpeed).SetEase(Ease.OutBack);
                 _currentState = 0;
+                
             }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
             if (!isInteractable) return;
+            
+            //Get player Reference
+            CombatEntity playerUnit = BattleStateManager.Instance.playerUnit;
+            
             if (!_isLocked)
             {
-                if (actionBar.InsertCard(cardDisplay, ActionOwner.Player)) // If card can be inserted
+                if (actionBar.InsertCard(cardDisplay, playerUnit,out ActionDisplay actionDisplay)) // If card can be inserted
                 {
+                    //Action connect to this card
+                    _actionDisplay = actionDisplay;
+                    
                     cardDisplay.isPlayed = true;
                     _currentState = 2;
                     _isLocked = true;
@@ -87,15 +112,16 @@ namespace ShabuStudio.Gameplay
                 else
                 {
                     transform.DOKill(true);
-                    transform.DOShakePosition(0.2f, new Vector3(0.01f, 0.01f, 0f), 30, 90, false, true);
+                    transform.DOShakePosition(0.2f, _cannotClickOffset, 30, 90, false, true);
                 }
             }
             else
             {
+                _actionDisplay = null;
                 cardDisplay.isPlayed = false;
                 _currentState = 1;
                 _isLocked = false;
-                actionBar.RemoveCard(cardDisplay, ActionOwner.Player);
+                actionBar.RemoveCard(cardDisplay, playerUnit);
                 transform.DOLocalMoveY(_startYPosition, _transitionSpeed).SetEase(Ease.OutBack);
             }
         }

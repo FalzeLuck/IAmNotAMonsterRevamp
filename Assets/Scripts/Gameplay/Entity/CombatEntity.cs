@@ -9,11 +9,12 @@ namespace ShabuStudio.Gameplay
         [Header("Stats")]
         public string unitName;
         public ActionOwner unitType;
-        public int maxHealth = 100;
+        
+        [SerializeField] BaseStats baseStats;
+        public Stats Stats { get; private set; }
         public int currentHealth;
         public bool isDead = false;
         
-        //[Header("Buff")]
         
         public System.Action<int, int> OnHealthChanged; // Current, Max
         public System.Action OnStatusChanged; // When buffs are added/removed
@@ -22,10 +23,15 @@ namespace ShabuStudio.Gameplay
         public DeckData deckData;
         public List<CardData> availableCards = new List<CardData>();
         public List<CardData> droppedCards = new List<CardData>();
+
+        void Awake()
+        {
+            Stats = new Stats(new StatsMediator(), baseStats);
+        }
         
         private void Start()
         {
-            currentHealth = maxHealth;
+            currentHealth = baseStats.maxHealth;
             UpdateUI();
         }
         
@@ -72,7 +78,7 @@ namespace ShabuStudio.Gameplay
         public void Heal(int amount)
         {
             currentHealth += amount;
-            if (currentHealth > maxHealth) currentHealth = maxHealth;
+            if (currentHealth > Stats.MaxHealth) currentHealth = Stats.MaxHealth;
             UpdateUI();
         }
         
@@ -80,10 +86,28 @@ namespace ShabuStudio.Gameplay
         // -------------------
         // Buff Logic
         // -------------------
-        
-        private void UpdateUI()
+
+        public void ApplyBuff(List<Buff> buffList)
         {
-            OnHealthChanged?.Invoke(currentHealth, maxHealth);
+            foreach (var buff in buffList)
+            {
+                buff.ApplyBuff(this);
+            }
+            
+            UpdateUI();
+        }
+
+        public void DecreaseBuffTurn(int value)
+        {
+            Stats.Mediator.DecreaseTurnCountdown(value);
+        }
+        
+        // ----------
+        // UI Things
+        // ----------
+        public void UpdateUI()
+        {
+            OnHealthChanged?.Invoke(currentHealth, Stats.MaxHealth);
         }
 
         void Die()

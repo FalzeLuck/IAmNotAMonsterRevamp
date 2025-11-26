@@ -18,11 +18,9 @@ namespace ShabuStudio.Gameplay
             if (targetUnit != null)
             {
                 targetUnit.OnHealthChanged += UpdateHealthUI;
-                
-                // Force an update immediately so the bar looks correct at start
-                UpdateHealthUI(targetUnit.currentHealth, targetUnit.maxHealth);
             }
         }
+        
         
         private void OnDisable()
         {

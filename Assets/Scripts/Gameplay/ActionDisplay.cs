@@ -1,3 +1,4 @@
+using DG.Tweening;
 using ShabuStudio.Data;
 using TMPro;
 using UnityEngine;
@@ -8,18 +9,19 @@ namespace ShabuStudio.Gameplay
     public class ActionDisplay : MonoBehaviour
     {
         public Action action;
-        private ActionOwner owner;
         
         [Header("References")]
         public TextMeshProUGUI speedText;
         public Image ownerIndicatorImage;
+        
+        //Hightlight references
+        [SerializeField]private Image highlightImage;
 
-        public void Initialize(CardData cardData,int cardSpeed, ActionOwner owner)
+        public void Initialize(CardData cardData,int cardSpeed, CombatEntity ownerEntity)
         {
-            action = new Action(cardData, cardSpeed, owner);
-            this.owner = owner;
+            action = new Action(cardData, cardSpeed, ownerEntity);
             speedText.text = action.speed.ToString();
-            if(owner == ActionOwner.Player)
+            if(ownerEntity.unitType == ActionOwner.Player)
             {
                 ownerIndicatorImage.color = Color.green;
             }
@@ -27,20 +29,33 @@ namespace ShabuStudio.Gameplay
             {
                 ownerIndicatorImage.color = Color.red;
             }
+            
+            highlightImage.DOFade(0, 0);
         }
+        
+        public void StartHighlight()
+        {
+            highlightImage.DOFade(1, 0.2f);
+        }
+        
+        public void StopHighlight()
+        {
+            highlightImage.DOFade(0, 0.2f);
+        }
+        
     }
 
     public class Action
     {
         public CardData cardData;
         public int speed;
-        public ActionOwner owner;
+        public CombatEntity ownerEntity;
         
-        public Action(CardData cardData, int speed, ActionOwner owner)
+        public Action(CardData cardData, int speed, CombatEntity ownerEntity)
         {
             this.cardData = cardData;
             this.speed = speed;
-            this.owner = owner;
+            this.ownerEntity = ownerEntity;
         }
     }
 

@@ -29,10 +29,11 @@ namespace ShabuStudio.Gameplay
                 _combatManager.PlayCard(action,out bool targetDead);
                 yield return StartCoroutine(_actionBar.RemoveCardWaitFinish(0));
 
-                if (targetDead && action.owner == ActionOwner.Player) //Remove All Enemy card
+                if (targetDead && action.ownerEntity.unitType == ActionOwner.Player) //Remove All Enemy card
                 {
                     yield return StartCoroutine(_actionBar.RemoveCardSameOwner(ActionOwner.Enemy));
-                }else if (targetDead && action.owner == ActionOwner.Enemy) //Remove All Player card
+                }
+                else if (targetDead && action.ownerEntity.unitType == ActionOwner.Enemy) //Remove All Player card
                 {
                     yield return StartCoroutine(_actionBar.RemoveCardSameOwner(ActionOwner.Player));
                 }

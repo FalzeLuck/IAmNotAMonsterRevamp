@@ -25,6 +25,7 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private HandManager handManager;
         [SerializeField] private DeckManager deckManager;
         [SerializeField] private CombatManager combatManager;
+        [SerializeField] private DamageTextManager damageTextManager;
 
 
         private void Start()
@@ -69,9 +70,10 @@ namespace ShabuStudio.Gameplay
         {
             actionBar.Initialize();
             deckManager.Initialize();
-            combatManager.Initialize();
+            combatManager.Initialize(damageTextManager);
             handManager.Initialize(deckManager);
             actionManager.Initialize(actionBar,combatManager);
+            damageTextManager.Initialize();
             
             ChangeState(BattleState.Start);
         }
@@ -117,6 +119,9 @@ namespace ShabuStudio.Gameplay
                 return;
             }
             
+            playerUnit.DecreaseBuffTurn(1);
+            enemyUnit.DecreaseBuffTurn(1);
+            
             ChangeState(BattleState.Start);
         }
 
@@ -126,6 +131,15 @@ namespace ShabuStudio.Gameplay
             actionManager.playButton.gameObject.SetActive(false);
             handManager.SetHandCardInteractable(false);
             handManager.RemovePlayedCard();
+        }
+
+        
+        //Update Every UI In the game
+        void UpdateAllUI()
+        {
+            playerUnit.UpdateUI();
+            enemyUnit.UpdateUI();
+            actionBar.UpdateUI();
         }
     }
 
@@ -140,4 +154,5 @@ namespace ShabuStudio.Gameplay
         Win,
         Lose
     }
+    
 }

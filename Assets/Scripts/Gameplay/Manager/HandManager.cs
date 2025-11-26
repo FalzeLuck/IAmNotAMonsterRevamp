@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using ShabuStudio.Data;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -47,7 +48,6 @@ namespace ShabuStudio.Gameplay
             {
                 newCard.InitializeCard(deckManager.playerDeck.DrawRandomCard(),-newCard.transform.GetSiblingIndex());
             }
-            
             UpdateCardPositions();
         }
 

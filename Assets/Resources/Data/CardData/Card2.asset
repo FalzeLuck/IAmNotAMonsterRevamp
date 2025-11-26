@@ -14,10 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: attack_2
   cardType: 0
+  buffsToApply:
+    list: []
   cardName: Attack1
   cardImage: {fileID: 0}
   cardDescription: 
   cardCost: 3
   cardMinSpeed: 4
   cardMaxSpeed: 8
-  cardDamage: 10
+  cardAmount: 3
+  references:
+    version: 2
+    RefIds: []

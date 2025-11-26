@@ -194,7 +194,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.05
+  m_fontSize: 37.75
   m_fontSizeBase: 17.76
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -352,7 +352,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.225, y: 0.375}
+  m_SizeDelta: {x: 168.75, y: 281.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &149215729594417758
 MonoBehaviour:
@@ -367,6 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardData: {fileID: 0}
+  isPlayed: 0
   cardCostText: {fileID: 4942408369604696178}
   cardSpeedText: {fileID: 884584040184723589}
   canvas: {fileID: 1817790539729706394}
@@ -384,9 +385,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverLocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  _hoverYOffset: 50
+  _cannotClickOffset: {x: 10, y: 10, z: 0}
   _transitionSpeed: 0.3
   cardDisplay: {fileID: 0}
+  _actionDisplay: {fileID: 0}
   defaultCardOrder: 0
+  isInteractable: 1
 --- !u!222 &3410934672319114060
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -473,10 +478,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2213026905547595563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.17917633}
-  m_AnchoredPosition: {x: 0, y: 0.0116}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.69000006, y: 0.85}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.07559967, y: 0.4600067}
+  m_SizeDelta: {x: -0.15129852, y: 0.7975006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6013369154120547404
 CanvasRenderer:
@@ -533,7 +538,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.05
+  m_fontSize: 30.7
   m_fontSizeBase: 17.76
   m_fontWeight: 400
   m_enableAutoSizing: 1
