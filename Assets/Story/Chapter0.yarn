@@ -1,0 +1,15 @@
+﻿title: Chapter0
+tags:
+---
+// Define the commands we will use later
+// syntax: <<command_name parameter1 parameter2>>
+
+<<set_sprite Dante Happy>>
+Dante: <Tick-Tock> #line:001
+
+<<set_sprite Dante Happy>>
+Dante: <Tick-Tock!> #line:002
+
+<<set_sprite Dante Happy>>
+Faust: The manager seems pleased. #line:003
+===

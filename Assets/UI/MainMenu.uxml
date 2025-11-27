@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/main-menu.uss?fileID=7433441132597879392&amp;guid=89e487778eb489542aa86f9f509f52e6&amp;type=3#main-menu" />
+    <ui:VisualElement name="Panel" style="flex-grow: 1; align-items: auto; flex-shrink: 0; flex-direction: row;">
+        <ui:VisualElement name="LeftSideContainer" style="flex-grow: 1; justify-content: flex-start; align-self: stretch; width: 939px; align-items: flex-start; flex-shrink: 0;">
+            <ui:Button text="Setting" name="SettingButton" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RightButtonContainer" style="flex-grow: 1; flex-direction: column; width: auto; margin-top: 0; flex-shrink: 0; margin-bottom: 0; align-content: auto; justify-content: space-between; align-self: stretch; align-items: center; margin-right: 5%; padding-right: 0%; height: auto;">
+            <ui:VisualElement name="Container" style="flex-grow: 1; height: auto; align-items: center; flex-direction: column; align-self: stretch; align-content: auto; width: auto; min-width: auto; justify-content: flex-start; flex-shrink: 0;">
+                <ui:Button text="Chapter &#10;Select" name="MapButton" style="flex-grow: 1; flex-wrap: nowrap; flex-direction: column; width: auto; align-self: stretch; font-size: 71px; text-overflow: clip;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: row; align-content: center; align-items: flex-start; justify-content: center; align-self: stretch; height: auto; flex-shrink: 0;">
+                <ui:Button text="Shop" name="ShopButton" style="flex-shrink: 0; flex-grow: 1; align-self: auto; font-size: 75px;" />
+                <ui:Button text="Build" name="BuildButton" style="flex-grow: 1; align-self: auto; font-size: 75px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

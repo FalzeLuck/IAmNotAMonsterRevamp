@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/intro.uss?fileID=7433441132597879392&amp;guid=a2179562fc0962c4587da4f21aa21b48&amp;type=3#intro" />
+    <ui:VisualElement name="Panel" class="Background" style="flex-grow: 1; justify-content: center; align-self: auto; align-items: center;">
+        <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgb(255, 255, 255); display: flex; justify-content: center; width: 70%; height: auto; margin-top: 40%; padding-top: 0; margin-bottom: 10%; align-self: auto; align-items: center;">
+            <ui:Label text="Label" name="PressText" style="font-size: 112px; align-items: center; justify-content: center; -unity-text-align: middle-center;">
+                <Bindings>
+                    <UnityEngine.Localization.LocalizedString property="text" table="GUID:16c5b65054444d84ca1f692884c732c1" entry="Id(275931365294080)" />
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
