@@ -13,6 +13,7 @@ namespace ShabuStudio.Gameplay
         [SerializeField] BaseStats baseStats;
         public Stats Stats { get; private set; }
         public int currentHealth;
+        public int currentCost{private set; get;}
         public bool isDead = false;
         
         
@@ -52,6 +53,22 @@ namespace ShabuStudio.Gameplay
             }
             
             deckData.ResetAvailableCards();
+        }
+        
+        // -----------------------------------------
+        // Cost Manage
+        // -----------------------------------------
+
+        public void AddCost(int amount)
+        {
+            if(amount >= 0)
+                currentCost += amount;
+        }
+        
+        public void RemoveCost(int amount)
+        {
+            if(amount >= 0)
+                currentCost -= amount;
         }
 
         // ----------------------------------------------

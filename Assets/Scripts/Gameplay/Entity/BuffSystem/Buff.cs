@@ -20,7 +20,7 @@ namespace ShabuStudio.Gameplay
     [Serializable]
     public class StatsModifierBuff : Buff
     {
-        public enum OperatorType
+        private enum OperatorType
         {
             Add,
             Multiply
@@ -41,6 +41,25 @@ namespace ShabuStudio.Gameplay
             };
             
             entity.Stats.Mediator.AddModifier(modifier);
+        }
+    }
+    
+    [Serializable]
+    public class CostModifierBuff : Buff
+    {
+        public int costModifier = 1;
+        public override void ApplyBuff(CombatEntity entity)
+        {
+            if (costModifier > 0)
+            {
+                entity.AddCost(costModifier);
+            }
+            else if (costModifier < 0)
+            {
+                entity.RemoveCost(Math.Abs(costModifier));
+            }
+            
+            return;
         }
     }
     

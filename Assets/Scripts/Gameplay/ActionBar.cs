@@ -19,33 +19,19 @@ namespace ShabuStudio.Gameplay
         public ActionDisplay actionPrefab;
         public TextMeshProUGUI actionCostText;
         
-        [Header("Action Cost Parameter")]
-        private readonly Dictionary<ActionOwner,int> _currentActionCost = new Dictionary<ActionOwner, int>(); // Action owner , cost
         
 
 
         public void Initialize()
         {
-            _currentActionCost.Add(ActionOwner.Player,0);
-            _currentActionCost.Add(ActionOwner.Enemy,0);
+            
         }
 
-        public void ResetAllCost()
-        {
-            //Temporary Reset. May have a better method to reset in the future.
-            _currentActionCost[ActionOwner.Player] = 0;
-            _currentActionCost[ActionOwner.Enemy] = 0;
-            
-            UpdateText(ActionOwner.Player);
-        }
 
         /// <summary>
         /// Inserts a card into the action bar based on its speed, updates the action cost,
         /// and animates the card's insertion into the UI.
         /// </summary>
-        /// <param name="cardData">The data object representing the card's characteristics.</param>
-        /// <param name="cardSpeed">The speed of the card, determining its position in the action bar.</param>
-        /// <param name="owner">The owner of the card (e.g., Player or Enemy) for determining action cost limitations.</param>
         /// <returns>Returns true if the card was successfully inserted. Returns false if the insertion fails due to exceeding the maximum action cost.</returns>
         public bool InsertCard(CardDisplay card, CombatEntity entity,out ActionDisplay actionDisplay)
         {
@@ -58,21 +44,19 @@ namespace ShabuStudio.Gameplay
         /// </summary>
         /// <param name="cardData">The data object representing the characteristics of the card being inserted.</param>
         /// <param name="cardSpeed">The speed parameter of the card, determining its position in the action bar.</param>
-        /// <param name="owner">The owner of the card (e.g., Player or Enemy).</param>
         /// <returns>Returns true if the card is successfully inserted. Returns false if the insertion fails due to exceeding the maximum action cost.</returns>
         public bool InsertCard(CardData cardData, int cardSpeed, CombatEntity entity,out ActionDisplay actionDisplay)
         {
-            ActionOwner owner = entity.unitType;
-            int maxActionCost = entity.Stats.MaxCost; 
             //Return false if can't insert card anymore
-            if (cardData.cardCost + _currentActionCost[owner] > maxActionCost)
+            if (entity.currentCost - cardData.cardCost < 0)
             {
                 actionDisplay = null;
                 return false;
             }
             
-            //Add action cost first to prevent logic error
-            AddActionCost(cardData.cardCost,owner);
+            //Remove playing entity action cost first to prevent logic error
+            entity.RemoveCost(cardData.cardCost);
+            UpdateText(entity);
             
             //Continue insert card
             int index = GetActionIndexBySpeed(cardSpeed);
@@ -114,7 +98,6 @@ namespace ShabuStudio.Gameplay
         /// Removes a card from the action bar, and performs the removal animation.
         /// </summary>
         /// <param name="card">The data object representing the card's display to be removed.</param>
-        /// <param name="owner">The owner of the card (e.g., Player or Enemy) to adjust the appropriate action cost.</param>
         public void RemoveCard(CardDisplay card, CombatEntity entity)
         {
             RemoveCard(card.cardData, card.currentSpeed,entity);
@@ -124,10 +107,9 @@ namespace ShabuStudio.Gameplay
         
         public void RemoveCard(CardData cardData, int cardSpeed, CombatEntity entity)
         {
-            ActionOwner owner = entity.unitType;
-            
-            //Remove action cost first to prevent logic error
-            AddActionCost(-cardData.cardCost,owner);
+            //Add playing entity action cost first to prevent logic error
+            entity.AddCost(cardData.cardCost);
+            UpdateText(entity);
             
             int index = actionCardSpeedList.IndexOf(cardSpeed);
             if (index < 0 || index >= displayActions.Count) return;
@@ -187,26 +169,20 @@ namespace ShabuStudio.Gameplay
                     Destroy(objToRemove);
                 });
         }
+        
 
-
-        void AddActionCost(int cost,ActionOwner owner)
+        void UpdateText(CombatEntity entity)
         {
-            _currentActionCost[owner] += cost;
-            UpdateText(owner);
-        }
-
-        void UpdateText(ActionOwner owner)
-        {
-            if(owner == ActionOwner.Player)
+            if(entity != null && entity.unitType == ActionOwner.Player)
             {
-                actionCostText.text = $"{_currentActionCost[owner].ToString()} / {BattleStateManager.Instance.playerUnit.Stats.MaxCost.ToString()}";
+                actionCostText.text = $"{entity.currentCost}";
             }
         }
 
         public void UpdateUI()
         {
-            UpdateText(ActionOwner.Player);
-            UpdateText(ActionOwner.Enemy);
+            UpdateText(BattleStateManager.Instance.playerUnit);
+            UpdateText(BattleStateManager.Instance.enemyUnit);
         }
         
     }

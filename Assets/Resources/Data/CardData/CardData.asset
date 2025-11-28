@@ -17,6 +17,7 @@ MonoBehaviour:
   buffsToApply:
     list:
     - rid: 5898636392749858816
+    - rid: 5898636437371748442
   cardName: 
   cardImage: {fileID: 0}
   cardDescription: 
@@ -31,7 +32,12 @@ MonoBehaviour:
       type: {class: StatsModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
       data:
         buffName: TestBuff
-        type: 1
+        type: 0
         operatorType: 0
         value: 10
         countdownTurn: 2
+    - rid: 5898636437371748442
+      type: {class: CostModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
+      data:
+        buffName: CostBuff
+        costModifier: 1

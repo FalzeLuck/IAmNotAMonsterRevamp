@@ -37,6 +37,8 @@ namespace ShabuStudio.Gameplay
                 {
                     yield return StartCoroutine(_actionBar.RemoveCardSameOwner(ActionOwner.Player));
                 }
+                
+                _actionBar.UpdateUI();
             }
         }
     }

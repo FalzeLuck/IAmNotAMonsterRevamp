@@ -2,8 +2,7 @@ namespace ShabuStudio.Gameplay
 {
     public enum StatsType
     {
-        MaxHealth,
-        MaxCost
+        MaxHealth
     }
     
     public class Stats
@@ -23,15 +22,6 @@ namespace ShabuStudio.Gameplay
             }
         }
 
-        public int MaxCost
-        {
-            get
-            {
-                var q = new Query(StatsType.MaxCost, baseStats.maxCost);
-                statsMediator.PerformQuery(this, q);
-                return q.Value;
-            }
-        }
         
         public Stats(StatsMediator statsMediator, BaseStats baseStats)
         {

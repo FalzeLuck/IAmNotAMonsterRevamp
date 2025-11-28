@@ -75,12 +75,17 @@ namespace ShabuStudio.Gameplay
             actionManager.Initialize(actionBar,combatManager);
             damageTextManager.Initialize();
             
+            
+            UpdateAllUI();
             ChangeState(BattleState.Start);
         }
 
         void HandleStart()
         {
-            actionBar.ResetAllCost();   
+            playerUnit.AddCost(3);
+            enemyUnit.AddCost(3);
+            
+            UpdateAllUI();
             
             //Will have start turn effect in the future
             ChangeState(BattleState.DrawPhase);

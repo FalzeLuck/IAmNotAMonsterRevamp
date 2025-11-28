@@ -6,6 +6,5 @@ namespace ShabuStudio.Gameplay
     public class BaseStats : ScriptableObject
     {
         public int maxHealth;
-        public int maxCost;
     }
 }
