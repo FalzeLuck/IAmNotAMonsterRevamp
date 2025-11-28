@@ -7,8 +7,6 @@ namespace ShabuStudio.MainMenu
     {
         public VisualElement ui;
 
-        public GameObject TestObject;
-
         public Button mapButton;
         public Button settingButton;
         public Button shopButton;
@@ -38,7 +36,7 @@ namespace ShabuStudio.MainMenu
 
         void OnMapButtonClicked()
         {
-            TestObject.SetActive(false);
+            SceneLoader.LoadScene(3);
         }
         
         void OnSettingButtonClicked()
