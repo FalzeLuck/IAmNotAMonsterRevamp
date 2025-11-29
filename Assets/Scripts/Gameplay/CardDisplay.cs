@@ -1,7 +1,11 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
 using ShabuStudio.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace ShabuStudio.Gameplay
@@ -15,6 +19,10 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private TextMeshProUGUI cardSpeedText;
         [SerializeField] private Canvas canvas;
         [SerializeField] private CardMovement cardMovement;
+        [SerializeField] private Image cardImage;
+        private Material _cardDynamicMaterial;
+        private int _dissolveAmountID; 
+        private CanvasGroup _canvasGroup;
 
         public int currentSpeed {get; private set;}
         private void Start()
@@ -24,6 +32,12 @@ namespace ShabuStudio.Gameplay
                 cardData = ScriptableObject.CreateInstance<CardData>();
                 InitializeCard(cardData);
             }
+            
+            _cardDynamicMaterial = new Material(cardImage.material);
+            cardImage.material = _cardDynamicMaterial;
+            _dissolveAmountID = Shader.PropertyToID("_DissolveAmount");
+            
+            _canvasGroup = GetComponent<CanvasGroup>();
         }
 
         //Set card data and update text.
@@ -66,8 +80,28 @@ namespace ShabuStudio.Gameplay
         {
             currentSpeed = Random.Range(cardData.cardMinSpeed,cardData.cardMaxSpeed + 1);
         }
-        
-        
+
+        public void RemoveCard()
+        {
+            DissolveCard();
+        }
+
+        void DissolveCard()
+        {
+            float duration = 0.5f;
+            Ease ease = Ease.Linear;
+            
+            _cardDynamicMaterial.DOFloat(1f, _dissolveAmountID, duration)
+                .SetEase(ease);
+
+            _canvasGroup.DOFade(0f, duration)
+                .SetEase(ease)
+                .OnComplete(() =>
+                {
+                    DOTween.Kill(gameObject);
+                    Destroy(gameObject);
+                });
+        }
 
     }
 }

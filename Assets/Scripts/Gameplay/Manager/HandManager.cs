@@ -109,7 +109,7 @@ namespace ShabuStudio.Gameplay
                 {
                     handCards.RemoveAt(i);
             
-                    Destroy(card);
+                    cardDisplay.RemoveCard();
                 }
             }
             UpdateCardPositions();
