@@ -56,6 +56,8 @@ namespace ShabuStudio.Gameplay
         {
             if (!isInteractable) return;
             
+            CardDetailDisplay.CurrentCardData = cardData;
+            
             //Action Display relate to this card
             if (_isLocked)
             {
@@ -68,13 +70,14 @@ namespace ShabuStudio.Gameplay
                 transform.DOScale(_hoverLocalScale, _transitionSpeed).SetEase(Ease.OutBack);
                 _currentState = 1;
                 
-                
             }
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             if (!isInteractable) return;
+            
+            CardDetailDisplay.CurrentCardData = null;
             
             //Action Display relate to this card
             if (_isLocked)

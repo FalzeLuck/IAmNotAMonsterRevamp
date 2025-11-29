@@ -43,7 +43,7 @@ namespace ShabuStudio.Gameplay
             {
                 int index = Random.Range(0, hand.Count);
                 CardData card = hand[index];
-                int speed = Random.Range(card.cardMinSpeed, card.cardMaxSpeed + 1);
+                int speed = card.cardSpeed;
 
                 if (!actionBar.InsertCard(card, speed, this, out _))
                 {

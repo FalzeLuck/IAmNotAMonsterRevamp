@@ -44,7 +44,7 @@ namespace ShabuStudio.Gameplay
         public void InitializeCard(CardData card, int sortOrder = 0)
         {
             cardData = card;
-            RandomSpeed();
+            currentSpeed = card.cardSpeed;
             UpdateText();
             InitializeSortOrder(sortOrder);
         }
@@ -76,10 +76,6 @@ namespace ShabuStudio.Gameplay
             cardSpeedText.text = currentSpeed.ToString();
         }
 
-        void RandomSpeed()
-        {
-            currentSpeed = Random.Range(cardData.cardMinSpeed,cardData.cardMaxSpeed + 1);
-        }
 
         public void RemoveCard()
         {

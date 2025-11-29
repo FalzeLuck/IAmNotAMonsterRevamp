@@ -14,11 +14,11 @@ namespace ShabuStudio.Data
             DrawPropertiesExcluding(serializedObject, "m_Script", "buffsToApply");
         
             // 2. Get the card type
-            SerializedProperty cardTypeProp = serializedObject.FindProperty("cardType");
-            CardType currentCardType = (CardType)cardTypeProp.enumValueIndex;
+            SerializedProperty cardTypeProp = serializedObject.FindProperty("canInflictBuff");
+            bool canBuff = (bool)cardTypeProp.boolValue;
         
             // 3. Logic: Only draw the list if it is a BuffCard
-            if (currentCardType == CardType.BuffCard)
+            if (canBuff)
             {
                 SerializedProperty buffsProp = serializedObject.FindProperty("buffsToApply");
                 

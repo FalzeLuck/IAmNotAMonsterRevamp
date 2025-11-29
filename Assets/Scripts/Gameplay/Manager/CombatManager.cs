@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ShabuStudio.Data;
 using UnityEngine;
 
@@ -12,7 +13,6 @@ namespace ShabuStudio.Gameplay
         
         [Header("Damage Spawn Point References")]
         public Transform damageSpawnPointPlayer;
-
         public Transform damageSpawnPointEnemy;
 
         public void Initialize(DamageTextManager damageTextManager)
@@ -27,14 +27,59 @@ namespace ShabuStudio.Gameplay
         public void PlayCard(Action action,out bool isDead)
         {
             CardData card = action.cardData;
-            if (card.cardType == CardType.AttackCard)
+            ActionOwner ownerType = action.ownerEntity.unitType;
+            List<Buff> buffList = card.buffsToApply.list;
+            List<Buff> buffsToApplyToTarget = new List<Buff>();
+            List<Buff> buffsToApplyToSelf = new List<Buff>();
+            //Define Target
+            CombatEntity target = null;
+            CombatEntity self = null;
+            Transform damageSpawnPoint = null;
+
+            //Define target
+            if (ownerType == ActionOwner.Player)
             {
-                PlayAttack(card.cardAmount, action.ownerEntity);
+                target = _enemyUnit;
+                self = _playerUnit;
+                damageSpawnPoint = damageSpawnPointEnemy;
             }
-            else if (card.cardType == CardType.BuffCard)
+            else if (ownerType == ActionOwner.Enemy)
             {
-                PlayBuff(card,action.ownerEntity);
+                target = _playerUnit;
+                self = _enemyUnit;
+                damageSpawnPoint = damageSpawnPointPlayer;
             }
+
+            //Define Buff to Apply to target
+            foreach (Buff buff in buffList)
+            {
+                if (buff.target == Buff.BuffTarget.Enemy)
+                {
+                    buffsToApplyToTarget.Add(buff);
+                }
+            }
+            
+            //Define Buff to Apply to target
+            foreach (Buff buff in buffList)
+            {
+                if (buff.target == Buff.BuffTarget.Self)
+                {
+                    buffsToApplyToSelf.Add(buff);
+                }
+            }
+
+            
+            //Start Action
+            target.TakeDamage(card.damage, out var damage);
+            _damageTextManager.SpawnDamageText(damageSpawnPoint.position,damage,false);
+            target.ApplyBuff(buffsToApplyToTarget);
+            self.ApplyBuff(buffsToApplyToSelf);
+            
+            
+            
+            
+            
+            
 
             if (action.ownerEntity.unitType == ActionOwner.Player && _enemyUnit.isDead)
             {
@@ -50,24 +95,10 @@ namespace ShabuStudio.Gameplay
             }
         }
 
-        void PlayAttack(int damage, CombatEntity ownerEntity)
+        public void OnStartTurn()
         {
-            ActionOwner ownerType = ownerEntity.unitType;
-            if(ownerType == ActionOwner.Player)
-            {
-                _enemyUnit.TakeDamage(damage);
-                _damageTextManager.SpawnDamageText(damageSpawnPointEnemy.position, damage, false);
-            }
-            else
-            {
-                _playerUnit.TakeDamage(damage);
-                _damageTextManager.SpawnDamageText(damageSpawnPointPlayer.position, damage, false);
-            }
-        }
-
-        void PlayBuff(CardData card, CombatEntity ownerEntity)
-        {
-            ownerEntity.ApplyBuff(card.buffsToApply.list);
+            _enemyUnit.OnStartTurn();
+            _playerUnit.OnStartTurn();
         }
     }
     

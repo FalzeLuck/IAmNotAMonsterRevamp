@@ -36,7 +36,7 @@ namespace ShabuStudio.MainMenu
 
         void OnMapButtonClicked()
         {
-            SceneLoader.LoadScene(3);
+            SceneLoader.Instance.LoadScene(3);
         }
         
         void OnSettingButtonClicked()

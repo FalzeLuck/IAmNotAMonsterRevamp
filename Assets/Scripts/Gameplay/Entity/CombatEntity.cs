@@ -14,6 +14,7 @@ namespace ShabuStudio.Gameplay
         public Stats Stats { get; private set; }
         public int currentHealth;
         public int currentCost{private set; get;}
+        public List<Buff> OnStartTurnBuffs = new List<Buff>();
         public bool isDead = false;
         
         
@@ -75,13 +76,19 @@ namespace ShabuStudio.Gameplay
         // Health Logic
         // ----------------------------------------------
         
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage,out int uiDamage)
         {
+            if(damage <= 0)
+            {
+                uiDamage = 0;
+                return;
+            }
             int finalDamage = damage;
             
             //Future Calculate Damage method HERE...
             
             currentHealth -= finalDamage;
+            uiDamage = finalDamage;
             if(currentHealth < 0) currentHealth = 0;
             
             
@@ -90,6 +97,7 @@ namespace ShabuStudio.Gameplay
             {
                 Die();
             }
+            
         }
         
         public void Heal(int amount)
@@ -108,10 +116,27 @@ namespace ShabuStudio.Gameplay
         {
             foreach (var buff in buffList)
             {
-                buff.ApplyBuff(this);
+                if (buff.buffType == Buff.BuffType.OnAction)
+                {
+                    buff.ApplyBuff(this);
+                }
+                else if(buff.buffType == Buff.BuffType.OnTurnStart)
+                {
+                    OnStartTurnBuffs.Add(buff);
+                }
             }
             
             UpdateUI();
+        }
+
+        public void OnStartTurn()
+        {
+            foreach (var buff in OnStartTurnBuffs)
+            {
+                buff.ApplyBuff(this);
+            }
+            UpdateUI();
+            OnStartTurnBuffs.Clear();
         }
 
         public void DecreaseBuffTurn(int value)

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: CardText_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: f38864a57a88e8142993c2fac4e7fcb8, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 5898636456408908140
+  m_TableData:
+  - m_Id: 159727665152
+    m_Localized: Damage Then Heal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 392033386496
+    m_Localized: 'Deal {card.damage} damage and heal {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      HP. '
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 46662554927104
+    m_Localized: Healing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46615205429248
+    m_Localized: Heal {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      hp.
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  references:
+    version: 2
+    RefIds:
+    - rid: 5898636456408908140
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 392033386496
+        - id: 46615205429248

@@ -8,7 +8,7 @@ namespace ShabuStudio.Intro
     {
         [Header("Settings")]
         [Tooltip("The name of the scene to load")]
-        public string mainMenuSceneName = "MainMenu";
+        public int mainMenuSceneIndex;
 
         
         public void OnPlayerJoined(PlayerInput playerInput)
@@ -21,7 +21,7 @@ namespace ShabuStudio.Intro
             
             playerInput.DeactivateInput();
             
-            SceneManager.LoadScene(mainMenuSceneName);
+            SceneLoader.Instance.LoadScene(mainMenuSceneIndex);
         }
     }
 }

@@ -85,9 +85,11 @@ namespace ShabuStudio.Gameplay
             playerUnit.AddCost(3);
             enemyUnit.AddCost(3);
             
+            //OnStartTurnEffect
+            combatManager.OnStartTurn();
+            
             UpdateAllUI();
             
-            //Will have start turn effect in the future
             ChangeState(BattleState.DrawPhase);
         }
         

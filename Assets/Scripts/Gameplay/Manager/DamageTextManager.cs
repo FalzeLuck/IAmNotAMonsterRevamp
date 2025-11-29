@@ -8,6 +8,7 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private DamageText damageTextPrefab;
         [SerializeField] private Transform damageTextCanvasTransform;
         private List<DamageText> _damageTextList = new List<DamageText>();
+        
 
         public void Initialize()
         {
@@ -16,6 +17,8 @@ namespace ShabuStudio.Gameplay
         
         public void SpawnDamageText(Vector3 screenPos, int damageAmount, bool isCriticalHit)
         {
+            if(damageAmount <= 0) return;
+            
             //Check if there is any inactive damage text in list.
             foreach (DamageText item in _damageTextList)
             {
