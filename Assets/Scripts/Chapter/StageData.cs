@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ShabuStudio.Stage
+namespace ShabuStudio.Chapter
 {
     [CreateAssetMenu(fileName = "StageData", menuName = "Stage/StageData")]
     public class StageData : ScriptableObject

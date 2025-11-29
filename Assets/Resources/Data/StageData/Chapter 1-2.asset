@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edfc60b39b4d0c74fac9e7a742e85c74, type: 3}
-  m_Name: SortifyNoteDatabase
+  m_Script: {fileID: 11500000, guid: 20af1a7450dda8d46803a38ae26a57bf, type: 3}
+  m_Name: Chapter 1-2
   m_EditorClassIdentifier: 
-  notes:
-  - objID: Scene_ChapterSelect_===Camera===_8
-    noteContent: New Note Content
-    comments: []
+  stageID: 1-2
+  stageName: 
+  stageDescription: 
+  prerequisiteStage: {fileID: 11400000, guid: bd57225559e28ee49aa696d3aa461c94, type: 2}
