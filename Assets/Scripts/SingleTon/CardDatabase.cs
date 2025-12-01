@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ShabuStudio.Chapter;
 using UnityEngine;
 
 namespace ShabuStudio.Data
@@ -29,8 +30,7 @@ namespace ShabuStudio.Data
         {
             if (isInitialized) return;
 
-            // 1. Load all CardData assets from "Assets/Resources/Cards"
-            // The string "Cards" is the path inside the Resources folder
+            
             CardData[] allCards = Resources.LoadAll<CardData>("Data/CardData");
 
             // 2. Populate the Dictionary for fast lookup
@@ -45,6 +45,7 @@ namespace ShabuStudio.Data
                     Debug.LogWarning($"Duplicate Card ID found: {card.cardID}. Check card: {card.name}");
                 }
             }
+
 
             isInitialized = true;
             Debug.Log($"Database Loaded: {cardLookup.Count} cards found.");

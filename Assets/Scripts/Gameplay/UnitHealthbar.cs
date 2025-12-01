@@ -9,8 +9,8 @@ namespace ShabuStudio.Gameplay
     public class UnitHealthbar : MonoBehaviour
     {
         [Header("References")]
-        public CombatEntity targetUnit;
-        public Slider healthSlider;
+        private CombatEntity targetUnit;
+        public Image barForeground;
         public TMP_Text healthText;
 
         private void OnEnable()
@@ -19,6 +19,12 @@ namespace ShabuStudio.Gameplay
             {
                 targetUnit.OnHealthChanged += UpdateHealthUI;
             }
+        }
+
+        public void SetTarget(CombatEntity target)
+        {
+            targetUnit = target;
+            OnEnable();
         }
         
         
@@ -37,8 +43,8 @@ namespace ShabuStudio.Gameplay
             float fillAmount = (float)currentHealth / maxHealth;
 
 
-            healthSlider.DOKill(); 
-            healthSlider.DOValue(fillAmount, 0.3f).SetEase(Ease.OutCubic);
+            barForeground.DOKill(); 
+            barForeground.DOFillAmount(fillAmount, 0.3f).SetEase(Ease.OutCubic);
 
             // Update Text
             if (healthText != null)

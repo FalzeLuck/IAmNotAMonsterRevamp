@@ -8,16 +8,16 @@ namespace ShabuStudio.Gameplay
 {
     public class DeckManager : MonoBehaviour
     {
-        public DeckData playerDeck;
-        public DeckData enemyDeck;
+        public DeckDataHolder playerDeck;
+        public DeckDataHolder enemyDeck;
 
         public void Initialize()
         {
             BattleStateManager.Instance.playerUnit.InitializeDeck();
-            playerDeck = BattleStateManager.Instance.playerUnit.deckData;
+            playerDeck = BattleStateManager.Instance.playerUnit.deckDataHolder;
             
             BattleStateManager.Instance.enemyUnit.InitializeDeck();
-            enemyDeck = BattleStateManager.Instance.enemyUnit.deckData;
+            enemyDeck = BattleStateManager.Instance.enemyUnit.deckDataHolder;
         }
     }
 }

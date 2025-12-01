@@ -33,7 +33,7 @@ namespace ShabuStudio.Gameplay
         void DrawCard()
         {
             //Draw card from deck
-            hand.Add(deckData.DrawRandomCard());
+            hand.Add(deckDataHolder.DrawRandomCard());
         }
 
 

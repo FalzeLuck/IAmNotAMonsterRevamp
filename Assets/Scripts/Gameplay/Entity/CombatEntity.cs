@@ -22,7 +22,7 @@ namespace ShabuStudio.Gameplay
         public System.Action OnStatusChanged; // When buffs are added/removed
         
         [Header("Deck Data")]
-        public DeckData deckData;
+        public DeckDataHolder deckDataHolder;
         public List<CardData> availableCards = new List<CardData>();
         public List<CardData> droppedCards = new List<CardData>();
 
@@ -45,15 +45,15 @@ namespace ShabuStudio.Gameplay
         {
             if (unitType == ActionOwner.Player) //If player
             {
-                deckData = PlayerDataManager.Instance.savedDecks[PlayerDataManager.Instance.currentDeckIndex];
+                deckDataHolder = PlayerDataManager.Instance.savedDecks[PlayerDataManager.Instance.currentDeckIndex];
             }
 
-            if (deckData == null)
+            if (deckDataHolder == null)
             {
                 Debug.LogError($"Deck Data of {unitName} is null!");
             }
             
-            deckData.ResetAvailableCards();
+            deckDataHolder.ResetAvailableCards();
         }
         
         // -----------------------------------------

@@ -1,3 +1,4 @@
+using ShabuStudio.Gameplay;
 using UnityEngine;
 
 namespace ShabuStudio.Chapter
@@ -9,6 +10,7 @@ namespace ShabuStudio.Chapter
         public string stageID; // Ex. 1-1
         public string stageName;
         [TextArea] public string stageDescription;
+        public GameObject enemyPrefab;
     
         [Header("Requirement")]
         public StageData prerequisiteStage;

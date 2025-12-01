@@ -20,6 +20,7 @@ namespace ShabuStudio.Gameplay
         [Header("References")]
         public CombatEntity playerUnit;
         public EnemyCombatEntity enemyUnit;
+        [SerializeField] private SetupManager setupManager;
         [SerializeField] private ActionBar actionBar;
         [SerializeField] private ActionManager actionManager;
         [SerializeField] private HandManager handManager;
@@ -30,6 +31,7 @@ namespace ShabuStudio.Gameplay
 
         private void Start()
         {
+            StartCoroutine(setupManager.StartSetup(GameManager.Instance.currentStageData));
             Invoke("StartInitialize", 0.1f);
         }
 

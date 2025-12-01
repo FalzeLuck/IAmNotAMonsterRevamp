@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_ChapterSelect.unity
     guid: 1735be96d9f8c6f419d621e7f06c2b93
   - enabled: 1
+    path: Assets/Scenes/TestVisualNovel.unity
+    guid: 487b1bc7370131246a33559699fdff4d
+  - enabled: 1
     path: Assets/Scenes/Scene_Gameplay.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
   m_configObjects:

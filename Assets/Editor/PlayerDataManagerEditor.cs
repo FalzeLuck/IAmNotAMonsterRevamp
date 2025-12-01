@@ -33,7 +33,10 @@ namespace ShabuStudio.Data
             else
             {
                 GUILayout.Space(10);
-                EditorGUILayout.HelpBox("Enter Play Mode to use Save/Load debugging.", MessageType.Info);
+                if (GUILayout.Button("Load All Decks"))
+                {
+                    playerData.LoadAllDecks(Path.Combine(Application.persistentDataPath, "playerData.json"));
+                }
             }
         }
     }

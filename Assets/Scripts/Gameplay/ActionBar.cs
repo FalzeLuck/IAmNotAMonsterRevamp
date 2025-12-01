@@ -164,8 +164,9 @@ namespace ShabuStudio.Gameplay
             return objToRemove.transform
                 .DOScale(0f, 0.3f)  
                 .SetEase(Ease.InBack)   
-                .OnComplete(() =>        
+                .OnComplete(() =>
                 {
+                    objToRemove.transform.DOKill();
                     Destroy(objToRemove);
                 });
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace ShabuStudio.Data
@@ -19,7 +20,7 @@ namespace ShabuStudio.Data
             DontDestroyOnLoad(gameObject);
         }
     
-        public List<DeckData> savedDecks = new List<DeckData>(); // < DeckData>
+        public List<DeckDataHolder> savedDecks = new List<DeckDataHolder>(); // < DeckData>
         public int currentDeckIndex = 0;
 
 
@@ -40,6 +41,15 @@ namespace ShabuStudio.Data
         {
             SaveSystem saveSystem = FindFirstObjectByType<SaveSystem>();
             savedDecks = saveSystem.LoadAllDecks();
+            
+            
         }
+        #if UNITY_EDITOR
+        public void LoadAllDecks(string customPath)
+        {
+            SaveSystem saveSystem = FindFirstObjectByType<SaveSystem>();
+            savedDecks = saveSystem.LoadAllDecks(customPath);
+        }
+        #endif 
     }
 }

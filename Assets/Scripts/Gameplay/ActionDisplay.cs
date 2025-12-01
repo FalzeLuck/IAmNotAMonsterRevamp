@@ -12,7 +12,9 @@ namespace ShabuStudio.Gameplay
         
         [Header("References")]
         public TextMeshProUGUI speedText;
-        public Image ownerIndicatorImage;
+        public Image ActionBackgroundImage;
+        public Sprite playerIndicator;
+        public Sprite enemyIndicator;
         
         //Hightlight references
         [SerializeField]private Image highlightImage;
@@ -23,11 +25,11 @@ namespace ShabuStudio.Gameplay
             speedText.text = action.speed.ToString();
             if(ownerEntity.unitType == ActionOwner.Player)
             {
-                ownerIndicatorImage.color = Color.green;
+                ActionBackgroundImage.sprite = playerIndicator;
             }
             else
             {
-                ownerIndicatorImage.color = Color.red;
+                ActionBackgroundImage.sprite = enemyIndicator;
             }
             
             highlightImage.DOFade(0, 0);

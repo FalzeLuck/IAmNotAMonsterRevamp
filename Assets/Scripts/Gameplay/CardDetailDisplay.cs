@@ -13,9 +13,13 @@ namespace ShabuStudio.Gameplay
 
         private CardData previousCardData;
         public static CardData CurrentCardData;
-        
 
-        private void Update()
+        private void Start()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void Reload()
         {
             if (CurrentCardData != previousCardData)
             {
@@ -24,21 +28,25 @@ namespace ShabuStudio.Gameplay
             }
         }
 
+
         void Initialize(CardData cardData)
         {
             if (cardData == null)
             {
                 previousCardData.cardName.StringChanged -= UpdateCardNameText;
                 previousCardData.cardDescription.StringChanged -= UpdateCardDescriptionText;
+                gameObject.SetActive(false);
                 return;
             }
             else
             {
+                gameObject.SetActive(true);
                 cardData.cardName.StringChanged -= UpdateCardNameText;
                 cardData.cardDescription.StringChanged -= UpdateCardDescriptionText;
 
                 cardData.cardName.StringChanged += UpdateCardNameText;
                 cardData.cardDescription.StringChanged += UpdateCardDescriptionText;
+                
             }
 
 

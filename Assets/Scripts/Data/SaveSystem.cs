@@ -33,12 +33,12 @@ namespace ShabuStudio.Data
 
         //Main Save Function.
         //Saves all player's decks in the game.
-        public void SaveAllDecks(List<DeckData> runtimeDecks)
+        public void SaveAllDecks(List<DeckDataHolder> runtimeDecks)
         {
             PlayerSaveData saveData = new PlayerSaveData();
 
             // Loop through every deck currently in the game
-            foreach (DeckData runtimeDeck in runtimeDecks)
+            foreach (DeckDataHolder runtimeDeck in runtimeDecks)
             {
                 // Create a "Save Format" deck
                 SavedDeck diskDeck = new SavedDeck();
@@ -63,24 +63,24 @@ namespace ShabuStudio.Data
         }
         
         // Main load function.
-        public List<DeckData> LoadAllDecks()
+        public List<DeckDataHolder> LoadAllDecks()
         {
             if (!File.Exists(saveFilePath))
             {
                 Debug.LogWarning("No save file found. Returning empty list.");
-                return new List<DeckData>(); 
+                return new List<DeckDataHolder>(); 
             }
 
             string json = File.ReadAllText(saveFilePath);
             PlayerSaveData saveData = JsonUtility.FromJson<PlayerSaveData>(json);
             
-            List<DeckData> loadedDecks = new List<DeckData>();
+            List<DeckDataHolder> loadedDecks = new List<DeckDataHolder>();
 
             // Reconstruct the decks
             foreach (SavedDeck diskDeck in saveData.savedDecks)
             {
                 // Create a new Runtime Deck
-                DeckData newDeck = new DeckData(diskDeck.deckID, diskDeck.deckName);
+                DeckDataHolder newDeck = new DeckDataHolder(diskDeck.deckID, diskDeck.deckName);
 
                 // Convert IDs back to Card Objects using your Database
                 foreach (string id in diskDeck.cardIDs)
@@ -99,6 +99,43 @@ namespace ShabuStudio.Data
             return loadedDecks;
         }
         
-        
+        #if UNITY_EDITOR
+        public List<DeckDataHolder> LoadAllDecks(string customPath)
+        {
+            if (!File.Exists(customPath))
+            {
+                Debug.LogWarning("No save file found. Returning empty list.");
+                return new List<DeckDataHolder>(); 
+            }
+
+            string json = File.ReadAllText(customPath);
+            PlayerSaveData saveData = JsonUtility.FromJson<PlayerSaveData>(json);
+            
+            List<DeckDataHolder> loadedDecks = new List<DeckDataHolder>();
+
+            // Reconstruct the decks
+            foreach (SavedDeck diskDeck in saveData.savedDecks)
+            {
+                // Create a new Runtime Deck
+                DeckDataHolder newDeck = new DeckDataHolder(diskDeck.deckID, diskDeck.deckName);
+
+                // Convert IDs back to Card Objects using your Database
+                foreach (string id in diskDeck.cardIDs)
+                {
+                    CardData[] allCards = Resources.LoadAll<CardData>("Data/CardData");
+                    CardData card = Array.Find(allCards, x => x.cardID == id);
+                    if (card != null)
+                    {
+                        newDeck.allCards.Add(card);
+                    }
+                }
+
+                loadedDecks.Add(newDeck);
+            }
+
+            Debug.Log("Decks loaded successfully.");
+            return loadedDecks;
+        }
+        #endif
     }
 }

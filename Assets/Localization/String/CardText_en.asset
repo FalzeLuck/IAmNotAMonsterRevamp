@@ -24,7 +24,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 392033386496
-    m_Localized: 'Deal {card.damage} damage and heal {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Deal {card.damage} damage and heal {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
       HP. '
     m_Metadata:
       m_Items:
@@ -34,8 +35,9 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 46615205429248
-    m_Localized: Heal {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
-      hp.
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})} 
+      Heal {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      hp.'
     m_Metadata:
       m_Items:
       - rid: 5898636456408908140

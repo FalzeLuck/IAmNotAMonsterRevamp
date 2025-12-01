@@ -15,11 +15,17 @@ namespace ShabuStudio.Gameplay
         public Transform damageSpawnPointPlayer;
         public Transform damageSpawnPointEnemy;
 
+        [Header("Unit HealthBar")] 
+        [SerializeField]private UnitHealthbar playerHealthbar;
+        [SerializeField]private UnitHealthbar enemyHealthbar;
+
         public void Initialize(DamageTextManager damageTextManager)
         {
             _playerUnit = BattleStateManager.Instance.playerUnit;
             _enemyUnit = BattleStateManager.Instance.enemyUnit;
             _damageTextManager = damageTextManager;
+            playerHealthbar.SetTarget(_playerUnit);
+            enemyHealthbar.SetTarget(_enemyUnit);
         }
 
         
