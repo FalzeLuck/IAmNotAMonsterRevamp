@@ -18,6 +18,11 @@ namespace ShabuStudio.Gameplay
         private List<GameObject> handCards = new List<GameObject>();
         [Tooltip("True: Last card is on top. False: First card is on top.")]
         public bool lastCardOnTop = true;
+        
+        [Header("Hide Hand Settings")]
+        private Vector3 defaultHandPostion;
+        [SerializeField] private Vector3 hideHandOffset;
+        
 
         //For exchanging Data from deck.
         private DeckManager deckManager;
@@ -28,6 +33,7 @@ namespace ShabuStudio.Gameplay
         public void Initialize(DeckManager deckManager)
         {
             this.deckManager = deckManager;
+            defaultHandPostion = splineContainer.transform.position;
             SetHandCardInteractable(false);
         }
 
@@ -66,7 +72,7 @@ namespace ShabuStudio.Gameplay
         }
         
         //Update Card Position in hand.
-        private void UpdateCardPositions()
+        void UpdateCardPositions()
         {
             if(handCards.Count <= 0) return;
 
@@ -77,12 +83,15 @@ namespace ShabuStudio.Gameplay
             {
                 CardMovement cardMovement = handCards[i].GetComponent<CardMovement>();
                 
+                //Calculate world position and rotation with spline
                 float p = firstCardPosition + i * cardSpacing;
                 Vector3 splinePosition = spline.EvaluatePosition(p);
                 Vector3 forward = spline.EvaluateTangent(p);
                 Vector3 up = spline.EvaluateUpVector(p);
                 Quaternion rotation = Quaternion.LookRotation(up, Vector3.Cross(up, forward).normalized);
-                drawCardTween = handCards[i].transform.DOMove(splinePosition + splineContainer.transform.position, 0.25f).OnComplete(
+                
+                //Calculate local position and rotation of card.
+                drawCardTween = handCards[i].transform.DOLocalMove(splinePosition, 0.25f).OnComplete(
                     () => cardMovement.UpdateLocal());
                 handCards[i].transform.DOLocalRotateQuaternion(rotation, 0.25f);
             }
@@ -94,6 +103,20 @@ namespace ShabuStudio.Gameplay
             foreach (GameObject card in handCards)
             {
                 card.GetComponent<CardMovement>().SetInteractable(interactable);
+            }
+        }
+        
+        //Hide hand card
+        public void HideHand(bool hide)
+        { 
+            if (hide)
+            {
+                Vector3 handPos = defaultHandPostion + hideHandOffset;
+                splineContainer.transform.DOMove(handPos, 0.25f).SetEase(Ease.OutBack);
+            }
+            else
+            {
+                splineContainer.transform.DOMove(defaultHandPostion, 0.25f).SetEase(Ease.OutBack);
             }
         }
 
@@ -108,7 +131,6 @@ namespace ShabuStudio.Gameplay
                 if (cardDisplay.isPlayed)
                 {
                     handCards.RemoveAt(i);
-            
                     cardDisplay.RemoveCard();
                 }
             }

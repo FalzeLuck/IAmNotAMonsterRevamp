@@ -5,6 +5,7 @@ using DG.Tweening;
 using ShabuStudio.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -17,6 +18,8 @@ namespace ShabuStudio.Gameplay
         public bool isPlayed = false;
         [SerializeField] private TextMeshProUGUI cardCostText;
         [SerializeField] private TextMeshProUGUI cardSpeedText;
+        [SerializeField] private TextMeshProUGUI cardNameText;
+        [SerializeField] private TextMeshProUGUI cardTypeText;
         [SerializeField] private Canvas canvas;
         [SerializeField] private CardMovement cardMovement;
         [SerializeField] private Image cardImage;
@@ -45,8 +48,16 @@ namespace ShabuStudio.Gameplay
         {
             cardData = card;
             currentSpeed = card.cardSpeed;
+            cardTypeText.text = card.cardType.ToString();
+            card.cardName.StringChanged -= HandleNameText;
+            card.cardName.StringChanged += HandleNameText;
             UpdateText();
             InitializeSortOrder(sortOrder);
+        }
+
+        void HandleNameText(string localizedText)
+        {
+            cardNameText.text = localizedText;
         }
 
         //For Initilize card sort
@@ -79,6 +90,7 @@ namespace ShabuStudio.Gameplay
 
         public void RemoveCard()
         {
+            transform.SetParent(transform.parent.parent);
             DissolveCard();
         }
 

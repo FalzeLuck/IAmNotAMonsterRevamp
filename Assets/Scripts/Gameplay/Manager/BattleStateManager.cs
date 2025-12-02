@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ShabuStudio.Gameplay
 {
@@ -13,6 +14,9 @@ namespace ShabuStudio.Gameplay
         {
             Instance = this;
         }
+        [Header("Scene Index")]
+        public int winSceneIndex;
+        public int loseSceneIndex;
         
         [Header("State Info")]
         private BattleState currentState;
@@ -51,7 +55,7 @@ namespace ShabuStudio.Gameplay
                     HandleInitialize();
                     break;
                 case BattleState.Start:
-                    HandleStart();
+                    StartCoroutine(HandleStart());
                     break;
                 case BattleState.DrawPhase:
                     StartCoroutine(HandleDrawPhase());
@@ -65,8 +69,13 @@ namespace ShabuStudio.Gameplay
                 case BattleState.EndPhase:
                     HandleEndPhase();
                     break;
+                case BattleState.Win:
+                    HandleWin();
+                    break;
             }
         }
+
+        
 
         void HandleInitialize()
         {
@@ -82,16 +91,17 @@ namespace ShabuStudio.Gameplay
             ChangeState(BattleState.Start);
         }
 
-        void HandleStart()
+        IEnumerator HandleStart()
         {
             playerUnit.AddCost(3);
             enemyUnit.AddCost(3);
             
             //OnStartTurnEffect
             combatManager.OnStartTurn();
+            handManager.HideHand(false); //Hide hand after 1 second ( 1 second = 1 frame)
             
             UpdateAllUI();
-            
+            yield return null;
             ChangeState(BattleState.DrawPhase);
         }
         
@@ -110,6 +120,7 @@ namespace ShabuStudio.Gameplay
 
         IEnumerator HandleActionPhase()
         {
+            handManager.HideHand(true);
             yield return StartCoroutine(actionManager.StartActionSequence());
             ChangeState(BattleState.EndPhase);
         }
@@ -132,6 +143,11 @@ namespace ShabuStudio.Gameplay
             enemyUnit.DecreaseBuffTurn(1);
             
             ChangeState(BattleState.Start);
+        }
+        
+        private void HandleWin()
+        {
+            SceneManager.LoadScene(winSceneIndex);
         }
 
         public void StartActionSequence()

@@ -23,6 +23,16 @@ public class SceneLoader : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    public static void LoadSceneStatic(int sceneIndex)
+    {
+        Instance.LoadScene(sceneIndex);
+    }
+    
+    public static void LoadSceneStatic(string sceneName)
+    {
+        Instance.LoadScene(sceneName);
+    }
+
     public void LoadScene(int sceneIndex)
     {
         //For safety purpose
