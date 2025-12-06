@@ -7,6 +7,7 @@ namespace ShabuStudio.Gameplay
 {
     public class EnemyCombatEntity : CombatEntity
     {
+        public int fixedCost = 3;
         [Header("Enemy Hand")]
         public List<CardData> hand;
         public int handSize = 5;

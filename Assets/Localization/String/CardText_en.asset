@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 5898636456408908140
   m_TableData:
   - m_Id: 159727665152
-    m_Localized: Damage Then Heal
+    m_Localized: Regen Slash
     m_Metadata:
       m_Items: []
   - m_Id: 392033386496
@@ -41,6 +41,17 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908140
+  - m_Id: 1474355586580480
+    m_Localized: Wound Mark
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1474376264499200
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Enemy take additional {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      damage per hit for 1 turn.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
   references:
     version: 2
     RefIds:
@@ -51,3 +62,4 @@ MonoBehaviour:
         m_SharedEntries:
         - id: 392033386496
         - id: 46615205429248
+        - id: 1474376264499200

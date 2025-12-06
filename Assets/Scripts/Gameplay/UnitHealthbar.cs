@@ -9,7 +9,7 @@ namespace ShabuStudio.Gameplay
     public class UnitHealthbar : MonoBehaviour
     {
         [Header("References")]
-        private CombatEntity targetUnit;
+        [SerializeField]private CombatEntity targetUnit;
         public Image barForeground;
         public TMP_Text healthText;
 
@@ -23,8 +23,11 @@ namespace ShabuStudio.Gameplay
 
         public void SetTarget(CombatEntity target)
         {
-            targetUnit = target;
-            OnEnable();
+            if (targetUnit == null)
+            {
+                targetUnit = target;
+                OnEnable();
+            }
         }
         
         

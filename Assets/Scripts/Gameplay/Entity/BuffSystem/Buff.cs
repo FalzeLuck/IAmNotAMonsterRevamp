@@ -31,7 +31,7 @@ namespace ShabuStudio.Gameplay
             All = ~0
         }
         
-
+        public string buffName;
         public int buffValue;
         public BuffAffect affectTarget; // Flags to select what things this buff is doing too.
         public BuffTarget target;
@@ -57,6 +57,7 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private StatsType type = StatsType.MaxHealth;
         [SerializeField] private OperatorType operatorType = OperatorType.Add;
         [SerializeField] private int countdownTurn = 1;
+        [SerializeField] private bool stackable = true;
 
         public override void ApplyBuff(CombatEntity entity)
         {

@@ -15,6 +15,7 @@ namespace ShabuStudio.Gameplay
         {
             modifiers.AddLast(modifier);
             Queries += modifier.Handle;
+            
 
             modifier.OnDispose += _ =>
             {
@@ -22,6 +23,7 @@ namespace ShabuStudio.Gameplay
                 Queries -= modifier.Handle;
             };
         }
+
 
         public void DecreaseTurnCountdown(int value)
         {

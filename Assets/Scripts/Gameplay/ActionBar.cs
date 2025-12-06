@@ -27,6 +27,11 @@ namespace ShabuStudio.Gameplay
             
         }
 
+        public static bool CanInsertCard(CardData cardData, CombatEntity entity)
+        {
+            return entity.currentCost - cardData.cardCost >= 0;
+        }
+
 
         /// <summary>
         /// Inserts a card into the action bar based on its speed, updates the action cost,

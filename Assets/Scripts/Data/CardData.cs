@@ -24,7 +24,8 @@ namespace ShabuStudio.Data
 
     public enum CardType
     {
-        AttackCard,
-        BuffCard
+        Attack,
+        Buff,
+        Debuff
     }
 }

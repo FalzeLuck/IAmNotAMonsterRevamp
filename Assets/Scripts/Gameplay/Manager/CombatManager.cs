@@ -17,7 +17,6 @@ namespace ShabuStudio.Gameplay
 
         [Header("Unit HealthBar")] 
         [SerializeField]private UnitHealthbar playerHealthbar;
-        [SerializeField]private UnitHealthbar enemyHealthbar;
 
         public void Initialize(DamageTextManager damageTextManager)
         {
@@ -25,7 +24,6 @@ namespace ShabuStudio.Gameplay
             _enemyUnit = BattleStateManager.Instance.enemyUnit;
             _damageTextManager = damageTextManager;
             playerHealthbar.SetTarget(_playerUnit);
-            enemyHealthbar.SetTarget(_enemyUnit);
         }
 
         

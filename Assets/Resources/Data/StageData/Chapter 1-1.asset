@@ -15,5 +15,5 @@ MonoBehaviour:
   stageID: 1-1
   stageName: 
   stageDescription: 
-  enemyPrefab: {fileID: 5896892805378539629, guid: 398ae0a93e833394a80f138191ccdd4a, type: 3}
+  enemyPrefab: {fileID: 206198227935772668, guid: 22fbc8c631c1b9f498efe72b7bb27b90, type: 3}
   prerequisiteStage: {fileID: 0}

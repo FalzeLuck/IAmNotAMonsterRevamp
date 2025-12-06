@@ -72,6 +72,12 @@ namespace ShabuStudio.Gameplay
                 currentCost -= amount;
         }
 
+        public void SetCost(int amount)
+        {
+            currentCost = amount;
+            if(currentCost < 0) currentCost = 0;
+        }
+
         // ----------------------------------------------
         // Health Logic
         // ----------------------------------------------
@@ -83,9 +89,10 @@ namespace ShabuStudio.Gameplay
                 uiDamage = 0;
                 return;
             }
-            int finalDamage = damage;
+            
             
             //Future Calculate Damage method HERE...
+            int finalDamage = damage + Stats.AdditionalTakenDamage;
             
             currentHealth -= finalDamage;
             uiDamage = finalDamage;

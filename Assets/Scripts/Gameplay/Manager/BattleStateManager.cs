@@ -94,7 +94,7 @@ namespace ShabuStudio.Gameplay
         IEnumerator HandleStart()
         {
             playerUnit.AddCost(3);
-            enemyUnit.AddCost(3);
+            enemyUnit.SetCost(enemyUnit.fixedCost);
             
             //OnStartTurnEffect
             combatManager.OnStartTurn();

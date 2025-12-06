@@ -12,6 +12,10 @@ namespace ShabuStudio.Gameplay
         {
             GameObject enemyObject = Instantiate(stageData.enemyPrefab, enemySpawnPoint,false);
             EnemyCombatEntity enemyData = enemyObject.GetComponent<EnemyCombatEntity>();
+            if (enemyData == null)
+            {
+                enemyData = enemyObject.GetComponentInChildren<EnemyCombatEntity>();
+            }
             BattleStateManager.Instance.enemyUnit = enemyData;
             
             
