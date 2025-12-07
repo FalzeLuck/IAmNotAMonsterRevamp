@@ -1,4 +1,7 @@
+using System;
+using ShabuStudio.Audio;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace ShabuStudio.MainMenu
@@ -11,6 +14,8 @@ namespace ShabuStudio.MainMenu
         public Button settingButton;
         public Button shopButton;
         public Button buildButton;
+        
+        
 
         private void Awake()
         {
@@ -30,9 +35,19 @@ namespace ShabuStudio.MainMenu
             
             buildButton = ui.Q<Button>("BuildButton");
             buildButton.clicked += OnBuildButtonClicked;
-
-
         }
+
+        
+        //Unhhok all register event to prevent memory leak.
+        private void OnDisable()
+        {
+            mapButton.clicked -= OnMapButtonClicked;
+            settingButton.clicked -= OnSettingButtonClicked;
+            shopButton.clicked -= OnShopButtonClicked;
+            buildButton.clicked -= OnBuildButtonClicked;
+        }
+
+        
 
         void OnMapButtonClicked()
         {
@@ -41,8 +56,9 @@ namespace ShabuStudio.MainMenu
         
         void OnSettingButtonClicked()
         {
-            
+            SceneManager.LoadSceneAsync("Scene_Setting", LoadSceneMode.Additive);
         }
+        
         
         void OnShopButtonClicked()
         {

@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/main-menu.uss?fileID=7433441132597879392&amp;guid=89e487778eb489542aa86f9f509f52e6&amp;type=3#main-menu" />
-    <ui:VisualElement name="Panel" style="flex-grow: 1; align-items: auto; flex-shrink: 0; flex-direction: row;">
+    <ui:VisualElement name="MainPanel" style="flex-grow: 1; align-items: auto; flex-shrink: 0; flex-direction: row; display: flex;">
         <ui:VisualElement name="LeftSideContainer" style="flex-grow: 1; justify-content: flex-start; align-self: stretch; width: 939px; align-items: flex-start; flex-shrink: 0;">
             <ui:Button text="Setting" name="SettingButton" />
         </ui:VisualElement>

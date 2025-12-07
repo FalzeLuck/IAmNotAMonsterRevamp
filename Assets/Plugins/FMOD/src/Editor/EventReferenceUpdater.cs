@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -220,6 +221,7 @@ namespace FMODUnity
             foreach (string guid in guids)
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid);
+                
 
                 yield return string.Format(L10n.Tr("Searching {0}"), path);
 
@@ -248,6 +250,8 @@ namespace FMODUnity
             foreach (string guid in guids)
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid);
+                
+                if(Path.GetFileName(path) == "PanelSettings.asset") continue;
 
                 yield return string.Format(L10n.Tr("Searching {0}"), path);
 
@@ -290,6 +294,10 @@ namespace FMODUnity
             foreach (string guid in guids)
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (!path.StartsWith("Assets/Scenes")) 
+                {
+                    continue;
+                }
 
                 yield return string.Format(L10n.Tr("Searching {0}"), path);
 
