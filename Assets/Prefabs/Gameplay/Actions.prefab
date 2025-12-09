@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -15.704407, y: 2.8267994}
-  m_SizeDelta: {x: -31.4087, y: -5.6536}
+  m_AnchoredPosition: {x: -0.93019867, y: -0.000017166138}
+  m_SizeDelta: {x: -1.8603, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2606272745565448399
 CanvasRenderer:
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9268406, b: 0.4669811, a: 1}
+  m_Color: {r: 1, g: 0.9268406, b: 0.4669811, a: 0.15686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -202,10 +202,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7109171034516901837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.030000001, y: 0.16000001}
-  m_AnchorMax: {x: 0.36, y: 0.58000004}
-  m_AnchoredPosition: {x: -0.20000076, y: -0.118299484}
-  m_SizeDelta: {x: -0.16999817, y: 0.8050003}
+  m_AnchorMin: {x: 0.63000005, y: 0.080000006}
+  m_AnchorMax: {x: 0.95000005, y: 0.52000004}
+  m_AnchoredPosition: {x: 0.099998474, y: -0.20000076}
+  m_SizeDelta: {x: 0.83000183, y: -0.1949997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3235911951820554393
 CanvasRenderer:
@@ -237,15 +237,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 459d8a73308776b40a4e9a0db3d505a5, type: 2}
+  m_sharedMaterial: {fileID: -564211714614534976, guid: 459d8a73308776b40a4e9a0db3d505a5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283387727
-  m_fontColor: {r: 0.31132078, g: 0.31132078, b: 0.31132078, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_fontSizeMin: 1
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

@@ -100,10 +100,10 @@ TextureImporter:
       name: ActionBar_0
       rect:
         serializedVersion: 2
-        x: 51
-        y: 59
-        width: 114
-        height: 745
+        x: 21
+        y: 17
+        width: 120
+        height: 525
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

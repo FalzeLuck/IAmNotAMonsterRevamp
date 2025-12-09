@@ -100,10 +100,10 @@ TextureImporter:
       name: ActionBarEnemy_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 4
-        width: 95
-        height: 57
+        x: 5
+        y: 5
+        width: 101
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
