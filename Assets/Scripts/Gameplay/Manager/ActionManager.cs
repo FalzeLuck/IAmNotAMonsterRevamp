@@ -11,7 +11,7 @@ namespace ShabuStudio.Gameplay
         private ActionBar _actionBar;
         private List<ActionDisplay> _actionSequence = new List<ActionDisplay>();
         private CombatManager _combatManager;
-        public Button playButton;
+        public PlayButtonController playButton;
         
         public void Initialize(ActionBar actionBar,CombatManager combatManager)
         {
@@ -25,15 +25,16 @@ namespace ShabuStudio.Gameplay
         {
             while (_actionSequence.Count > 0)
             {
-                Action action = _actionSequence[0].action;
-                _combatManager.PlayCard(action,out bool targetDead);
+                ActionData actionData = _actionSequence[0].ActionData;
+                bool targetDead = false;
+                yield return StartCoroutine(_combatManager.PlayCard(actionData,(resultIsDead) => targetDead = resultIsDead)) ;
                 yield return StartCoroutine(_actionBar.RemoveCardWaitFinish(0));
 
-                if (targetDead && action.ownerEntity.unitType == ActionOwner.Player) //Remove All Enemy card
+                if (targetDead && actionData.ownerEntity.unitType == ActionOwner.Player) //Remove All Enemy card
                 {
                     yield return StartCoroutine(_actionBar.RemoveCardSameOwner(ActionOwner.Enemy));
                 }
-                else if (targetDead && action.ownerEntity.unitType == ActionOwner.Enemy) //Remove All Player card
+                else if (targetDead && actionData.ownerEntity.unitType == ActionOwner.Enemy) //Remove All Player card
                 {
                     yield return StartCoroutine(_actionBar.RemoveCardSameOwner(ActionOwner.Player));
                 }
@@ -41,5 +42,7 @@ namespace ShabuStudio.Gameplay
                 _actionBar.UpdateUI();
             }
         }
+        
+        
     }
 }

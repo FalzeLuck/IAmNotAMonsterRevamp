@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using ShabuStudio.Data;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,9 @@ namespace ShabuStudio.Gameplay
 {
     public class CardDetailDisplay : MonoBehaviour
     {
+        public Vector3 moveOffset;
+        private Vector3 originalPosition;
+        
         [Header("References")] 
         public TextMeshProUGUI cardNameText;
         public TextMeshProUGUI cardDescriptionText;
@@ -16,7 +20,8 @@ namespace ShabuStudio.Gameplay
 
         private void Start()
         {
-            gameObject.SetActive(false);
+            originalPosition = transform.position;
+            ShowPanel(false);
         }
 
         public void Reload()
@@ -33,17 +38,16 @@ namespace ShabuStudio.Gameplay
         {
             if (cardData == null)
             {
+                ShowPanel(false);
                 previousCardData.cardName.StringChanged -= UpdateCardNameText;
                 previousCardData.cardDescription.StringChanged -= UpdateCardDescriptionText;
-                gameObject.SetActive(false);
                 return;
             }
             else
             {
-                gameObject.SetActive(true);
                 cardData.cardName.StringChanged -= UpdateCardNameText;
                 cardData.cardDescription.StringChanged -= UpdateCardDescriptionText;
-
+                ShowPanel(true);
                 cardData.cardName.StringChanged += UpdateCardNameText;
                 cardData.cardDescription.StringChanged += UpdateCardDescriptionText;
                 
@@ -51,6 +55,19 @@ namespace ShabuStudio.Gameplay
 
 
         }
+
+        void ShowPanel(bool show)
+        {
+            if (!show)
+            {
+                transform.DOMove(transform.position + moveOffset, 0.2f).SetEase(Ease.OutBack);
+            }
+            else
+            {
+                transform.DOMove(originalPosition, 0.2f).SetEase(Ease.OutBack);
+            }
+        }
+        
         
         void UpdateCardNameText(string localizedText)
         {

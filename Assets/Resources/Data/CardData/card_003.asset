@@ -54,10 +54,9 @@ MonoBehaviour:
         affectTarget: 0
         target: 1
         buffType: 1
-        type: 1
+        type: 2
         operatorType: 0
         countdownTurn: 1
-        stackable: 1
     - rid: 5898636456408908135
       type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:

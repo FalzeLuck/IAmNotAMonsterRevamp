@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using ShabuStudio.Data;
 using UnityEngine;
@@ -119,13 +120,13 @@ namespace ShabuStudio.Gameplay
         // Buff Logic
         // -------------------
 
-        public void ApplyBuff(List<Buff> buffList)
+        public IEnumerator ApplyBuff(List<Buff> buffList)
         {
             foreach (var buff in buffList)
             {
                 if (buff.buffType == Buff.BuffType.OnAction)
                 {
-                    buff.ApplyBuff(this);
+                    yield return StartCoroutine(buff.ApplyBuff(this));
                 }
                 else if(buff.buffType == Buff.BuffType.OnTurnStart)
                 {
@@ -134,13 +135,14 @@ namespace ShabuStudio.Gameplay
             }
             
             UpdateUI();
+            yield return null;
         }
 
         public void OnStartTurn()
         {
             foreach (var buff in OnStartTurnBuffs)
             {
-                buff.ApplyBuff(this);
+                StartCoroutine(buff.ApplyBuff(this));
             }
             UpdateUI();
             OnStartTurnBuffs.Clear();

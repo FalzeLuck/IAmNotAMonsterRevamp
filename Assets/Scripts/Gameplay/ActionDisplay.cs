@@ -8,7 +8,7 @@ namespace ShabuStudio.Gameplay
 {
     public class ActionDisplay : MonoBehaviour
     {
-        public Action action;
+        public ActionData ActionData;
         
         [Header("References")]
         public TextMeshProUGUI speedText;
@@ -21,8 +21,8 @@ namespace ShabuStudio.Gameplay
 
         public void Initialize(CardData cardData,int cardSpeed, CombatEntity ownerEntity)
         {
-            action = new Action(cardData, cardSpeed, ownerEntity);
-            speedText.text = action.speed.ToString();
+            ActionData = new ActionData(cardData, cardSpeed, ownerEntity);
+            speedText.text = ActionData.speed.ToString();
             if(ownerEntity.unitType == ActionOwner.Player)
             {
                 ActionBackgroundImage.sprite = playerIndicator;
@@ -47,13 +47,13 @@ namespace ShabuStudio.Gameplay
         
     }
 
-    public class Action
+    public class ActionData
     {
         public CardData cardData;
         public int speed;
         public CombatEntity ownerEntity;
         
-        public Action(CardData cardData, int speed, CombatEntity ownerEntity)
+        public ActionData(CardData cardData, int speed, CombatEntity ownerEntity)
         {
             this.cardData = cardData;
             this.speed = speed;

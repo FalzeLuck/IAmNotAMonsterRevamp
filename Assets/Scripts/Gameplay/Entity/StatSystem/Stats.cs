@@ -3,6 +3,7 @@ namespace ShabuStudio.Gameplay
     public enum StatsType
     {
         MaxHealth,
+        AdditionalDamage,
         AdditionalTakenDamage
     }
     
@@ -12,6 +13,7 @@ namespace ShabuStudio.Gameplay
         readonly BaseStats baseStats;
 
         public StatsMediator Mediator => statsMediator;
+
 
         public int MaxHealth
         {
@@ -28,6 +30,16 @@ namespace ShabuStudio.Gameplay
             get
             {
                 var q = new Query(StatsType.AdditionalTakenDamage, baseStats.additionalTakenDamage);
+                statsMediator.PerformQuery(this, q);
+                return q.Value;
+            }
+        }
+
+        public int AdditionalDamage
+        {
+            get
+            {
+                var q = new Query(StatsType.AdditionalDamage, baseStats.additionalDamage);
                 statsMediator.PerformQuery(this, q);
                 return q.Value;
             }

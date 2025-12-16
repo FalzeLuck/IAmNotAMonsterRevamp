@@ -52,6 +52,37 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908140
+  - m_Id: 5704039362904064
+    m_Localized: Use All Cost!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5704090210451456
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      If using when cost is equal to 0, Add {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      damage buff.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 5706423145250816
+    m_Localized: Add Cost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5706425766690816
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Increase Own cost by {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 5706937043959808
+    m_Localized: Decrease enemy cost.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5706987237195776
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Decrease current opponent cost by {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
   references:
     version: 2
     RefIds:
@@ -63,3 +94,6 @@ MonoBehaviour:
         - id: 392033386496
         - id: 46615205429248
         - id: 1474376264499200
+        - id: 5704090210451456
+        - id: 5706425766690816
+        - id: 5706987237195776

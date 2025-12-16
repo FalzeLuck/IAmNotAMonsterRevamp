@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,7 +37,7 @@ namespace ShabuStudio.Gameplay
         public BuffAffect affectTarget; // Flags to select what things this buff is doing too.
         public BuffTarget target;
         public BuffType buffType;
-        public abstract void ApplyBuff(CombatEntity entity);
+        public abstract IEnumerator ApplyBuff(CombatEntity entity);
     }
 
     [Serializable]
@@ -57,9 +58,8 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private StatsType type = StatsType.MaxHealth;
         [SerializeField] private OperatorType operatorType = OperatorType.Add;
         [SerializeField] private int countdownTurn = 1;
-        [SerializeField] private bool stackable = true;
 
-        public override void ApplyBuff(CombatEntity entity)
+        public override IEnumerator ApplyBuff(CombatEntity entity)
         {
             StatsModifier modifier = operatorType switch
             {
@@ -69,13 +69,14 @@ namespace ShabuStudio.Gameplay
             };
             
             entity.Stats.Mediator.AddModifier(modifier);
+            yield return null;
         }
     }
     
     [Serializable]
     public class CostModifierBuff : Buff
     {
-        public override void ApplyBuff(CombatEntity entity)
+        public override IEnumerator ApplyBuff(CombatEntity entity)
         {
             if (buffValue > 0)
             {
@@ -85,17 +86,103 @@ namespace ShabuStudio.Gameplay
             {
                 entity.RemoveCost(Math.Abs(buffValue));
             }
+            yield return null;
         }
     }
 
     [Serializable]
     public class HealBuff : Buff
     {
-        public override void ApplyBuff(CombatEntity entity)
+        public override IEnumerator ApplyBuff(CombatEntity entity)
         {
-            if(buffValue < 0) return;
+            if(buffValue < 0) yield break;
             
             entity.Heal(buffValue);
+            yield return null;
+        }
+    }
+
+    [Serializable]
+    public class RequireConditionBuff : Buff
+    {
+        private enum BuffConditionType
+        {
+            MaxHealth,
+            AdditionalDamage,
+            AdditionalTakenDamage,
+        
+            // -- EXCLUSIVE TYPE --
+            CurrentCost, 
+        }
+        
+        private enum ConditionType
+        {
+            Equal,
+            NotEqual,
+            MoreThanOrEqual,
+            MoreThan,
+            LessThanOrEqual,
+            LessThan,
+        }
+        
+        [Header( "Condition" )]
+        [SerializeField] private BuffConditionType conditionStatsType = BuffConditionType.MaxHealth;
+        [SerializeField] private ConditionType conditionType = ConditionType.Equal;
+        [SerializeField] private int conditionValue = 0;
+        [BF_SubclassList.SubclassList(typeof(Buff)), SerializeField]public Buff_container buffsToApply;
+        
+        public override IEnumerator ApplyBuff(CombatEntity entity)
+        {
+            if (CheckCondition(entity))
+            {
+                yield return entity.StartCoroutine(entity.ApplyBuff(buffsToApply.list));
+            }
+            yield return null;
+        }
+
+        bool CheckCondition(CombatEntity entity)
+        {
+            var stats = entity.Stats;
+            if(stats == null) return false;
+            
+
+            int valueToCheck = 0;
+
+            switch (conditionStatsType)
+            {
+                case BuffConditionType.MaxHealth:
+                    valueToCheck = stats.MaxHealth;
+                    break;
+                case BuffConditionType.AdditionalDamage:
+                    valueToCheck = stats.AdditionalDamage;
+                    break;
+                case BuffConditionType.AdditionalTakenDamage:
+                    valueToCheck = stats.AdditionalTakenDamage;
+                    break;
+                case BuffConditionType.CurrentCost:
+                    valueToCheck = entity.currentCost;
+                    break;
+            }
+            
+            
+            
+            switch (conditionType)
+            {
+                case ConditionType.Equal:
+                    return valueToCheck == conditionValue;
+                case ConditionType.NotEqual:
+                    return valueToCheck != conditionValue;
+                case ConditionType.MoreThanOrEqual:
+                    return valueToCheck >= conditionValue;
+                case ConditionType.MoreThan:
+                    return valueToCheck > conditionValue;
+                case ConditionType.LessThanOrEqual:
+                    return valueToCheck <= conditionValue;
+                case ConditionType.LessThan:
+                    return valueToCheck < conditionValue;
+                default:
+                    return false;
+            }
         }
     }
     

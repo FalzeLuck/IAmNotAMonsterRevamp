@@ -147,7 +147,7 @@ namespace ShabuStudio.Gameplay
         {
             for (int i = displayActions.Count - 1; i >= 0; i--)
             {
-                if (displayActions[i].action.ownerEntity.unitType == owner)
+                if (displayActions[i].ActionData.ownerEntity.unitType == owner)
                 {
                     GameObject objToRemove = displayActions[i].gameObject;
                     RemoveFromAllList(i);
@@ -181,7 +181,7 @@ namespace ShabuStudio.Gameplay
         {
             if(entity != null && entity.unitType == ActionOwner.Player)
             {
-                actionCostText.text = $"{entity.currentCost}";
+                actionCostText.text = $"Cost : {entity.currentCost}";
             }
         }
 

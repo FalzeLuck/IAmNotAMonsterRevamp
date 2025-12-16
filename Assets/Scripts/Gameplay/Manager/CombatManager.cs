@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using ShabuStudio.Data;
 using UnityEngine;
@@ -28,10 +29,12 @@ namespace ShabuStudio.Gameplay
 
         
         
-        public void PlayCard(Action action,out bool isDead)
+        public IEnumerator PlayCard(ActionData actionData,Action<bool> deadCallback)
         {
-            CardData card = action.cardData;
-            ActionOwner ownerType = action.ownerEntity.unitType;
+            bool isDead = false;
+            
+            CardData card = actionData.cardData;
+            ActionOwner ownerType = actionData.ownerEntity.unitType;
             List<Buff> buffList = card.buffsToApply.list;
             List<Buff> buffsToApplyToTarget = new List<Buff>();
             List<Buff> buffsToApplyToSelf = new List<Buff>();
@@ -74,10 +77,10 @@ namespace ShabuStudio.Gameplay
 
             
             //Start Action
-            target.TakeDamage(card.damage, out var damage);
+            yield return StartCoroutine(target.ApplyBuff(buffsToApplyToTarget));
+            yield return StartCoroutine(self.ApplyBuff(buffsToApplyToSelf));
+            target.TakeDamage(card.damage + self.Stats.AdditionalDamage, out var damage);
             _damageTextManager.SpawnDamageText(damageSpawnPoint.position,damage,false);
-            target.ApplyBuff(buffsToApplyToTarget);
-            self.ApplyBuff(buffsToApplyToSelf);
             
             
             
@@ -85,11 +88,11 @@ namespace ShabuStudio.Gameplay
             
             
 
-            if (action.ownerEntity.unitType == ActionOwner.Player && _enemyUnit.isDead)
+            if (actionData.ownerEntity.unitType == ActionOwner.Player && _enemyUnit.isDead)
             {
                 isDead = true;
             }
-            else if (action.ownerEntity.unitType == ActionOwner.Enemy && _playerUnit.isDead)
+            else if (actionData.ownerEntity.unitType == ActionOwner.Enemy && _playerUnit.isDead)
             {
                 isDead = true;
             }
@@ -97,6 +100,8 @@ namespace ShabuStudio.Gameplay
             {
                 isDead = false;
             }
+            
+            deadCallback?.Invoke(isDead);
         }
 
         public void OnStartTurn()
