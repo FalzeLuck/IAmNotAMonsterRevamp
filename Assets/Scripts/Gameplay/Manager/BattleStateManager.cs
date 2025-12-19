@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,18 +31,18 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private DamageTextManager damageTextManager;
 
 
-        private void Start()
+        private async void Start()
         {
-            StartCoroutine(setupManager.StartSetup(GameManager.Instance.currentStageData));
-            Invoke("StartInitialize", 0.1f);
+            await setupManager.StartSetup(GameManager.Instance.currentStageData);
+            StartInitialize();
         }
 
         void StartInitialize()
         {
-            ChangeState(BattleState.Initialize);
+            ChangeState(BattleState.Initialize).Forget();
         }
 
-        public void ChangeState(BattleState newState)
+        public async UniTaskVoid ChangeState(BattleState newState)
         {
             currentState = newState;
             Debug.Log($"State Changed to {newState}");
@@ -55,16 +53,16 @@ namespace ShabuStudio.Gameplay
                     HandleInitialize();
                     break;
                 case BattleState.Start:
-                    StartCoroutine(HandleStart());
+                    await HandleStart();
                     break;
                 case BattleState.DrawPhase:
-                    StartCoroutine(HandleDrawPhase());
+                    await HandleDrawPhase();
                     break;
                 case BattleState.ActionSetupPhase:
                     HandleActionSetupPhase();
                     break;
                 case BattleState.ActionPhase:
-                    StartCoroutine(HandleActionPhase());
+                    await HandleActionPhase();
                     break;
                 case BattleState.EndPhase:
                     HandleEndPhase();
@@ -91,58 +89,58 @@ namespace ShabuStudio.Gameplay
             ChangeState(BattleState.Start);
         }
 
-        IEnumerator HandleStart()
+        async UniTask HandleStart()
         {
             playerUnit.AddCost(3);
             enemyUnit.SetCost(enemyUnit.fixedCost);
             
             //OnStartTurnEffect
             combatManager.OnStartTurn();
-            handManager.HideHand(false); //Hide hand after 1 second ( 1 second = 1 frame)
+            handManager.HideHand(false); //Hide hand after 1 second (1 second = 1 frame)
             
             UpdateAllUI();
-            yield return null;
-            ChangeState(BattleState.DrawPhase);
+            await UniTask.NextFrame();
+            ChangeState(BattleState.DrawPhase).Forget();
         }
         
-        IEnumerator HandleDrawPhase()
+        async UniTask HandleDrawPhase()
         {
-            yield return StartCoroutine(handManager.DrawCardToMax()); //Wait Until Player draw all card.
-            ChangeState(BattleState.ActionSetupPhase);
+            await handManager.DrawCardToMax(); //Wait Until Player draw all card.
+            ChangeState(BattleState.ActionSetupPhase).Forget();
         }
 
         void HandleActionSetupPhase()
         {
-            StartCoroutine(enemyUnit.StartActionSetup(actionBar));
+            enemyUnit.StartActionSetup(actionBar).Forget();
             actionManager.playButton.gameObject.SetActive(true);
             handManager.SetHandCardInteractable(true);
         }
 
-        IEnumerator HandleActionPhase()
+        async UniTask HandleActionPhase()
         {
             handManager.HideHand(true);
-            yield return StartCoroutine(actionManager.StartActionSequence());
-            ChangeState(BattleState.EndPhase);
+            await actionManager.StartActionSequence();
+            ChangeState(BattleState.EndPhase).Forget();
         }
 
         void HandleEndPhase()
         {
             if (enemyUnit.isDead)
             {
-                ChangeState(BattleState.Win);
+                ChangeState(BattleState.Win).Forget();
                 return;
             }
             
             if (playerUnit.isDead)
             {
-                ChangeState(BattleState.Lose);
+                ChangeState(BattleState.Lose).Forget();
                 return;
             }
             
             playerUnit.DecreaseBuffTurn(1);
             enemyUnit.DecreaseBuffTurn(1);
             
-            ChangeState(BattleState.Start);
+            ChangeState(BattleState.Start).Forget();
         }
         
         private void HandleWin()
@@ -152,7 +150,7 @@ namespace ShabuStudio.Gameplay
 
         public void StartActionSequence()
         {
-            ChangeState(BattleState.ActionPhase);
+            ChangeState(BattleState.ActionPhase).Forget();
             actionManager.playButton.gameObject.SetActive(false);
             handManager.SetHandCardInteractable(false);
             handManager.RemovePlayedCard();

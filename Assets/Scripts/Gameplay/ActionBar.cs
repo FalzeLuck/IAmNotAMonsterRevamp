@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using ShabuStudio.Data;
 using TMPro;
@@ -128,9 +130,9 @@ namespace ShabuStudio.Gameplay
             RemoveActionObjWithAnim(objToRemove);
         }
 
-        public IEnumerator RemoveCardWaitFinish(int index)
+        public async UniTask RemoveCardWaitFinish(int index,CancellationToken token)
         {
-            if (index < 0 || index >= displayActions.Count) yield break;
+            if (index < 0 || index >= displayActions.Count) return;
             
             GameObject objToRemove = displayActions[index].gameObject;
 
@@ -140,10 +142,11 @@ namespace ShabuStudio.Gameplay
             // Animate and Destroy
             Tween tween = RemoveActionObjWithAnim(objToRemove);
             
-            yield return tween.WaitForCompletion();
+            //Wait for tween finish and cancel when objToRemove is destroy
+            await tween.ToUniTask(cancellationToken:token);
         }
 
-        public IEnumerator RemoveCardSameOwner(ActionOwner owner)
+        public async UniTask RemoveCardSameOwner(ActionOwner owner,CancellationToken token)
         {
             for (int i = displayActions.Count - 1; i >= 0; i--)
             {
@@ -151,8 +154,7 @@ namespace ShabuStudio.Gameplay
                 {
                     GameObject objToRemove = displayActions[i].gameObject;
                     RemoveFromAllList(i);
-                    RemoveActionObjWithAnim(objToRemove);
-                    yield return null;
+                    await RemoveActionObjWithAnim(objToRemove).ToUniTask(cancellationToken:token);
                 }
             }
         }

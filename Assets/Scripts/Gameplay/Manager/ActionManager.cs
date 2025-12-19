@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ShabuStudio.Data;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,22 +22,23 @@ namespace ShabuStudio.Gameplay
             playButton.gameObject.SetActive(false);
         }
 
-        public IEnumerator StartActionSequence()
+        public async UniTask StartActionSequence()
         {
+            var token = this.GetCancellationTokenOnDestroy();
             while (_actionSequence.Count > 0)
             {
                 ActionData actionData = _actionSequence[0].ActionData;
-                bool targetDead = false;
-                yield return StartCoroutine(_combatManager.PlayCard(actionData,(resultIsDead) => targetDead = resultIsDead)) ;
-                yield return StartCoroutine(_actionBar.RemoveCardWaitFinish(0));
+                
+                bool targetDead = await _combatManager.PlayCard(actionData,token) ;
+                await _actionBar.RemoveCardWaitFinish(0,token);
 
                 if (targetDead && actionData.ownerEntity.unitType == ActionOwner.Player) //Remove All Enemy card
                 {
-                    yield return StartCoroutine(_actionBar.RemoveCardSameOwner(ActionOwner.Enemy));
+                    await _actionBar.RemoveCardSameOwner(ActionOwner.Enemy,token);
                 }
                 else if (targetDead && actionData.ownerEntity.unitType == ActionOwner.Enemy) //Remove All Player card
                 {
-                    yield return StartCoroutine(_actionBar.RemoveCardSameOwner(ActionOwner.Player));
+                    await _actionBar.RemoveCardSameOwner(ActionOwner.Player,token);
                 }
                 
                 _actionBar.UpdateUI();

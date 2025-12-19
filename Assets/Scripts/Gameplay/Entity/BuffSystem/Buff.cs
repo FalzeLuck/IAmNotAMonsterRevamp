@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace ShabuStudio.Gameplay
@@ -37,7 +39,11 @@ namespace ShabuStudio.Gameplay
         public BuffAffect affectTarget; // Flags to select what things this buff is doing too.
         public BuffTarget target;
         public BuffType buffType;
-        public abstract IEnumerator ApplyBuff(CombatEntity entity);
+
+        public virtual async UniTask ApplyBuff(CombatEntity entity, CancellationToken token)
+        {
+            await UniTask.CompletedTask;
+        }
     }
 
     [Serializable]
@@ -59,7 +65,7 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private OperatorType operatorType = OperatorType.Add;
         [SerializeField] private int countdownTurn = 1;
 
-        public override IEnumerator ApplyBuff(CombatEntity entity)
+        public override async UniTask ApplyBuff(CombatEntity entity, CancellationToken token)
         {
             StatsModifier modifier = operatorType switch
             {
@@ -69,14 +75,13 @@ namespace ShabuStudio.Gameplay
             };
             
             entity.Stats.Mediator.AddModifier(modifier);
-            yield return null;
         }
     }
     
     [Serializable]
     public class CostModifierBuff : Buff
     {
-        public override IEnumerator ApplyBuff(CombatEntity entity)
+        public override async UniTask ApplyBuff(CombatEntity entity,CancellationToken token)
         {
             if (buffValue > 0)
             {
@@ -86,19 +91,17 @@ namespace ShabuStudio.Gameplay
             {
                 entity.RemoveCost(Math.Abs(buffValue));
             }
-            yield return null;
         }
     }
 
     [Serializable]
     public class HealBuff : Buff
     {
-        public override IEnumerator ApplyBuff(CombatEntity entity)
+        public override async UniTask ApplyBuff(CombatEntity entity,CancellationToken token)
         {
-            if(buffValue < 0) yield break;
+            if(buffValue < 0) return;
             
             entity.Heal(buffValue);
-            yield return null;
         }
     }
 
@@ -131,13 +134,15 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private int conditionValue = 0;
         [BF_SubclassList.SubclassList(typeof(Buff)), SerializeField]public Buff_container buffsToApply;
         
-        public override IEnumerator ApplyBuff(CombatEntity entity)
+        public override async UniTask ApplyBuff(CombatEntity entity,CancellationToken token)
         {
             if (CheckCondition(entity))
             {
-                yield return entity.StartCoroutine(entity.ApplyBuff(buffsToApply.list));
+                if (buffsToApply != null && buffsToApply.list.Count > 0)
+                {
+                    await entity.ApplyBuff(buffsToApply.list, token);
+                }
             }
-            yield return null;
         }
 
         bool CheckCondition(CombatEntity entity)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using ShabuStudio.Data;
 using UnityEngine;
@@ -58,17 +59,17 @@ namespace ShabuStudio.Gameplay
         }
 
         //Draw Card to hand until max hand size reached.
-        public IEnumerator DrawCardToMax()
+        public async UniTask DrawCardToMax()
         {
-            if(handCards.Count >= maxHandSize) yield break;
+            if(handCards.Count >= maxHandSize) return;
 
             while (handCards.Count < maxHandSize)
             {
                 DrawCard();
-                yield return new WaitForSeconds(0.1f);
+                await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
             }
             
-            yield return drawCardTween.WaitForCompletion();
+            await drawCardTween.ToUniTask();
         }
         
         //Update Card Position in hand.

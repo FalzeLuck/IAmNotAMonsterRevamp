@@ -1,4 +1,5 @@
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using ShabuStudio.Chapter;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace ShabuStudio.Gameplay
     {
         public Transform enemySpawnPoint;
 
-        public IEnumerator StartSetup(StageData stageData)
+        public async UniTask StartSetup(StageData stageData)
         {
             GameObject enemyObject = Instantiate(stageData.enemyPrefab, enemySpawnPoint,false);
             EnemyCombatEntity enemyData = enemyObject.GetComponent<EnemyCombatEntity>();
@@ -18,8 +19,7 @@ namespace ShabuStudio.Gameplay
             }
             BattleStateManager.Instance.enemyUnit = enemyData;
             
-            
-            yield return null;
+            await UniTask.NextFrame();
         }
     }
 }

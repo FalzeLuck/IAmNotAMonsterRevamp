@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using ShabuStudio.Data;
 using UnityEngine;
 
@@ -7,23 +8,31 @@ namespace ShabuStudio.Gameplay
 {
     public class EnemyCombatEntity : CombatEntity
     {
+        [Header("Enemy References")]
+        public Animator animator;
         public int fixedCost = 3;
         [Header("Enemy Hand")]
         public List<CardData> hand;
         public int handSize = 5;
-        
+
+
+        protected override void Start()
+        {
+            base.Start();
+        }
+
         //-------------------------
         // Enemy Will Draw card then put it in action bar
         //--------------------------
-        public IEnumerator StartActionSetup(ActionBar actionBar)
+        public async UniTask StartActionSetup(ActionBar actionBar)
         {
-            yield return StartCoroutine(DrawCardToMax());
-            yield return StartCoroutine(InsertCardToActionBar(actionBar));
+            DrawCardToMax();
+            await InsertCardToActionBar(actionBar);
         }
 
-        IEnumerator DrawCardToMax()
+        void DrawCardToMax()
         {
-            if(hand.Count >= handSize) yield break;
+            if(hand.Count >= handSize) return;
             
             while (hand.Count < handSize)
             {
@@ -33,12 +42,18 @@ namespace ShabuStudio.Gameplay
 
         void DrawCard()
         {
-            //Draw card from deck
             hand.Add(deckDataHolder.DrawRandomCard());
         }
 
+        public override void TakeDamage(int damage, out int uiDamage)
+        {
+            base.TakeDamage(damage, out uiDamage);
+            if(damage > 0)
+                animator.SetTrigger("Hit");
+        }
 
-        IEnumerator InsertCardToActionBar(ActionBar actionBar)
+
+        async UniTask InsertCardToActionBar(ActionBar actionBar)
         {
             while (hand.Count > 0)
             {
@@ -48,13 +63,13 @@ namespace ShabuStudio.Gameplay
 
                 if (!actionBar.InsertCard(card, speed, this, out _))
                 {
-                    yield break;
+                    return;
                 }
 
                 hand.RemoveAt(index);
             }
 
-            yield return null;
+            await UniTask.NextFrame();
         }
     }
 }

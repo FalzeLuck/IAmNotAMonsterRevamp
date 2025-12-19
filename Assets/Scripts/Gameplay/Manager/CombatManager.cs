@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using ShabuStudio.Data;
 using UnityEngine;
 
@@ -29,7 +31,7 @@ namespace ShabuStudio.Gameplay
 
         
         
-        public IEnumerator PlayCard(ActionData actionData,Action<bool> deadCallback)
+        public async UniTask<bool> PlayCard(ActionData actionData,CancellationToken token)
         {
             bool isDead = false;
             
@@ -77,8 +79,10 @@ namespace ShabuStudio.Gameplay
 
             
             //Start Action
-            yield return StartCoroutine(target.ApplyBuff(buffsToApplyToTarget));
-            yield return StartCoroutine(self.ApplyBuff(buffsToApplyToSelf));
+            await UniTask.WhenAll(
+                    target.ApplyBuff(buffsToApplyToTarget,token),
+                    self.ApplyBuff(buffsToApplyToSelf,token)
+                );
             target.TakeDamage(card.damage + self.Stats.AdditionalDamage, out var damage);
             _damageTextManager.SpawnDamageText(damageSpawnPoint.position,damage,false);
             
@@ -101,7 +105,7 @@ namespace ShabuStudio.Gameplay
                 isDead = false;
             }
             
-            deadCallback?.Invoke(isDead);
+            return isDead;
         }
 
         public void OnStartTurn()

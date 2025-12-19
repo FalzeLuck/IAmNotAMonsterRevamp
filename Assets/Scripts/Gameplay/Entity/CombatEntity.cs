@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using ShabuStudio.Data;
 using UnityEngine;
 
@@ -32,7 +34,7 @@ namespace ShabuStudio.Gameplay
             Stats = new Stats(new StatsMediator(), baseStats);
         }
         
-        private void Start()
+        protected virtual void Start()
         {
             currentHealth = baseStats.maxHealth;
             UpdateUI();
@@ -83,7 +85,7 @@ namespace ShabuStudio.Gameplay
         // Health Logic
         // ----------------------------------------------
         
-        public void TakeDamage(int damage,out int uiDamage)
+        public virtual void TakeDamage(int damage,out int uiDamage)
         {
             if(damage <= 0)
             {
@@ -120,13 +122,13 @@ namespace ShabuStudio.Gameplay
         // Buff Logic
         // -------------------
 
-        public IEnumerator ApplyBuff(List<Buff> buffList)
+        public async UniTask ApplyBuff(List<Buff> buffList,CancellationToken token)
         {
             foreach (var buff in buffList)
             {
                 if (buff.buffType == Buff.BuffType.OnAction)
                 {
-                    yield return StartCoroutine(buff.ApplyBuff(this));
+                    await buff.ApplyBuff(this,token);
                 }
                 else if(buff.buffType == Buff.BuffType.OnTurnStart)
                 {
@@ -135,14 +137,14 @@ namespace ShabuStudio.Gameplay
             }
             
             UpdateUI();
-            yield return null;
+            await UniTask.NextFrame(token);
         }
 
         public void OnStartTurn()
         {
             foreach (var buff in OnStartTurnBuffs)
             {
-                StartCoroutine(buff.ApplyBuff(this));
+                buff.ApplyBuff(this,this.GetCancellationTokenOnDestroy()).Forget();
             }
             UpdateUI();
             OnStartTurnBuffs.Clear();
