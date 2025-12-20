@@ -20,6 +20,11 @@ namespace ShabuStudio.Gameplay
 
         [Header("Unit HealthBar")] 
         [SerializeField]private UnitHealthbar playerHealthbar;
+        
+        [Header("VFX References")]
+        public VFXManager vfxManager;
+        public Transform vfxPlayerSpawnPoint;
+        public Transform vfxEnemySpawnPoint;
 
         public void Initialize(DamageTextManager damageTextManager)
         {
@@ -83,8 +88,27 @@ namespace ShabuStudio.Gameplay
                     target.ApplyBuff(buffsToApplyToTarget,token),
                     self.ApplyBuff(buffsToApplyToSelf,token)
                 );
-            target.TakeDamage(card.damage + self.Stats.AdditionalDamage, out var damage);
-            _damageTextManager.SpawnDamageText(damageSpawnPoint.position,damage,false);
+
+            //Prepare Damage
+            int totalDamage = card.damage + self.Stats.AdditionalDamage;
+            float[] hitPattern = card.hitRatio;
+            _damageTextManager.PrepareDamage(totalDamage,damageSpawnPoint,hitPattern);
+            
+            //Play VFX
+            try
+            {
+                await vfxManager.PlayTimelineAsync(card,
+                    ownerType == ActionOwner.Player ? vfxEnemySpawnPoint : vfxPlayerSpawnPoint,
+                    _damageTextManager,
+                    token);
+            }
+            finally
+            {
+                _damageTextManager.FlushRamainingDamage();
+            }
+            
+            //Apply Damage
+            target.TakeDamage(totalDamage, out var damage);
             
             
             

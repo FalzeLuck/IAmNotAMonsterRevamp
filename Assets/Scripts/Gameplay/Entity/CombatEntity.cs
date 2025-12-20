@@ -110,7 +110,7 @@ namespace ShabuStudio.Gameplay
             
         }
         
-        public void Heal(int amount)
+        public virtual void Heal(int amount)
         {
             currentHealth += amount;
             if (currentHealth > Stats.MaxHealth) currentHealth = Stats.MaxHealth;

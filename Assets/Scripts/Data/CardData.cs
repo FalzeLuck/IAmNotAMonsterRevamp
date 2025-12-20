@@ -19,6 +19,10 @@ namespace ShabuStudio.Data
         [Min(0)] public int cardSpeed;
         [Min(0)] public int damage;
         public bool canInflictBuff = false;
+        
+        [Header("Animation & Timeline")]
+        public GameObject vfxPrefab;
+        public float[] hitRatio = {1f};
 
     }
 
