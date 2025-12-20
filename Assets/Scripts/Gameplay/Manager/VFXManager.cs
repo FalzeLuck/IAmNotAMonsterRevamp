@@ -9,7 +9,42 @@ namespace ShabuStudio.Gameplay
 {
     public class VFXManager : MonoBehaviour
     {
+        public static VFXManager Instance { get; private set; }
+        private void Awake()
+        {
+            if (Instance != null && Instance != this) Destroy(gameObject);
+            else Instance = this;
+        }
+        
 
+        public async UniTask PlayTimelineAsync(GameObject vfxPrefab,Transform vfxSpawnParent,DamageTextManager bindingSignalObject, CancellationToken token)
+        {
+            GameObject vfxObject;
+            if (vfxPrefab != null)
+            {
+                vfxObject = Instantiate(vfxPrefab, vfxSpawnParent);
+            }
+            else
+            {
+                return;
+            }
+            
+            PlayableDirector vfxDirector = vfxObject.GetComponent<PlayableDirector>();
+            if(vfxDirector == null || vfxDirector.playableAsset == null) return;
+            
+            BindingSignalTrack(vfxDirector,bindingSignalObject.gameObject);
+            
+            vfxDirector.Play();
+
+            await UniTask.Delay(
+                System.TimeSpan.FromSeconds(vfxDirector.duration),
+                ignoreTimeScale:false,
+                cancellationToken: token);
+
+            vfxDirector.Stop();
+            Destroy(vfxObject);
+        }
+        
         public async UniTask PlayTimelineAsync(CardData cardData,Transform vfxSpawnParent,DamageTextManager bindingSignalObject, CancellationToken token)
         {
             GameObject vfxObject;
@@ -52,8 +87,6 @@ namespace ShabuStudio.Gameplay
                     return;
                 }
             }
-            
-            Debug.LogError("No Signal Track Found");
         }
     }
 }

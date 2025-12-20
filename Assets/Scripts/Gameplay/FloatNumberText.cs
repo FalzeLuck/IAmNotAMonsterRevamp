@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShabuStudio.Gameplay
 {
-    public class DamageText : MonoBehaviour
+    public class FloatNumberText : MonoBehaviour
     {
         [Header("References")]
         [SerializeField]private TextMeshProUGUI damageText;
@@ -18,21 +18,16 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private Ease movementEase = Ease.OutCirc;
         [SerializeField] private Vector3 punchScale = new Vector3(0.5f, 0.5f, 0.5f);
         
-        public void SetupAndStart(Vector3 screenPos,int damageAmount, bool isCriticalHit)
+        public void SetupAndStart(Vector3 screenPos,int numberAmount,Color textColor, bool isCriticalHit,string prefix = "")
         {
-            damageText.text = $"-{damageAmount}";
-            
+            damageText.text = $"{prefix}{numberAmount}";
+            damageText.color = textColor;    
         
             transform.position = screenPos;
             
             if (isCriticalHit) //If damage can critical in future.
             {
                 damageText.fontSize *= 1.5f;
-                damageText.color = Color.yellow;
-            }
-            else
-            {
-                damageText.color = Color.red;
             }
 
             

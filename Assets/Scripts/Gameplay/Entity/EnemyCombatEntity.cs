@@ -45,11 +45,22 @@ namespace ShabuStudio.Gameplay
             hand.Add(deckDataHolder.DrawRandomCard());
         }
 
-        public override void TakeDamage(int damage, out int uiDamage)
+        public override void TakeDamage(int damage)
         {
-            base.TakeDamage(damage, out uiDamage);
-            if(damage > 0)
-                animator.SetTrigger("Hit");
+            base.TakeDamage(damage);
+        }
+        
+        public override void Heal(int amount)
+        {
+            base.Heal(amount);
+            Debug.Log(CombatManager.Instance.damageSpawnPointEnemy.position);
+            DamageTextManager.Instance.SpawnText(CombatManager.Instance.damageSpawnPointEnemy.position,amount,Color.green, false,"+");
+        }
+        
+
+        public void PlayTrigger(string trigger)
+        {
+            animator.SetTrigger(trigger);
         }
 
 

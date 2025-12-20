@@ -44,6 +44,8 @@ MonoBehaviour:
   damage: 30
   canInflictBuff: 1
   vfxPrefab: {fileID: 1345078675182571299, guid: 704ba4fe68c03a445afdf59b20697aaa, type: 3}
+  hitRatio:
+  - 1
   references:
     version: 2
     RefIds:

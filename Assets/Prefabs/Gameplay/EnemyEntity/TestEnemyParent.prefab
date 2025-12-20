@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5997638977036148468}
+  - {fileID: 4883418208370247357}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &324853007166305653
@@ -658,11 +659,11 @@ MonoBehaviour:
   baseStats: {fileID: 11400000, guid: f0ce92f7d8cf09747aa5c83b80c4fe99, type: 2}
   currentHealth: 0
   isDead: 0
+  vfxSpawnPoint: {fileID: 4883418208370247357}
   deckDataHolder:
     deckName: Enemy Deck
     deckID: enemy_deck_001
     allCards:
-    - {fileID: 11400000, guid: fa52a0d5faf12914e8e1d3e92e96cc13, type: 2}
     - {fileID: 11400000, guid: 3a382626e3cd89743b7e803d1faac28a, type: 2}
     availableCards: []
     droppedCards: []
@@ -1274,6 +1275,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6723701038652721952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.078}
+--- !u!1 &5699782467587644010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4883418208370247357}
+  m_Layer: 6
+  m_Name: vfxPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4883418208370247357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699782467587644010}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2797355653312453551}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6276589262295738092
 GameObject:
   m_ObjectHideFlags: 0

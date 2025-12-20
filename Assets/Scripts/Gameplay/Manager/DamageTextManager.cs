@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -7,13 +9,25 @@ namespace ShabuStudio.Gameplay
 {
     public class DamageTextManager : MonoBehaviour, INotificationReceiver
     {
-        [SerializeField] private DamageText damageTextPrefab;
+        public static DamageTextManager Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this) Destroy(gameObject);
+            else Instance = this;
+        }
+
+        [SerializeField] private FloatNumberText floatNumberTextPrefab;
         [SerializeField] private Transform damageTextCanvasTransform;
-        private List<DamageText> _damageTextList = new List<DamageText>();
+        [SerializeField] private CinemachineImpulseSource impulseSource;
+        [SerializeField] private Color damageColor = Color.red;
+        private List<FloatNumberText> _damageTextList = new List<FloatNumberText>();
         
         //Queue to store pre-calculated damage
         private Queue<DamageInfo> _damageQueue = new Queue<DamageInfo>();
         private Transform damagePos;
+        
+        private CombatEntity _currentTakeDamageEntity;
         
         public struct DamageInfo
         {
@@ -25,9 +39,10 @@ namespace ShabuStudio.Gameplay
             
         }
         
-        public void PrepareDamage(int damageAmount,Transform damageSpawnPoint, float[] ratios)
+        public void PrepareNumber(int damageAmount,Transform damageSpawnPoint,CombatEntity entity, float[] ratios)
         {
             _damageQueue.Clear();
+            _currentTakeDamageEntity = entity;
             damagePos = damageSpawnPoint;
             float ratioSum = 0;
             foreach (float ratio in ratios) ratioSum += ratio;
@@ -48,8 +63,9 @@ namespace ShabuStudio.Gameplay
             }
         }
 
-        public void FlushRamainingDamage()
+        public void FlushRemainingDamage()
         {
+            _currentTakeDamageEntity = null;
             while (_damageQueue.Count > 0)
             {
                 ProcessOnHitDamage();
@@ -61,32 +77,41 @@ namespace ShabuStudio.Gameplay
             if (_damageQueue.Count == 0) return;
             
             DamageInfo damageInfo = _damageQueue.Dequeue();
-            Debug.Log(damageInfo.damageAmount);
+
+            if (_currentTakeDamageEntity is EnemyCombatEntity && _currentTakeDamageEntity!=null)
+            {
+                (_currentTakeDamageEntity as EnemyCombatEntity).PlayTrigger("Hit");
+            }
             
-            SpawnDamageText(damagePos.position,damageInfo.damageAmount,false);
+            if (impulseSource != null && damageInfo.damageAmount > 0)
+            {
+                float shakeForce = 0.2f; 
+                impulseSource.GenerateImpulse(shakeForce);
+            }
+            
+            SpawnText(damagePos.position,damageInfo.damageAmount,damageColor,false, "-");
             
         }
         
-        public void SpawnDamageText(Vector3 screenPos, int damageAmount, bool isCriticalHit)
+        public void SpawnText(Vector3 screenPos, int damageAmount,Color textColor, bool isCriticalHit,string prefix = "")
         {
             if(damageAmount <= 0) return;
             
             //Check if there is any inactive damage text in list.
-            foreach (DamageText item in _damageTextList)
+            foreach (FloatNumberText item in _damageTextList)
             {
                 if (!item.gameObject.activeInHierarchy) 
                 {
                     item.gameObject.SetActive(true);
-                    item.SetupAndStart(screenPos,damageAmount, isCriticalHit);
+                    item.SetupAndStart(screenPos,damageAmount,textColor, isCriticalHit,prefix);
                     return;
                 }
             }
             
             //Else create new damageText
-            DamageText damageText = Instantiate(damageTextPrefab,damageTextCanvasTransform);
-            _damageTextList.Add(damageText);
-            damageText.SetupAndStart(screenPos,damageAmount, isCriticalHit);
-            
+            FloatNumberText floatNumberText = Instantiate(floatNumberTextPrefab,damageTextCanvasTransform);
+            _damageTextList.Add(floatNumberText);
+            floatNumberText.SetupAndStart(screenPos,damageAmount,textColor, isCriticalHit,prefix);
         }
     }
 }

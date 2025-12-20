@@ -196,8 +196,6 @@ MonoBehaviour:
   damageSpawnPointEnemy: {fileID: 53387477}
   playerHealthbar: {fileID: 373413598867094039}
   vfxManager: {fileID: 1188934}
-  vfxPlayerSpawnPoint: {fileID: 1005683717}
-  vfxEnemySpawnPoint: {fileID: 1160987311}
 --- !u!4 &41381741
 Transform:
   m_ObjectHideFlags: 0
@@ -248,6 +246,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &230914694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230914695}
+  m_Layer: 0
+  m_Name: vfxPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &230914695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230914694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1005683717}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &283229928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1474,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 230914695}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1005683718
@@ -1465,6 +1495,7 @@ MonoBehaviour:
   baseStats: {fileID: 11400000, guid: c1ef6748ce9ebbf4187cd3e39f3ceb0c, type: 2}
   currentHealth: 0
   isDead: 0
+  vfxSpawnPoint: {fileID: 0}
   deckDataHolder:
     deckName: 
     deckID: 
@@ -2154,7 +2185,7 @@ Transform:
   m_GameObject: {fileID: 1160987310}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4.493}
+  m_LocalPosition: {x: 0, y: 0.05, z: 4.493}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3909,7 +3940,7 @@ MonoBehaviour:
   m_Intensity: 0
   m_InnerSpotPercent: 46.664936
   m_SpotIESCutoffPercent: 100
-  m_LightDimmer: 5.4
+  m_LightDimmer: 1
   m_VolumetricDimmer: 2.55
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
@@ -4072,7 +4103,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 2800000, guid: 64ee42be95ff15b4781ca54723275168, type: 3}
+  m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -4675,6 +4706,7 @@ GameObject:
   - component: {fileID: 1556354538}
   - component: {fileID: 1556354537}
   - component: {fileID: 1556354539}
+  - component: {fileID: 1556354540}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -4755,6 +4787,30 @@ MonoBehaviour:
   swayAmount: 1
   smoothSpeed: 2
   pauseOnTabOut: 1
+--- !u!114 &1556354540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556354536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1558449636
 GameObject:
   m_ObjectHideFlags: 0
@@ -5084,7 +5140,7 @@ GameObject:
   - component: {fileID: 1683432597}
   - component: {fileID: 1683432596}
   m_Layer: 0
-  m_Name: Floor (1)
+  m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5120,7 +5176,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683432595}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -5411,37 +5467,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2138170391}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1738894593
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1738894594}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1738894594
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1738894593}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.865745, y: 8.601455, z: -0.2716813}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2138170391}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746171674
 GameObject:
   m_ObjectHideFlags: 0
@@ -5496,6 +5521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1775711595}
   - component: {fileID: 1775711594}
+  - component: {fileID: 1775711596}
   m_Layer: 0
   m_Name: DamageTextManager
   m_TagString: Untagged
@@ -5515,8 +5541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be097fafbf049443b92508a05625b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPrefab: {fileID: 7436918253790161474, guid: 041c2f13a114e364b9434f0dd56484d9, type: 3}
+  floatNumberTextPrefab: {fileID: 7436918253790161474, guid: 041c2f13a114e364b9434f0dd56484d9, type: 3}
   damageTextCanvasTransform: {fileID: 1339676377}
+  impulseSource: {fileID: 1775711596}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &1775711595
 Transform:
   m_ObjectHideFlags: 0
@@ -5532,6 +5560,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1775711596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775711593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1 &1800038759
 GameObject:
   m_ObjectHideFlags: 0
@@ -6363,7 +6444,6 @@ Transform:
   - {fileID: 1329269062}
   - {fileID: 1339676377}
   - {fileID: 975705929}
-  - {fileID: 1738894594}
   - {fileID: 1736175680}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

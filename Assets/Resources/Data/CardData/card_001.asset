@@ -43,6 +43,9 @@ MonoBehaviour:
   cardSpeed: 5
   damage: 10
   canInflictBuff: 1
+  vfxPrefab: {fileID: 0}
+  hitRatio:
+  - 1
   references:
     version: 2
     RefIds:

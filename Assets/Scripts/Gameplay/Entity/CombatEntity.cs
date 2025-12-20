@@ -24,6 +24,9 @@ namespace ShabuStudio.Gameplay
         public System.Action<int, int> OnHealthChanged; // Current, Max
         public System.Action OnStatusChanged; // When buffs are added/removed
         
+        [Header("References")]
+        public Transform vfxSpawnPoint;
+        
         [Header("Deck Data")]
         public DeckDataHolder deckDataHolder;
         public List<CardData> availableCards = new List<CardData>();
@@ -85,11 +88,10 @@ namespace ShabuStudio.Gameplay
         // Health Logic
         // ----------------------------------------------
         
-        public virtual void TakeDamage(int damage,out int uiDamage)
+        public virtual void TakeDamage(int damage)
         {
             if(damage <= 0)
             {
-                uiDamage = 0;
                 return;
             }
             
@@ -98,11 +100,8 @@ namespace ShabuStudio.Gameplay
             int finalDamage = damage + Stats.AdditionalTakenDamage;
             
             currentHealth -= finalDamage;
-            uiDamage = finalDamage;
             if(currentHealth < 0) currentHealth = 0;
             
-            
-            UpdateUI();
             if (currentHealth <= 0)
             {
                 Die();
@@ -114,8 +113,8 @@ namespace ShabuStudio.Gameplay
         {
             currentHealth += amount;
             if (currentHealth > Stats.MaxHealth) currentHealth = Stats.MaxHealth;
-            UpdateUI();
         }
+
         
         
         // -------------------

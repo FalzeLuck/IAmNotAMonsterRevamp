@@ -39,10 +39,14 @@ namespace ShabuStudio.Gameplay
         public BuffAffect affectTarget; // Flags to select what things this buff is doing too.
         public BuffTarget target;
         public BuffType buffType;
+        public GameObject vfxPrefab;
 
         public virtual async UniTask ApplyBuff(CombatEntity entity, CancellationToken token)
         {
-            await UniTask.CompletedTask;
+            if (vfxPrefab != null)
+            {
+                await VFXManager.Instance.PlayTimelineAsync(vfxPrefab,entity.vfxSpawnPoint,DamageTextManager.Instance, token);
+            }
         }
     }
 
@@ -67,6 +71,7 @@ namespace ShabuStudio.Gameplay
 
         public override async UniTask ApplyBuff(CombatEntity entity, CancellationToken token)
         {
+            await base.ApplyBuff(entity, token);
             StatsModifier modifier = operatorType switch
             {
                 OperatorType.Add => new BasicStatModifier(type, countdownTurn, x => x + buffValue),
@@ -83,6 +88,7 @@ namespace ShabuStudio.Gameplay
     {
         public override async UniTask ApplyBuff(CombatEntity entity,CancellationToken token)
         {
+            await base.ApplyBuff(entity, token);
             if (buffValue > 0)
             {
                 entity.AddCost(buffValue);
@@ -100,6 +106,7 @@ namespace ShabuStudio.Gameplay
         public override async UniTask ApplyBuff(CombatEntity entity,CancellationToken token)
         {
             if(buffValue < 0) return;
+            await base.ApplyBuff(entity, token);
             
             entity.Heal(buffValue);
         }

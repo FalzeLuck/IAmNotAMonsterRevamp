@@ -10,6 +10,14 @@ namespace ShabuStudio.Gameplay
 {
     public class CombatManager : MonoBehaviour
     {
+        public static CombatManager Instance { get; private set; }
+        
+        private void Awake()
+        {
+            if (Instance != null && Instance != this) Destroy(gameObject);
+            else Instance = this;
+        }
+        
         private CombatEntity _playerUnit;
         private CombatEntity _enemyUnit;
         private DamageTextManager _damageTextManager;
@@ -23,8 +31,6 @@ namespace ShabuStudio.Gameplay
         
         [Header("VFX References")]
         public VFXManager vfxManager;
-        public Transform vfxPlayerSpawnPoint;
-        public Transform vfxEnemySpawnPoint;
 
         public void Initialize(DamageTextManager damageTextManager)
         {
@@ -92,24 +98,27 @@ namespace ShabuStudio.Gameplay
             //Prepare Damage
             int totalDamage = card.damage + self.Stats.AdditionalDamage;
             float[] hitPattern = card.hitRatio;
-            _damageTextManager.PrepareDamage(totalDamage,damageSpawnPoint,hitPattern);
+            _damageTextManager.PrepareNumber(totalDamage,damageSpawnPoint,target,hitPattern);
             
             //Play VFX
             try
             {
                 await vfxManager.PlayTimelineAsync(card,
-                    ownerType == ActionOwner.Player ? vfxEnemySpawnPoint : vfxPlayerSpawnPoint,
+                    target.vfxSpawnPoint,
                     _damageTextManager,
                     token);
             }
             finally
             {
-                _damageTextManager.FlushRamainingDamage();
+                _damageTextManager.FlushRemainingDamage();
             }
             
             //Apply Damage
-            target.TakeDamage(totalDamage, out var damage);
+            target.TakeDamage(totalDamage);
             
+            //Update Ui
+            self.UpdateUI();
+            target.UpdateUI();
             
             
             
