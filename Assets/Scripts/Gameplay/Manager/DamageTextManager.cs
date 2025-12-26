@@ -83,7 +83,7 @@ namespace ShabuStudio.Gameplay
                 (_currentTakeDamageEntity as EnemyCombatEntity).PlayTrigger("Hit");
             }
             
-            if (impulseSource != null && damageInfo.damageAmount > 0)
+            if (impulseSource != null && damageInfo.damageAmount > 0 && _currentTakeDamageEntity is PlayerCombatEntity)
             {
                 float shakeForce = 0.2f; 
                 impulseSource.GenerateImpulse(shakeForce);

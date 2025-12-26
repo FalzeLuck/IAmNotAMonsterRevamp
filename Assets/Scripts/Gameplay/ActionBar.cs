@@ -7,11 +7,20 @@ using DG.Tweening;
 using ShabuStudio.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShabuStudio.Gameplay
 {
     public class ActionBar : MonoBehaviour
     {
+        public static ActionBar Instance { get; private set; }
+
+        private void Awake()
+        {
+            if(Instance != null && Instance != this) Destroy(gameObject);
+            else Instance = this;
+        }
+
         public List<CardData> actionCardList = new List<CardData>();
         public List<int> actionCardSpeedList = new List<int>();
         public List<ActionDisplay> displayActions = new List<ActionDisplay>(); //For track action that match with card data.
@@ -27,6 +36,88 @@ namespace ShabuStudio.Gameplay
         public void Initialize()
         {
             
+        }
+
+
+        public async UniTask RearrangeAction(CancellationToken token = default)
+        {
+            //Prepare Dictionary
+            Dictionary<ActionDisplay, int> originalIndices = new Dictionary<ActionDisplay, int>();
+            for (int i = 0; i < displayActions.Count; i++)
+            {
+                originalIndices[displayActions[i]] = i;
+            }
+
+
+            List<Vector2> slotPositions = new List<Vector2>();
+
+            // Force Unity to calculate the layout NOW so positions are correct
+            Canvas.ForceUpdateCanvases();
+
+            // loop through the TRANSFORM children (visual order), not the list
+            foreach (Transform child in container)
+            {
+                if (child.gameObject.activeSelf)
+                {
+                    slotPositions.Add(child.GetComponent<RectTransform>().anchoredPosition);
+                }
+            }
+
+
+            displayActions.Sort((a, b) =>
+            {
+                int compareResult = b.GetCurrentSpeed().CompareTo(a.GetCurrentSpeed());
+
+                if (compareResult != 0)
+                {
+                    return compareResult;
+                }
+
+                if (a.ActionData.ownerEntity.unitType == ActionOwner.Player) return -1;
+                if (b.ActionData.ownerEntity.unitType == ActionOwner.Player) return 1;
+
+                return GetIndexActionDisplay(a).CompareTo(GetIndexActionDisplay(b));
+            });
+
+            // Animate
+            VerticalLayoutGroup layoutGroup = container.GetComponent<VerticalLayoutGroup>();
+            if (layoutGroup != null) layoutGroup.enabled = false;
+
+            Sequence sortSequence = DOTween.Sequence();
+
+            for (int i = 0; i < displayActions.Count; i++)
+            {
+                ActionDisplay card = displayActions[i];
+                RectTransform cardRect = card.GetComponent<RectTransform>();
+
+                // If have a valid slot position for this index, move there
+                if (i < slotPositions.Count)
+                {
+                    // Join all movements into one sequence
+                    sortSequence.Join(cardRect.DOAnchorPos(slotPositions[i], 0.3f).SetEase(Ease.OutQuad));
+                }
+            }
+
+            await sortSequence.ToUniTask(cancellationToken: token);
+            
+            sortSequence.Kill(true);
+
+            for (int i = 0; i < displayActions.Count; i++)
+            {
+                displayActions[i].transform.SetSiblingIndex(i);
+            }
+
+            if (layoutGroup != null)
+            {
+                layoutGroup.enabled = true;
+                
+                LayoutRebuilder.ForceRebuildLayoutImmediate(container.GetComponent<RectTransform>());
+            }
+        }
+
+        private int GetIndexActionDisplay(ActionDisplay actionDisplay)
+        {
+            return displayActions.IndexOf(actionDisplay);
         }
 
         public static bool CanInsertCard(CardData cardData, CombatEntity entity)

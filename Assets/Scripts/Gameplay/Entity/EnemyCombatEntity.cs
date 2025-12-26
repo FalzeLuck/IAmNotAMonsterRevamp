@@ -8,6 +8,7 @@ namespace ShabuStudio.Gameplay
 {
     public class EnemyCombatEntity : CombatEntity
     {
+        [Header("UI")] public Sprite enemyIcon;
         [Header("Enemy References")]
         public Animator animator;
         public int fixedCost = 3;
@@ -53,7 +54,6 @@ namespace ShabuStudio.Gameplay
         public override void Heal(int amount)
         {
             base.Heal(amount);
-            Debug.Log(CombatManager.Instance.damageSpawnPointEnemy.position);
             DamageTextManager.Instance.SpawnText(CombatManager.Instance.damageSpawnPointEnemy.position,amount,Color.green, false,"+");
         }
         

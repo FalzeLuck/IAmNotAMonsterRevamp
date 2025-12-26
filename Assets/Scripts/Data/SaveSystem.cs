@@ -100,6 +100,34 @@ namespace ShabuStudio.Data
         }
         
         #if UNITY_EDITOR
+        public void SaveAllDecks(List<DeckDataHolder> runtimeDecks,string customPath)
+        {
+            PlayerSaveData saveData = new PlayerSaveData();
+
+            // Loop through every deck currently in the game
+            foreach (DeckDataHolder runtimeDeck in runtimeDecks)
+            {
+                // Create a "Save Format" deck
+                SavedDeck diskDeck = new SavedDeck();
+                diskDeck.deckName = runtimeDeck.deckName;
+                diskDeck.deckID = runtimeDeck.deckID;
+
+                // Convert the Card objects into String IDs
+                foreach (CardData card in runtimeDeck.allCards)
+                {
+                    diskDeck.cardIDs.Add(card.cardID);
+                }
+
+                // Add to the main save file
+                saveData.savedDecks.Add(diskDeck);
+            }
+
+            // Write to JSON
+            string json = JsonUtility.ToJson(saveData, true);
+            File.WriteAllText(customPath, json);
+            
+            Debug.Log($"Saved {runtimeDecks.Count} decks to {customPath}");
+        }
         public List<DeckDataHolder> LoadAllDecks(string customPath)
         {
             if (!File.Exists(customPath))

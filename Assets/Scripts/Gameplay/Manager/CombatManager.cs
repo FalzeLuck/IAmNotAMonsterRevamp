@@ -96,7 +96,7 @@ namespace ShabuStudio.Gameplay
                 );
 
             //Prepare Damage
-            int totalDamage = card.damage + self.Stats.AdditionalDamage;
+            int totalDamage = target.CalculateDamageTaken(self.CalculateDamageDealt(card.damage));
             float[] hitPattern = card.hitRatio;
             _damageTextManager.PrepareNumber(totalDamage,damageSpawnPoint,target,hitPattern);
             
@@ -105,6 +105,7 @@ namespace ShabuStudio.Gameplay
             {
                 await vfxManager.PlayTimelineAsync(card,
                     target.vfxSpawnPoint,
+                    self.vfxSpawnPoint,
                     _damageTextManager,
                     token);
             }

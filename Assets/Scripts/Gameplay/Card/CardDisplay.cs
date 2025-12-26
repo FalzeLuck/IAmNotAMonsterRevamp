@@ -26,6 +26,7 @@ namespace ShabuStudio.Gameplay
         [SerializeField] private Canvas canvas;
         [SerializeField] private CardMovement cardMovement;
         [SerializeField] private Image cardImage;
+        [SerializeField] private Image cardFloatingIcon;
         private Material _cardDynamicMaterial;
         private int _dissolveAmountID; 
         private CanvasGroup _canvasGroup;
@@ -54,6 +55,19 @@ namespace ShabuStudio.Gameplay
             cardTypeText.text = card.cardType.ToString();
             cardImageSprite.sprite = card.cardImage;
 
+
+            if (card.cardFloatIcon != null)
+            {
+                cardFloatingIcon.sprite = card.cardFloatIcon;
+                cardFloatingIcon.gameObject.transform.localPosition = card.cardFloatIconPosition;
+                cardFloatingIcon.gameObject.SetActive(true);
+            }
+            else
+            {
+                cardFloatingIcon.gameObject.SetActive(false);
+            }
+            
+            //Change BG according to card type.
             switch (card.cardType)
             {
                 case CardType.Attack:

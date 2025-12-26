@@ -33,6 +33,10 @@ namespace ShabuStudio.Data
             else
             {
                 GUILayout.Space(10);
+                if (GUILayout.Button("Save All Decks"))
+                {
+                    playerData.SaveAllDecks(Path.Combine(Application.persistentDataPath, "playerData.json"));
+                }
                 if (GUILayout.Button("Load All Decks"))
                 {
                     playerData.LoadAllDecks(Path.Combine(Application.persistentDataPath, "playerData.json"));

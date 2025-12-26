@@ -45,6 +45,11 @@ namespace ShabuStudio.Data
             
         }
         #if UNITY_EDITOR
+        public void SaveAllDecks(string customPath)
+        {
+            SaveSystem saveSystem = FindFirstObjectByType<SaveSystem>();
+            saveSystem.SaveAllDecks(savedDecks,customPath);
+        }
         public void LoadAllDecks(string customPath)
         {
             SaveSystem saveSystem = FindFirstObjectByType<SaveSystem>();

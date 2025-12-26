@@ -17,7 +17,10 @@ MonoBehaviour:
   buffsToApply:
     list:
     - rid: 3437170452582629468
-  cardImage: {fileID: 21300000, guid: 544f058a4c6756b47bddbb059808135b, type: 3}
+  cardImage: {fileID: 21300000, guid: 22824dc2a1fcb604b9bcd643e397ee3c, type: 3}
+  cardIcon: {fileID: 21300000, guid: 789d687f790a4bd46b0b37235f415851, type: 3}
+  cardFloatIcon: {fileID: 21300000, guid: eb6e6f796e43c3d428fe31d899d302ed, type: 3}
+  cardFloatIconPosition: {x: 51, y: 23}
   cardName:
     m_TableReference:
       m_TableCollectionName: GUID:f38864a57a88e8142993c2fac4e7fcb8
@@ -57,6 +60,7 @@ MonoBehaviour:
         affectTarget: 1
         target: 1
         buffType: 1
+        vfxPrefab: {fileID: 0}
     - rid: 5898636456408908135
       type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:

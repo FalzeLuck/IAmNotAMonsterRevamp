@@ -18,6 +18,9 @@ MonoBehaviour:
     list:
     - rid: 5898636456408908148
   cardImage: {fileID: 21300000, guid: 40ced01130b243e4086de120e2be22ec, type: 3}
+  cardIcon: {fileID: 21300000, guid: 41971b8bfaf90344fb0d66e1861ec5ff, type: 3}
+  cardFloatIcon: {fileID: 21300000, guid: 97acd5348dfb56c4e844aca56c94a571, type: 3}
+  cardFloatIconPosition: {x: 0, y: 0}
   cardName:
     m_TableReference:
       m_TableCollectionName: GUID:f38864a57a88e8142993c2fac4e7fcb8

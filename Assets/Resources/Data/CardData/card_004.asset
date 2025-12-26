@@ -17,7 +17,10 @@ MonoBehaviour:
   buffsToApply:
     list:
     - rid: 3437170452582629463
-  cardImage: {fileID: 21300000, guid: 544f058a4c6756b47bddbb059808135b, type: 3}
+  cardImage: {fileID: 21300000, guid: 3cb3055ba025ee041ba366dab50daa7a, type: 3}
+  cardIcon: {fileID: 21300000, guid: a4e3852720017c246b7a58e2a054b606, type: 3}
+  cardFloatIcon: {fileID: 21300000, guid: eb6e6f796e43c3d428fe31d899d302ed, type: 3}
+  cardFloatIconPosition: {x: 51, y: 23}
   cardName:
     m_TableReference:
       m_TableCollectionName: GUID:f38864a57a88e8142993c2fac4e7fcb8
@@ -57,6 +60,7 @@ MonoBehaviour:
         affectTarget: 1
         target: 0
         buffType: 0
+        vfxPrefab: {fileID: 0}
         conditionStatsType: 3
         conditionType: 0
         conditionValue: 0
@@ -71,6 +75,7 @@ MonoBehaviour:
         affectTarget: 0
         target: 0
         buffType: 0
+        vfxPrefab: {fileID: 0}
         type: 1
         operatorType: 0
         countdownTurn: 1

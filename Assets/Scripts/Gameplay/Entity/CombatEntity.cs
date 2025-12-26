@@ -17,12 +17,11 @@ namespace ShabuStudio.Gameplay
         public Stats Stats { get; private set; }
         public int currentHealth;
         public int currentCost{private set; get;}
-        public List<Buff> OnStartTurnBuffs = new List<Buff>();
+        [SerializeField] private List<Buff> OnStartTurnBuffs;
         public bool isDead = false;
-        
-        
         public System.Action<int, int> OnHealthChanged; // Current, Max
         public System.Action OnStatusChanged; // When buffs are added/removed
+        
         
         [Header("References")]
         public Transform vfxSpawnPoint;
@@ -39,6 +38,7 @@ namespace ShabuStudio.Gameplay
         
         protected virtual void Start()
         {
+            OnStartTurnBuffs = new List<Buff>();
             currentHealth = baseStats.maxHealth;
             UpdateUI();
         }
@@ -97,7 +97,7 @@ namespace ShabuStudio.Gameplay
             
             
             //Future Calculate Damage method HERE...
-            int finalDamage = damage + Stats.AdditionalTakenDamage;
+            int finalDamage = CalculateDamageTaken(damage);
             
             currentHealth -= finalDamage;
             if(currentHealth < 0) currentHealth = 0;
@@ -115,6 +115,15 @@ namespace ShabuStudio.Gameplay
             if (currentHealth > Stats.MaxHealth) currentHealth = Stats.MaxHealth;
         }
 
+        public int CalculateDamageDealt(int rawDamage)
+        {
+            return rawDamage + Stats.AdditionalDamage;
+        }
+
+        public int CalculateDamageTaken(int dealtDamage)
+        {
+            return dealtDamage + Stats.AdditionalTakenDamage;
+        }
         
         
         // -------------------

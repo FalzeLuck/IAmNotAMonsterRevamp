@@ -13,6 +13,9 @@ namespace ShabuStudio.Data
         public CardType cardType;
         [BF_SubclassList.SubclassList(typeof(Buff)), SerializeField]public Buff_container buffsToApply;
         public Sprite cardImage;
+        public Sprite cardIcon;
+        public Sprite cardFloatIcon;
+        public Vector2 cardFloatIconPosition;
         public LocalizedString cardName;
         public LocalizedString cardDescription;
         [Min(0)] public int cardCost;

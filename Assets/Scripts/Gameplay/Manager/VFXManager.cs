@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 using Cysharp.Threading.Tasks;
 using ShabuStudio.Data;
 using UnityEngine.Timeline;
+using UnityEngine.VFX;
 
 namespace ShabuStudio.Gameplay
 {
@@ -17,12 +18,12 @@ namespace ShabuStudio.Gameplay
         }
         
 
-        public async UniTask PlayTimelineAsync(GameObject vfxPrefab,Transform vfxSpawnParent,DamageTextManager bindingSignalObject, CancellationToken token)
+        public async UniTask PlayTimelineAsync(GameObject vfxPrefab,Transform targetVFXPos,DamageTextManager bindingSignalObject, CancellationToken token)
         {
             GameObject vfxObject;
             if (vfxPrefab != null)
             {
-                vfxObject = Instantiate(vfxPrefab, vfxSpawnParent);
+                vfxObject = Instantiate(vfxPrefab, targetVFXPos);
             }
             else
             {
@@ -45,18 +46,28 @@ namespace ShabuStudio.Gameplay
             Destroy(vfxObject);
         }
         
-        public async UniTask PlayTimelineAsync(CardData cardData,Transform vfxSpawnParent,DamageTextManager bindingSignalObject, CancellationToken token)
+        public async UniTask PlayTimelineAsync(CardData cardData,Transform targetVFXPos,Transform selfVfxPos,DamageTextManager bindingSignalObject, CancellationToken token)
         {
             GameObject vfxObject;
+            
+            //Create VFX object
             if (cardData.vfxPrefab != null)
             {
-                vfxObject = Instantiate(cardData.vfxPrefab, vfxSpawnParent);
+                vfxObject = Instantiate(cardData.vfxPrefab, targetVFXPos);
             }
             else
             {
                 return;
             }
             
+            //Set VFX Self Pos
+            VisualEffect vfx = vfxObject.GetComponentInChildren<VisualEffect>();
+            if(vfx.HasVector3("TargetPos"))
+            {
+                vfx.SetVector3("TargetPos", selfVfxPos.position);
+            }
+            
+            //Set Timeline
             PlayableDirector vfxDirector = vfxObject.GetComponent<PlayableDirector>();
             if(vfxDirector == null || vfxDirector.playableAsset == null) return;
             

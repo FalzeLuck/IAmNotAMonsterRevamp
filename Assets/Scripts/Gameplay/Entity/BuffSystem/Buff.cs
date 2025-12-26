@@ -113,6 +113,19 @@ namespace ShabuStudio.Gameplay
     }
 
     [Serializable]
+    public class SpeedBuff : Buff
+    {
+        public override async UniTask ApplyBuff(CombatEntity entity, CancellationToken token)
+        {
+            if(buffValue == 0) return;
+            await base.ApplyBuff(entity, token);
+            
+            ActionDisplay.AddActionDataSpeed(buffValue, entity.unitType);
+            await ActionBar.Instance.RearrangeAction(token);
+        }
+    }
+
+    [Serializable]
     public class RequireConditionBuff : Buff
     {
         private enum BuffConditionType
