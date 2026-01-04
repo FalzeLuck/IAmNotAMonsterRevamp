@@ -17,10 +17,10 @@ MonoBehaviour:
   buffsToApply:
     list:
     - rid: 3437170707573243988
-  cardImage: {fileID: 21300000, guid: 22824dc2a1fcb604b9bcd643e397ee3c, type: 3}
-  cardIcon: {fileID: 21300000, guid: 789d687f790a4bd46b0b37235f415851, type: 3}
-  cardFloatIcon: {fileID: 21300000, guid: eb6e6f796e43c3d428fe31d899d302ed, type: 3}
-  cardFloatIconPosition: {x: 51, y: 23}
+  cardImage: {fileID: 21300000, guid: 053e5aa5e50103647837827df5062ea2, type: 3}
+  cardIcon: {fileID: 21300000, guid: 74745970ef67b884e870a5b0a800ec4e, type: 3}
+  cardFloatIcon: {fileID: 21300000, guid: 7c40090cab5caf9459a74e9491ce0c56, type: 3}
+  cardFloatIconPosition: {x: 42, y: 23}
   cardName:
     m_TableReference:
       m_TableCollectionName: GUID:f38864a57a88e8142993c2fac4e7fcb8

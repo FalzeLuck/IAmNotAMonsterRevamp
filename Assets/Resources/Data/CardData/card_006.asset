@@ -60,7 +60,7 @@ MonoBehaviour:
         affectTarget: 1
         target: 1
         buffType: 1
-        vfxPrefab: {fileID: 0}
+        vfxPrefab: {fileID: 6791587590779341261, guid: 0689131fdc3da0948bea375ce2fe05a5, type: 3}
     - rid: 5898636456408908135
       type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:

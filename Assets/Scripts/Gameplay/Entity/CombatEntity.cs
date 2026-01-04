@@ -148,11 +148,11 @@ namespace ShabuStudio.Gameplay
             await UniTask.NextFrame(token);
         }
 
-        public void OnStartTurn()
+        public async UniTask OnStartTurn()
         {
             foreach (var buff in OnStartTurnBuffs)
             {
-                buff.ApplyBuff(this,this.GetCancellationTokenOnDestroy()).Forget();
+                await buff.ApplyBuff(this,this.GetCancellationTokenOnDestroy());
             }
             UpdateUI();
             OnStartTurnBuffs.Clear();

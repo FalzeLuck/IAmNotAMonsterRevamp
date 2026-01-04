@@ -46,7 +46,7 @@ MonoBehaviour:
   cardSpeed: 6
   damage: 0
   canInflictBuff: 1
-  vfxPrefab: {fileID: 0}
+  vfxPrefab: {fileID: 6791587590779341261, guid: 8e87cbe9839781f40b77ff1199329924, type: 3}
   hitRatio:
   - 1
   references:
@@ -60,7 +60,7 @@ MonoBehaviour:
         affectTarget: 0
         target: 1
         buffType: 1
-        vfxPrefab: {fileID: 0}
+        vfxPrefab: {fileID: 6791587590779341261, guid: 8f65fa3faa6d0c447abe2c2cb5b1854b, type: 3}
         type: 2
         operatorType: 0
         countdownTurn: 1

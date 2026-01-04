@@ -101,6 +101,30 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908141
+  - m_Id: 9802897915297792
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E40\u0E1E\u0E34\u0E48\u0E21 Speed \u0E01\u0E32\u0E23\u0E4C\u0E14\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14\u0E02\u0E2D\u0E07\u0E1C\u0E39\u0E49\u0E40\u0E25\u0E48\u0E19\u0E43\u0E19
+      Timeline Phase {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      \u0E2B\u0E19\u0E48\u0E27\u0E22"
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
+  - m_Id: 9802860476940288
+    m_Localized: "\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E04\u0E27\u0E32\u0E21\u0E40\u0E23\u0E47\u0E27"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12930435264987136
+    m_Localized: "\u0E25\u0E14\u0E04\u0E27\u0E32\u0E21\u0E40\u0E23\u0E47\u0E27"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12930479217098752
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E25\u0E14 Speed \u0E01\u0E32\u0E23\u0E4C\u0E14\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14\u0E02\u0E2D\u0E07\u0E28\u0E31\u0E15\u0E23\u0E39\u0E43\u0E19
+      Timeline Phase {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      \u0E2B\u0E19\u0E48\u0E27\u0E22"
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
   references:
     version: 2
     RefIds:
@@ -116,3 +140,5 @@ MonoBehaviour:
         - id: 5706425766690816
         - id: 5706987237195776
         - id: 9802809054773248
+        - id: 9802897915297792
+        - id: 12930479217098752

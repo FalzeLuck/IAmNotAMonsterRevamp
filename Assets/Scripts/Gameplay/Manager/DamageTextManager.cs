@@ -57,10 +57,14 @@ namespace ShabuStudio.Gameplay
         
         public void OnNotify(Playable sender, INotification notification, object context)
         {
-            if (notification is SignalEmitter emitter && emitter.asset.name == "Signal_OnHit")
+            if (notification is SignalEmitter emitter)
             {
-                ProcessOnHitDamage();
+                if (emitter.asset.name == "Signal_OnHit")
+                {
+                    ProcessOnHitDamage();
+                }
             }
+            
         }
 
         public void FlushRemainingDamage()
@@ -83,7 +87,7 @@ namespace ShabuStudio.Gameplay
                 (_currentTakeDamageEntity as EnemyCombatEntity).PlayTrigger("Hit");
             }
             
-            if (impulseSource != null && damageInfo.damageAmount > 0 && _currentTakeDamageEntity is PlayerCombatEntity)
+            if (impulseSource != null && damageInfo.damageAmount > 0)
             {
                 float shakeForce = 0.2f; 
                 impulseSource.GenerateImpulse(shakeForce);
@@ -92,6 +96,7 @@ namespace ShabuStudio.Gameplay
             SpawnText(damagePos.position,damageInfo.damageAmount,damageColor,false, "-");
             
         }
+
         
         public void SpawnText(Vector3 screenPos, int damageAmount,Color textColor, bool isCriticalHit,string prefix = "")
         {

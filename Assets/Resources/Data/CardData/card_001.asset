@@ -49,6 +49,9 @@ MonoBehaviour:
   vfxPrefab: {fileID: 6791587590779341261, guid: 2d85762af62fd5347947c0e00570c06c, type: 3}
   hitRatio:
   - 1
+  - 1
+  - 1
+  - 1
   references:
     version: 2
     RefIds:

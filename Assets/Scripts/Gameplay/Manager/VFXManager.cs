@@ -62,11 +62,14 @@ namespace ShabuStudio.Gameplay
             
             //Set VFX Self Pos
             VisualEffect vfx = vfxObject.GetComponentInChildren<VisualEffect>();
-            if(vfx.HasVector3("TargetPos"))
+            if (vfx != null)
             {
-                vfx.SetVector3("TargetPos", selfVfxPos.position);
+                if (vfx.HasVector3("TargetPos"))
+                {
+                    vfx.SetVector3("TargetPos", selfVfxPos.position);
+                }
             }
-            
+
             //Set Timeline
             PlayableDirector vfxDirector = vfxObject.GetComponent<PlayableDirector>();
             if(vfxDirector == null || vfxDirector.playableAsset == null) return;

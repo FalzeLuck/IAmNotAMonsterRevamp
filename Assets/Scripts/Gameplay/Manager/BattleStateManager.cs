@@ -95,7 +95,7 @@ namespace ShabuStudio.Gameplay
             enemyUnit.SetCost(enemyUnit.fixedCost);
             
             //OnStartTurnEffect
-            combatManager.OnStartTurn();
+            await combatManager.OnStartTurn();
             handManager.HideHand(false); //Hide hand after 1 second (1 second = 1 frame)
             
             UpdateAllUI();

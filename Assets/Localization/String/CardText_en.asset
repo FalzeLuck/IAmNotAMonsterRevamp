@@ -93,6 +93,26 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908140
+  - m_Id: 9802897915297792
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Increase self card speed in timeline bar by {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 9802860476940288
+    m_Localized: Increase speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12930435264987136
+    m_Localized: Decrease speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12930479217098752
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Decrease enemy card speed in timeline bar by {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
   references:
     version: 2
     RefIds:
@@ -108,3 +128,5 @@ MonoBehaviour:
         - id: 5706425766690816
         - id: 5706987237195776
         - id: 9802809054773248
+        - id: 9802897915297792
+        - id: 12930479217098752

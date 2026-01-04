@@ -142,10 +142,10 @@ namespace ShabuStudio.Gameplay
             return isDead;
         }
 
-        public void OnStartTurn()
+        public async UniTask OnStartTurn()
         {
-            _enemyUnit.OnStartTurn();
-            _playerUnit.OnStartTurn();
+            await _playerUnit.OnStartTurn();
+            await _enemyUnit.OnStartTurn();
         }
     }
     

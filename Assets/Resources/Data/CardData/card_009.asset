@@ -17,15 +17,15 @@ MonoBehaviour:
   buffsToApply:
     list:
     - rid: 3437170707573243988
-  cardImage: {fileID: 21300000, guid: 22824dc2a1fcb604b9bcd643e397ee3c, type: 3}
-  cardIcon: {fileID: 21300000, guid: 789d687f790a4bd46b0b37235f415851, type: 3}
-  cardFloatIcon: {fileID: 21300000, guid: eb6e6f796e43c3d428fe31d899d302ed, type: 3}
-  cardFloatIconPosition: {x: 51, y: 23}
+  cardImage: {fileID: 21300000, guid: 9ae41a69fef753e42983c2e25cec9dcc, type: 3}
+  cardIcon: {fileID: 21300000, guid: d705452c83f92494387875106954b9d3, type: 3}
+  cardFloatIcon: {fileID: 21300000, guid: 7c40090cab5caf9459a74e9491ce0c56, type: 3}
+  cardFloatIconPosition: {x: 42, y: 23}
   cardName:
     m_TableReference:
       m_TableCollectionName: GUID:f38864a57a88e8142993c2fac4e7fcb8
     m_TableEntryReference:
-      m_KeyId: 9802860476940288
+      m_KeyId: 12930435264987136
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:f38864a57a88e8142993c2fac4e7fcb8
     m_TableEntryReference:
-      m_KeyId: 9802897915297792
+      m_KeyId: 12930479217098752
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0

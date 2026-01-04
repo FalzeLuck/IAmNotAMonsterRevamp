@@ -61,7 +61,7 @@ MonoBehaviour:
         affectTarget: 1
         target: 0
         buffType: 1
-        vfxPrefab: {fileID: 0}
+        vfxPrefab: {fileID: 6791587590779341261, guid: 0a5888a228e3f564ea6a173a7c675e58, type: 3}
     - rid: 3437170452582629494
       type: {class: StatsModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
       data:
