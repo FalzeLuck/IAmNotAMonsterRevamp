@@ -44,10 +44,14 @@ MonoBehaviour:
         rid: 5898636456408908135
   cardCost: 1
   cardSpeed: 5
+  canDealDamage: 1
   damage: 10
+  haveConditionalDamageBonus: 0
+  conditionalDamageBonus: []
   canInflictBuff: 1
   vfxPrefab: {fileID: 6791587590779341261, guid: 2d85762af62fd5347947c0e00570c06c, type: 3}
   hitRatio:
+  - 1
   - 1
   - 1
   - 1
@@ -63,8 +67,8 @@ MonoBehaviour:
       type: {class: HealBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
       data:
         buffName: Healing...
+        buffDescription: 
         buffValue: 10
-        affectTarget: 0
         target: 0
         buffType: 0
         vfxPrefab: {fileID: 0}

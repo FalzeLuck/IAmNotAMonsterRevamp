@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using ShabuStudio.Data;
+using ShabuStudio.Gameplay.DoTSystem;
 using UnityEngine;
 
 namespace ShabuStudio.Gameplay
@@ -12,15 +13,18 @@ namespace ShabuStudio.Gameplay
         [Header("Stats")]
         public string unitName;
         public ActionOwner unitType;
-        
         [SerializeField] BaseStats baseStats;
         public Stats Stats { get; private set; }
         public int currentHealth;
         public int currentCost{private set; get;}
-        [SerializeField] private List<Buff> OnStartTurnBuffs;
         public bool isDead = false;
+        
+        [Header("Buffs")]
+        private DoTsHolder doTsHolder;
+        private List<Buff> OnStartTurnBuffs;
+        
         public System.Action<int, int> OnHealthChanged; // Current, Max
-        public System.Action OnStatusChanged; // When buffs are added/removed
+        public System.Action<Buff> OnStatusChanged; // When buffs are added/removed
         
         
         [Header("References")]
@@ -34,6 +38,7 @@ namespace ShabuStudio.Gameplay
         void Awake()
         {
             Stats = new Stats(new StatsMediator(), baseStats);
+            doTsHolder = new DoTsHolder(this);
         }
         
         protected virtual void Start()
@@ -122,6 +127,7 @@ namespace ShabuStudio.Gameplay
 
         public int CalculateDamageTaken(int dealtDamage)
         {
+            if(dealtDamage <= 0) return 0;
             return dealtDamage + Stats.AdditionalTakenDamage;
         }
         
@@ -147,6 +153,16 @@ namespace ShabuStudio.Gameplay
             UpdateUI();
             await UniTask.NextFrame(token);
         }
+        
+
+        public UniTask ApplyDoT(DoT doT, CancellationToken token)
+        {
+            doTsHolder.ApplyDoT(doT);
+            
+            return UniTask.CompletedTask;
+        }
+        
+        
 
         public async UniTask OnStartTurn()
         {
@@ -158,9 +174,25 @@ namespace ShabuStudio.Gameplay
             OnStartTurnBuffs.Clear();
         }
 
-        public void DecreaseBuffTurn(int value)
+        private void DecreaseBuffTurn(int value)
         {
             Stats.Mediator.DecreaseTurnCountdown(value);
+        }
+
+        public void OnTurnEnd()
+        {
+            DecreaseBuffTurn(1);
+            doTsHolder.TriggerDoT();
+            doTsHolder.ReduceTurnsDoT();
+        }
+        
+        // -------------
+        // Get Compare bool
+        //--------------
+
+        public bool HaveThisDot(DoT.DotType dotType)
+        {
+            return doTsHolder.HaveThisDot(dotType);
         }
         
         // ----------
@@ -169,6 +201,11 @@ namespace ShabuStudio.Gameplay
         public void UpdateUI()
         {
             OnHealthChanged?.Invoke(currentHealth, Stats.MaxHealth);
+        }
+
+        public void UpdateBuffPanel(Buff buff)
+        {
+            OnStatusChanged?.Invoke(buff);
         }
 
         void Die()

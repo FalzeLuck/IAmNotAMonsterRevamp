@@ -40,12 +40,12 @@ namespace ShabuStudio.Gameplay
             playerHealthbar.SetTarget(_playerUnit);
         }
 
-        
-        
-        public async UniTask<bool> PlayCard(ActionData actionData,CancellationToken token)
+
+
+        public async UniTask<bool> PlayCard(ActionData actionData, CancellationToken token)
         {
             bool isDead = false;
-            
+
             CardData card = actionData.cardData;
             ActionOwner ownerType = actionData.ownerEntity.unitType;
             List<Buff> buffList = card.buffsToApply.list;
@@ -70,36 +70,64 @@ namespace ShabuStudio.Gameplay
                 damageSpawnPoint = damageSpawnPointPlayer;
             }
 
-            //Define Buff to Apply to target
-            foreach (Buff buff in buffList)
+            if (card.canInflictBuff)
             {
-                if (buff.target == Buff.BuffTarget.Enemy)
+
+                //Define Buff to Apply to target
+                foreach (Buff buff in buffList)
                 {
-                    buffsToApplyToTarget.Add(buff);
+                    if (buff.target == Buff.BuffTarget.Target)
+                    {
+                        buffsToApplyToTarget.Add(buff);
+                    }
                 }
-            }
-            
-            //Define Buff to Apply to target
-            foreach (Buff buff in buffList)
-            {
-                if (buff.target == Buff.BuffTarget.Self)
+
+                //Define Buff to Apply to target
+                foreach (Buff buff in buffList)
                 {
-                    buffsToApplyToSelf.Add(buff);
+                    if (buff.target == Buff.BuffTarget.Self)
+                    {
+                        buffsToApplyToSelf.Add(buff);
+                    }
                 }
+
+
+                //Start Action
+                await UniTask.WhenAll(
+                    target.ApplyBuff(buffsToApplyToTarget, token),
+                    self.ApplyBuff(buffsToApplyToSelf, token)
+                );
             }
 
-            
-            //Start Action
-            await UniTask.WhenAll(
-                    target.ApplyBuff(buffsToApplyToTarget,token),
-                    self.ApplyBuff(buffsToApplyToSelf,token)
-                );
+
 
             //Prepare Damage
-            int totalDamage = target.CalculateDamageTaken(self.CalculateDamageDealt(card.damage));
-            float[] hitPattern = card.hitRatio;
-            _damageTextManager.PrepareNumber(totalDamage,damageSpawnPoint,target,hitPattern);
+            int calculatedDamage = card.damage;
+
+            if (card.conditionalDamageBonus != null && card.haveConditionalDamageBonus)
+            {
+                foreach (var bonus in card.conditionalDamageBonus)
+                {
+                    if (bonus.condition != null && bonus.condition.target == CardCondition.ConditionTarget.Self)
+                    {
+                        if (bonus.condition.IsConditionMet(self))
+                            calculatedDamage += bonus.bonusDamageAmount;
+                    }
             
+                    if (bonus.condition != null && bonus.condition.target == CardCondition.ConditionTarget.Target)
+                    {
+                        if (bonus.condition.IsConditionMet(target))
+                            calculatedDamage += bonus.bonusDamageAmount;
+                    }
+                }
+            }
+
+            int totalDamage = target.CalculateDamageTaken(self.CalculateDamageDealt(calculatedDamage));
+            if (!card.canDealDamage) totalDamage = 0;
+            float[] hitPattern = card.hitRatio;
+            _damageTextManager.PrepareNumber(totalDamage, damageSpawnPoint, target, hitPattern);
+
+
             //Play VFX
             try
             {
@@ -113,18 +141,18 @@ namespace ShabuStudio.Gameplay
             {
                 _damageTextManager.FlushRemainingDamage();
             }
-            
+
             //Apply Damage
-            target.TakeDamage(totalDamage);
-            
+            if (card.canDealDamage) target.TakeDamage(totalDamage);
+
             //Update Ui
             self.UpdateUI();
             target.UpdateUI();
-            
-            
-            
-            
-            
+
+
+
+
+
 
             if (actionData.ownerEntity.unitType == ActionOwner.Player && _enemyUnit.isDead)
             {
@@ -138,7 +166,7 @@ namespace ShabuStudio.Gameplay
             {
                 isDead = false;
             }
-            
+
             return isDead;
         }
 

@@ -4385,10 +4385,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
     availableCards: []
     droppedCards: []
-  - deckName: deck_003
+  - deckName: TestingDeck
     deckID: deck_003
     allCards:
-    - {fileID: 11400000, guid: b77377cc82e409949a8f8022ca65d4ed, type: 2}
+    - {fileID: 11400000, guid: a383503c080f78b4bacb4e040861b15c, type: 2}
+    - {fileID: 11400000, guid: ae08d7d288b4b0a47ac2f2d5681ff02f, type: 2}
+    - {fileID: 11400000, guid: a5ec6efd373a25647b8027da62c5a33d, type: 2}
     availableCards: []
     droppedCards: []
   currentDeckIndex: 2
@@ -5556,6 +5558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be097fafbf049443b92508a05625b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageTextOffset: {x: 100, y: 100}
   floatNumberTextPrefab: {fileID: 7436918253790161474, guid: 041c2f13a114e364b9434f0dd56484d9, type: 3}
   damageTextCanvasTransform: {fileID: 1339676377}
   impulseSource: {fileID: 1775711596}
@@ -6475,6 +6478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetUnit: {fileID: 0}
+  buffPanel: {fileID: 0}
   barForeground: {fileID: 4357731029409900701}
   healthText: {fileID: 3057154320190164613}
 --- !u!4 &543450652312481964

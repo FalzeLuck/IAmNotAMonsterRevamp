@@ -137,8 +137,8 @@ namespace ShabuStudio.Gameplay
                 return;
             }
             
-            playerUnit.DecreaseBuffTurn(1);
-            enemyUnit.DecreaseBuffTurn(1);
+            playerUnit.OnTurnEnd();
+            enemyUnit.OnTurnEnd();
             
             ChangeState(BattleState.Start).Forget();
         }

@@ -44,7 +44,10 @@ MonoBehaviour:
         rid: 5898636456408908135
   cardCost: 2
   cardSpeed: 6
+  canDealDamage: 0
   damage: 0
+  haveConditionalDamageBonus: 0
+  conditionalDamageBonus: []
   canInflictBuff: 1
   vfxPrefab: {fileID: 0}
   hitRatio:
@@ -56,8 +59,10 @@ MonoBehaviour:
       type: {class: CostModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
       data:
         buffName: Increase Cost
+        buffDescription: 
+        buffIcon: {fileID: 0}
         buffValue: -3
-        affectTarget: 1
+        buffTurnsToEnd: 0
         target: 1
         buffType: 1
         vfxPrefab: {fileID: 6791587590779341261, guid: 0689131fdc3da0948bea375ce2fe05a5, type: 3}

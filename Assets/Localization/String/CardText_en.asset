@@ -58,7 +58,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 5704090210451456
     m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
-      If using when cost is equal to 0, Add {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      If using when cost is equal to 0, Add {card.conditionalDamageBonus.0.bonusDamageAmount}
       damage buff.'
     m_Metadata:
       m_Items:
@@ -113,6 +113,39 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908140
+  - m_Id: 13348457477750784
+    m_Localized: Fire vortex
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13348655511814144
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Deal {card.damage} damage. If enemy have Burn type debuff deal additional {card.conditionalDamageBonus.0.bonusDamageAmount}
+      damage.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 13348677523521536
+    m_Localized: Flame weapon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13348703406571520
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Increase self damage by 8. If enemy have Burn type debuff, Increase self damage
+      by 12 instead.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 13348719613362176
+    m_Localized: Ignite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13348739708272640
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Inflict Burn. Enemy will take {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      damage for 2 turns.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
   references:
     version: 2
     RefIds:
@@ -130,3 +163,6 @@ MonoBehaviour:
         - id: 9802809054773248
         - id: 9802897915297792
         - id: 12930479217098752
+        - id: 13348655511814144
+        - id: 13348703406571520
+        - id: 13348739708272640

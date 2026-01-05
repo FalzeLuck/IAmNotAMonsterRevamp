@@ -20,13 +20,29 @@ namespace ShabuStudio.Data
         public LocalizedString cardDescription;
         [Min(0)] public int cardCost;
         [Min(0)] public int cardSpeed;
+
+
+        [Header("Damage Logic")] 
+        public bool canDealDamage = true;
         [Min(0)] public int damage;
+        public bool haveConditionalDamageBonus = false;
+        public List<ConditionalBonus> conditionalDamageBonus;
+        
+        [Header("Buff Logic")]
         public bool canInflictBuff = false;
         
         [Header("Animation & Timeline")]
         public GameObject vfxPrefab;
         public float[] hitRatio = {1f};
 
+    }
+    
+    [System.Serializable]
+    public struct ConditionalBonus
+    {
+        public string editorDescription; 
+        public int bonusDamageAmount;
+        public CardCondition condition;
     }
 
     public enum CardType

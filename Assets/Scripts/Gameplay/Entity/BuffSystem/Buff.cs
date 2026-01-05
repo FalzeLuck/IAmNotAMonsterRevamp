@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using ShabuStudio.Gameplay.DoTSystem;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShabuStudio.Gameplay
 {
@@ -19,34 +21,25 @@ namespace ShabuStudio.Gameplay
         public enum BuffTarget
         {
             Self,
-            Enemy
-        }
-
-        [System.Flags]
-        public enum BuffAffect
-        {
-            None = 0,
-            Entity = 1,
-            ActionValue = 2,
-            UI = 4,
-            
-            //helper to select all
-            All = ~0
+            Target
         }
         
         public string buffName;
+        public string buffDescription;
+        public Sprite buffIcon;
         public int buffValue;
-        public BuffAffect affectTarget; // Flags to select what things this buff is doing too.
+        public int buffTurnsToEnd;
         public BuffTarget target;
         public BuffType buffType;
         public GameObject vfxPrefab;
 
-        public virtual async UniTask ApplyBuff(CombatEntity entity, CancellationToken token)
+        public virtual async UniTask ApplyBuff(CombatEntity buffTarget, CancellationToken token)
         {
             if (vfxPrefab != null)
             {
-                await VFXManager.Instance.PlayTimelineAsync(vfxPrefab,entity.vfxSpawnPoint,DamageTextManager.Instance, token);
+                await VFXManager.Instance.PlayTimelineAsync(vfxPrefab,buffTarget.vfxSpawnPoint,DamageTextManager.Instance, token);
             }
+            buffTarget.UpdateBuffPanel(this);
         }
     }
 
@@ -67,35 +60,34 @@ namespace ShabuStudio.Gameplay
 
         [SerializeField] private StatsType type = StatsType.MaxHealth;
         [SerializeField] private OperatorType operatorType = OperatorType.Add;
-        [SerializeField] private int countdownTurn = 1;
 
-        public override async UniTask ApplyBuff(CombatEntity entity, CancellationToken token)
+        public override async UniTask ApplyBuff(CombatEntity buffTarget, CancellationToken token)
         {
-            await base.ApplyBuff(entity, token);
+            await base.ApplyBuff(buffTarget, token);
             StatsModifier modifier = operatorType switch
             {
-                OperatorType.Add => new BasicStatModifier(type, countdownTurn, x => x + buffValue),
-                OperatorType.Multiply => new BasicStatModifier(type, countdownTurn, x => x * buffValue),
+                OperatorType.Add => new BasicStatModifier(type, buffTurnsToEnd, x => x + buffValue),
+                OperatorType.Multiply => new BasicStatModifier(type, buffTurnsToEnd, x => x * buffValue),
                 _ => throw new System.Exception("Invalid operator type")
             };
             
-            entity.Stats.Mediator.AddModifier(modifier);
+            buffTarget.Stats.Mediator.AddModifier(modifier);
         }
     }
     
     [Serializable]
     public class CostModifierBuff : Buff
     {
-        public override async UniTask ApplyBuff(CombatEntity entity,CancellationToken token)
+        public override async UniTask ApplyBuff(CombatEntity buffTarget,CancellationToken token)
         {
-            await base.ApplyBuff(entity, token);
+            await base.ApplyBuff(buffTarget, token);
             if (buffValue > 0)
             {
-                entity.AddCost(buffValue);
+                buffTarget.AddCost(buffValue);
             }
             else if (buffValue < 0)
             {
-                entity.RemoveCost(Math.Abs(buffValue));
+                buffTarget.RemoveCost(Math.Abs(buffValue));
             }
         }
     }
@@ -103,111 +95,98 @@ namespace ShabuStudio.Gameplay
     [Serializable]
     public class HealBuff : Buff
     {
-        public override async UniTask ApplyBuff(CombatEntity entity,CancellationToken token)
+        public override async UniTask ApplyBuff(CombatEntity buffTarget,CancellationToken token)
         {
             if(buffValue < 0) return;
-            await base.ApplyBuff(entity, token);
+            await base.ApplyBuff(buffTarget, token);
             
-            entity.Heal(buffValue);
+            buffTarget.Heal(buffValue);
         }
     }
 
     [Serializable]
     public class SpeedBuff : Buff
     {
-        public override async UniTask ApplyBuff(CombatEntity entity, CancellationToken token)
+        public override async UniTask ApplyBuff(CombatEntity buffTarget, CancellationToken token)
         {
             if(buffValue == 0) return;
-            await base.ApplyBuff(entity, token);
+            await base.ApplyBuff(buffTarget, token);
             
-            ActionDisplay.AddActionDataSpeed(buffValue, entity.unitType);
+            ActionDisplay.AddActionDataSpeed(buffValue, buffTarget.unitType);
             await ActionBar.Instance.RearrangeAction(token);
         }
     }
-
+    
+    
     [Serializable]
-    public class RequireConditionBuff : Buff
+    public class DotBuff : Buff
     {
-        private enum BuffConditionType
+        [Header("DoT Properties")]
+        public Color dotColor;
+        public DoT.DotType dotType;
+        public override async UniTask ApplyBuff(CombatEntity buffTarget, CancellationToken token)
         {
-            MaxHealth,
-            AdditionalDamage,
-            AdditionalTakenDamage,
-        
-            // -- EXCLUSIVE TYPE --
-            CurrentCost, 
+            if(buffValue == 0) return;
+            await base.ApplyBuff(buffTarget, token);
+
+            DoT doT = new DoT(buffValue, buffTurnsToEnd, dotColor, dotType);
+            
+            await buffTarget.ApplyDoT(doT,token);
         }
+    }
+    
+    [Serializable]
+    public class ConditionBuff : Buff
+    {
+        [BF_SubclassList.SubclassList(typeof(Buff)), SerializeField]public Buff_container buffsToApplyOnConditionMet;
+        [BF_SubclassList.SubclassList(typeof(Buff)), SerializeField]public Buff_container buffsToApplyOnConditionNotMet;
+        [Header("Condition Properties")]
+        public CardCondition condition;
         
-        private enum ConditionType
+        public override async UniTask ApplyBuff(CombatEntity buffTarget, CancellationToken token)
         {
-            Equal,
-            NotEqual,
-            MoreThanOrEqual,
-            MoreThan,
-            LessThanOrEqual,
-            LessThan,
-        }
-        
-        [Header( "Condition" )]
-        [SerializeField] private BuffConditionType conditionStatsType = BuffConditionType.MaxHealth;
-        [SerializeField] private ConditionType conditionType = ConditionType.Equal;
-        [SerializeField] private int conditionValue = 0;
-        [BF_SubclassList.SubclassList(typeof(Buff)), SerializeField]public Buff_container buffsToApply;
-        
-        public override async UniTask ApplyBuff(CombatEntity entity,CancellationToken token)
-        {
-            if (CheckCondition(entity))
+            CombatEntity conditionCheckTarget = null;
+            
+            if (condition.target == CardCondition.ConditionTarget.Self && buffTarget is PlayerCombatEntity)
             {
-                if (buffsToApply != null && buffsToApply.list.Count > 0)
+                conditionCheckTarget = buffTarget;
+            }
+            else if (condition.target == CardCondition.ConditionTarget.Target && buffTarget is PlayerCombatEntity)
+            {
+                conditionCheckTarget = BattleStateManager.Instance.enemyUnit;
+            }
+            else if (condition.target == CardCondition.ConditionTarget.Self && buffTarget is EnemyCombatEntity)
+            {
+                conditionCheckTarget = buffTarget;
+            }
+            else if (condition.target == CardCondition.ConditionTarget.Target && buffTarget is EnemyCombatEntity)
+            {
+                conditionCheckTarget = BattleStateManager.Instance.playerUnit;
+            }
+
+            if (conditionCheckTarget != null)
+            {
+                Debug.Log(conditionCheckTarget.name);
+                if (condition.IsConditionMet(conditionCheckTarget))
                 {
-                    await entity.ApplyBuff(buffsToApply.list, token);
+                    foreach (var buff in buffsToApplyOnConditionMet.list)
+                    {
+                        //Show buff animation if can
+                        await buff.ApplyBuff(buffTarget,token);
+                    }
+                }
+                else
+                {
+                    foreach (var buff in buffsToApplyOnConditionNotMet.list)
+                    {
+                        //Show buff animation if can
+                        await buff.ApplyBuff(buffTarget,token);
+                    }
                 }
             }
-        }
-
-        bool CheckCondition(CombatEntity entity)
-        {
-            var stats = entity.Stats;
-            if(stats == null) return false;
             
-
-            int valueToCheck = 0;
-
-            switch (conditionStatsType)
-            {
-                case BuffConditionType.MaxHealth:
-                    valueToCheck = stats.MaxHealth;
-                    break;
-                case BuffConditionType.AdditionalDamage:
-                    valueToCheck = stats.AdditionalDamage;
-                    break;
-                case BuffConditionType.AdditionalTakenDamage:
-                    valueToCheck = stats.AdditionalTakenDamage;
-                    break;
-                case BuffConditionType.CurrentCost:
-                    valueToCheck = entity.currentCost;
-                    break;
-            }
-            
-            
-            
-            switch (conditionType)
-            {
-                case ConditionType.Equal:
-                    return valueToCheck == conditionValue;
-                case ConditionType.NotEqual:
-                    return valueToCheck != conditionValue;
-                case ConditionType.MoreThanOrEqual:
-                    return valueToCheck >= conditionValue;
-                case ConditionType.MoreThan:
-                    return valueToCheck > conditionValue;
-                case ConditionType.LessThanOrEqual:
-                    return valueToCheck <= conditionValue;
-                case ConditionType.LessThan:
-                    return valueToCheck < conditionValue;
-                default:
-                    return false;
-            }
+            //Final Buff animation
+            await base.ApplyBuff(buffTarget, token);
         }
     }
     

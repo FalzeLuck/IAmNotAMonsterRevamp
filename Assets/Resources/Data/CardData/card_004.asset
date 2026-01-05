@@ -15,8 +15,7 @@ MonoBehaviour:
   cardID: card_004
   cardType: 0
   buffsToApply:
-    list:
-    - rid: 3437170452582629463
+    list: []
   cardImage: {fileID: 21300000, guid: 3cb3055ba025ee041ba366dab50daa7a, type: 3}
   cardIcon: {fileID: 21300000, guid: a4e3852720017c246b7a58e2a054b606, type: 3}
   cardFloatIcon: {fileID: 21300000, guid: eb6e6f796e43c3d428fe31d899d302ed, type: 3}
@@ -44,41 +43,20 @@ MonoBehaviour:
         rid: 5898636456408908135
   cardCost: 3
   cardSpeed: 6
+  canDealDamage: 1
   damage: 30
-  canInflictBuff: 1
+  haveConditionalDamageBonus: 1
+  conditionalDamageBonus:
+  - editorDescription: Add Damage if self cost = 0
+    bonusDamageAmount: 20
+    condition: {fileID: 11400000, guid: 4ba229c94eb146f4c9765b70ce825248, type: 2}
+  canInflictBuff: 0
   vfxPrefab: {fileID: 1345078675182571299, guid: 704ba4fe68c03a445afdf59b20697aaa, type: 3}
   hitRatio:
   - 1
   references:
     version: 2
     RefIds:
-    - rid: 3437170452582629463
-      type: {class: RequireConditionBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
-      data:
-        buffName: AddAttack
-        buffValue: 20
-        affectTarget: 1
-        target: 0
-        buffType: 0
-        vfxPrefab: {fileID: 0}
-        conditionStatsType: 3
-        conditionType: 0
-        conditionValue: 0
-        buffsToApply:
-          list:
-          - rid: 3437170452582629464
-    - rid: 3437170452582629464
-      type: {class: StatsModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
-      data:
-        buffName: AddDamage
-        buffValue: 20
-        affectTarget: 0
-        target: 0
-        buffType: 0
-        vfxPrefab: {fileID: 0}
-        type: 1
-        operatorType: 0
-        countdownTurn: 1
     - rid: 5898636456408908135
       type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:

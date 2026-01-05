@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using ShabuStudio.Gameplay.UI;
 
 namespace ShabuStudio.Gameplay
 {
@@ -10,6 +11,7 @@ namespace ShabuStudio.Gameplay
     {
         [Header("References")]
         [SerializeField]private CombatEntity targetUnit;
+        [SerializeField] private BuffPanel buffPanel;
         public Image barForeground;
         public TMP_Text healthText;
 
@@ -18,6 +20,7 @@ namespace ShabuStudio.Gameplay
             if (targetUnit != null)
             {
                 targetUnit.OnHealthChanged += UpdateHealthUI;
+                targetUnit.OnStatusChanged += UpdateBuffPanel;
             }
         }
 
@@ -33,7 +36,11 @@ namespace ShabuStudio.Gameplay
         
         private void OnDisable()
         {
-            if (targetUnit != null) targetUnit.OnHealthChanged -= UpdateHealthUI;
+            if (targetUnit != null)
+            {
+                targetUnit.OnHealthChanged -= UpdateHealthUI;
+                targetUnit.OnStatusChanged -= UpdateBuffPanel;
+            }
         }
 
         /// <summary>
@@ -54,6 +61,12 @@ namespace ShabuStudio.Gameplay
             {
                 healthText.text = $"{currentHealth} / {maxHealth}";
             }
+        }
+
+        void UpdateBuffPanel(Buff buffForShow)
+        {
+            Debug.Log($"Buff for show : {buffForShow.buffName}");
+            buffPanel.UpdatePanel(buffForShow);
         }
     }
 }

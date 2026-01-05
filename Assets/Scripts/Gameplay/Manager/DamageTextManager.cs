@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -17,6 +16,10 @@ namespace ShabuStudio.Gameplay
             else Instance = this;
         }
 
+        [Header("Properties")]
+        [SerializeField] private Vector2 damageTextOffset = new Vector2(100f, 100f);
+        
+        [Header("References")]
         [SerializeField] private FloatNumberText floatNumberTextPrefab;
         [SerializeField] private Transform damageTextCanvasTransform;
         [SerializeField] private CinemachineImpulseSource impulseSource;
@@ -102,13 +105,18 @@ namespace ShabuStudio.Gameplay
         {
             if(damageAmount <= 0) return;
             
+            float xPos = screenPos.x + Random.Range(0,damageTextOffset.x);
+            float yPos = screenPos.y + Random.Range(0,damageTextOffset.y);
+            
+            Vector3 realSpawnPos = new Vector3(xPos,yPos,screenPos.z);
+            
             //Check if there is any inactive damage text in list.
             foreach (FloatNumberText item in _damageTextList)
             {
                 if (!item.gameObject.activeInHierarchy) 
                 {
                     item.gameObject.SetActive(true);
-                    item.SetupAndStart(screenPos,damageAmount,textColor, isCriticalHit,prefix);
+                    item.SetupAndStart(realSpawnPos,damageAmount,textColor, isCriticalHit,prefix);
                     return;
                 }
             }
@@ -116,7 +124,7 @@ namespace ShabuStudio.Gameplay
             //Else create new damageText
             FloatNumberText floatNumberText = Instantiate(floatNumberTextPrefab,damageTextCanvasTransform);
             _damageTextList.Add(floatNumberText);
-            floatNumberText.SetupAndStart(screenPos,damageAmount,textColor, isCriticalHit,prefix);
+            floatNumberText.SetupAndStart(realSpawnPos,damageAmount,textColor, isCriticalHit,prefix);
         }
     }
 }

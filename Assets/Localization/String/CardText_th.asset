@@ -63,7 +63,7 @@ MonoBehaviour:
   - m_Id: 5704090210451456
     m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
       \u0E2B\u0E32\u0E01\u0E43\u0E0A\u0E49 Cost \u0E2B\u0E21\u0E14\u0E1E\u0E2D\u0E14\u0E35
-      \u0E40\u0E1E\u0E34\u0E48\u0E21\u0E14\u0E32\u0E40\u0E21\u0E08 {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      \u0E40\u0E1E\u0E34\u0E48\u0E21\u0E14\u0E32\u0E40\u0E21\u0E08 {card.conditionalDamageBonus.0.bonusDamageAmount}
       \u0E2B\u0E19\u0E48\u0E27\u0E22"
     m_Metadata:
       m_Items:
@@ -125,6 +125,46 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908141
+  - m_Id: 13348457477750784
+    m_Localized: "\u0E1E\u0E32\u0E22\u0E38\u0E44\u0E1F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13348655511814144
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22
+      {card.damage} \u0E2B\u0E19\u0E48\u0E27\u0E22. \u0E2B\u0E32\u0E01\u0E28\u0E31\u0E15\u0E23\u0E39\u0E21\u0E35\u0E2A\u0E16\u0E32\u0E19\u0E30\u0E1C\u0E34\u0E14\u0E1B\u0E01\u0E15\u0E34\u0E1B\u0E23\u0E30\u0E40\u0E20\u0E17
+      Burn \u0E40\u0E1E\u0E34\u0E48\u0E21\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22\u0E04\u0E23\u0E31\u0E49\u0E07\u0E19\u0E35\u0E49
+      {card.conditionalDamageBonus.0.bonusDamageAmount} \u0E2B\u0E19\u0E48\u0E27\u0E22."
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
+  - m_Id: 13348677523521536
+    m_Localized: "\u0E1A\u0E31\u0E1E\u0E44\u0E1F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13348703406571520
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E40\u0E1E\u0E34\u0E48\u0E21\u0E14\u0E32\u0E40\u0E21\u0E08\u0E01\u0E32\u0E23\u0E42\u0E08\u0E21\u0E15\u0E35\u0E17\u0E31\u0E49\u0E07\u0E2B\u0E21\u0E14\u0E02\u0E2D\u0E07\u0E1C\u0E39\u0E49\u0E40\u0E25\u0E48\u0E19\u0E43\u0E19\u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19\u0E19\u0E35\u0E49
+      8 \u0E2B\u0E32\u0E01\u0E28\u0E31\u0E15\u0E23\u0E39\u0E21\u0E35\u0E2A\u0E16\u0E32\u0E19\u0E30\u0E1C\u0E34\u0E14\u0E1B\u0E01\u0E15\u0E34\u0E1B\u0E23\u0E30\u0E40\u0E20\u0E17
+      Burn \u0E14\u0E32\u0E40\u0E21\u0E08\u0E40\u0E1E\u0E34\u0E48\u0E21\u0E40\u0E1B\u0E47\u0E19
+      12"
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
+  - m_Id: 13348719613362176
+    m_Localized: "\u0E08\u0E38\u0E14\u0E44\u0E1F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13348739708272640
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E17\u0E33\u0E43\u0E2B\u0E49\u0E28\u0E31\u0E15\u0E23\u0E39\u0E15\u0E34\u0E14\u0E2A\u0E16\u0E32\u0E19\u0E30
+      Burn \u0E0B\u0E36\u0E48\u0E07\u0E08\u0E30\u0E2A\u0E23\u0E49\u0E32\u0E07\u0E04\u0E27\u0E32\u0E21\u0E40\u0E2A\u0E35\u0E22\u0E2B\u0E32\u0E22
+      {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}
+      \u0E2B\u0E19\u0E48\u0E27\u0E22\u0E40\u0E1B\u0E47\u0E19\u0E40\u0E27\u0E25\u0E32
+      2 \u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19."
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
   references:
     version: 2
     RefIds:
@@ -142,3 +182,6 @@ MonoBehaviour:
         - id: 9802809054773248
         - id: 9802897915297792
         - id: 12930479217098752
+        - id: 13348655511814144
+        - id: 13348703406571520
+        - id: 13348739708272640
