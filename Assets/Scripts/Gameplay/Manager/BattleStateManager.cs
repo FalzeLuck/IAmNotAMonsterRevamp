@@ -145,7 +145,18 @@ namespace ShabuStudio.Gameplay
         
         private void HandleWin()
         {
-            SceneManager.LoadScene(winSceneIndex);
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            
+            SceneManager.LoadScene("Scene_Win");
+        }
+        
+        private void HandleLose()
+        {
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            
+            SceneManager.LoadScene("Scene_Lose");
         }
 
         public void StartActionSequence()

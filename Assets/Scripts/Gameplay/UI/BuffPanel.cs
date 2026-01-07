@@ -8,13 +8,57 @@ namespace ShabuStudio.Gameplay.UI
     {
         public GameObject buffPrefab;
         
-        private List<BuffDataForShow> buffsForShow = new List<BuffDataForShow>();
-        public void UpdatePanel(Buff buffForShow)
+        List<ActiveBuff> activeBuffs = new List<ActiveBuff>();
+        
+        public void AddBuffToPanel(Buff buffForShow)
         {
-            BuffDataForShow showingBuff = new BuffDataForShow(buffForShow.buffName,buffForShow.buffDescription,buffForShow.buffTurnsToEnd,buffForShow.buffIcon);
-            buffsForShow.Add(showingBuff);
             
-            GameObject buffIcon = Instantiate(buffPrefab,transform);
+            //Add buff icon only buff that have turnsToEnd
+            if(buffForShow.buffTurnsToEnd > 0)
+            {
+                BuffDataForShow showingBuff = new BuffDataForShow(buffForShow.buffName,buffForShow.buffDescription,buffForShow.buffTurnsToEnd,buffForShow.buffIcon);
+                GameObject buffIcon = Instantiate(buffPrefab, transform);
+                
+                ActiveBuff activeBuff = new ActiveBuff(showingBuff,buffIcon);
+                activeBuffs.Add(activeBuff);
+                
+            }
+        }
+        
+        public void DecreaseBuffTurnInPanel()
+        {
+            foreach (var buff in activeBuffs)
+            {
+                buff.buffData.buffTurns--;
+            }
+            
+            ActiveBuff[] buffsToRemove = activeBuffs.FindAll(buff => buff.buffData.buffTurns <= 0).ToArray();
+            //Remove buff that have 0 or less turns.
+            activeBuffs.RemoveAll(buff => 
+            {
+                if (buff.buffData.buffTurns <= 0)
+                {
+                    if (buff.buffIconObj != null) 
+                    {
+                        Destroy(buff.buffIconObj);
+                    }
+        
+                    return true; 
+                }
+                return false; 
+            });
+        }
+    }
+
+    public class ActiveBuff
+    {
+        public BuffDataForShow buffData;
+        public GameObject buffIconObj;
+        
+        public ActiveBuff(BuffDataForShow buffData, GameObject buffIconObj)
+        {
+            this.buffData = buffData;
+            this.buffIconObj = buffIconObj;
         }
     }
     

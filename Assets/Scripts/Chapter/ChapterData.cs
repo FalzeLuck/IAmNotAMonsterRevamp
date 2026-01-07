@@ -8,6 +8,7 @@ namespace ShabuStudio.Chapter
     {
         [Header("Chapter Info")]
         public string chapterPrefix;
+        public string chapterSceneName;
         public LocalizedString chapterName;
         public LocalizedString chapterDescription;
     }

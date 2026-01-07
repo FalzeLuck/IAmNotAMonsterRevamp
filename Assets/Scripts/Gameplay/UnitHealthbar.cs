@@ -20,7 +20,8 @@ namespace ShabuStudio.Gameplay
             if (targetUnit != null)
             {
                 targetUnit.OnHealthChanged += UpdateHealthUI;
-                targetUnit.OnStatusChanged += UpdateBuffPanel;
+                targetUnit.OnStatusChanged += AddBuffToPanel;
+                targetUnit.OnTurnEndAction += UpdateBarOnTurnEnd;
             }
         }
 
@@ -39,7 +40,8 @@ namespace ShabuStudio.Gameplay
             if (targetUnit != null)
             {
                 targetUnit.OnHealthChanged -= UpdateHealthUI;
-                targetUnit.OnStatusChanged -= UpdateBuffPanel;
+                targetUnit.OnStatusChanged -= AddBuffToPanel;
+                targetUnit.OnTurnEndAction -= UpdateBarOnTurnEnd;
             }
         }
 
@@ -63,10 +65,14 @@ namespace ShabuStudio.Gameplay
             }
         }
 
-        void UpdateBuffPanel(Buff buffForShow)
+        void AddBuffToPanel(Buff buffForShow)
         {
-            Debug.Log($"Buff for show : {buffForShow.buffName}");
-            buffPanel.UpdatePanel(buffForShow);
+            buffPanel.AddBuffToPanel(buffForShow);
+        }
+
+        public void UpdateBarOnTurnEnd()
+        {
+            buffPanel.DecreaseBuffTurnInPanel();
         }
     }
 }

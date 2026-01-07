@@ -79,7 +79,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 5706987237195776
     m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
-      Decrease current opponent cost by {card.buffsToApply.list.Count:choose(0):X|{card.buffsToApply.list.0.buffValue}}.'
+      Enemy take more 5 damage this turn. If player cost this turn is 0 before using
+      this card, enemy take 10 more damage this turn.'
     m_Metadata:
       m_Items:
       - rid: 5898636456408908140

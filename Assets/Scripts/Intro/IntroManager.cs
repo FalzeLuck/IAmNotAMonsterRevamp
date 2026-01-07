@@ -21,7 +21,7 @@ namespace ShabuStudio.Intro
             
             playerInput.DeactivateInput();
             
-            SceneLoader.Instance.LoadScene(mainMenuSceneIndex);
+            SceneLoader.LoadScene(mainMenuSceneIndex);
         }
     }
 }

@@ -84,11 +84,22 @@ namespace ShabuStudio.Gameplay
             if (buffValue > 0)
             {
                 buffTarget.AddCost(buffValue);
+                if (buffTarget is PlayerCombatEntity)
+                {
+                    DamageTextManager.Instance.SpawnText(new Vector3(1656, 209, 0), buffValue, Color.yellow, false, "+");
+                    ActionBar.Instance.UpdateUI();
+                }
             }
             else if (buffValue < 0)
             {
                 buffTarget.RemoveCost(Math.Abs(buffValue));
+                if (buffTarget is PlayerCombatEntity)
+                {
+                    DamageTextManager.Instance.SpawnText(new Vector3(1656, 209, 0), buffValue, Color.yellow, false, "-");
+                    ActionBar.Instance.UpdateUI();
+                }
             }
+            
         }
     }
 
@@ -166,7 +177,6 @@ namespace ShabuStudio.Gameplay
 
             if (conditionCheckTarget != null)
             {
-                Debug.Log(conditionCheckTarget.name);
                 if (condition.IsConditionMet(conditionCheckTarget))
                 {
                     foreach (var buff in buffsToApplyOnConditionMet.list)

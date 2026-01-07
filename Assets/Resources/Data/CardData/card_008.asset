@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: card_008
   m_EditorClassIdentifier: 
   cardID: card_008
-  cardType: 2
+  cardType: 1
   buffsToApply:
     list:
     - rid: 3437170707573243988

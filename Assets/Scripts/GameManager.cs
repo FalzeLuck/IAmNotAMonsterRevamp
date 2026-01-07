@@ -18,6 +18,7 @@ namespace ShabuStudio
             DontDestroyOnLoad(gameObject);
         }
         
+        public ChapterData currentChapterData;
         public StageData currentStageData;
     }
 }

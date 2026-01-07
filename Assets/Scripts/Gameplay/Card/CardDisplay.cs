@@ -85,7 +85,8 @@ namespace ShabuStudio.Gameplay
             card.cardName.StringChanged -= HandleNameText;
             card.cardName.StringChanged += HandleNameText;
             UpdateText();
-            InitializeSortOrder(sortOrder);
+            if(cardMovement != null)
+                InitializeSortOrder(sortOrder);
         }
 
         void HandleNameText(string localizedText)

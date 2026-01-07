@@ -68,7 +68,9 @@ MonoBehaviour:
       data:
         buffName: Healing...
         buffDescription: 
+        buffIcon: {fileID: 0}
         buffValue: 10
+        buffTurnsToEnd: 0
         target: 0
         buffType: 0
         vfxPrefab: {fileID: 0}

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using ShabuStudio.Data;
 using UnityEngine;
 
@@ -21,6 +22,10 @@ namespace ShabuStudio.Gameplay
         private CombatEntity _playerUnit;
         private CombatEntity _enemyUnit;
         private DamageTextManager _damageTextManager;
+        
+        [Header("References")]
+        [SerializeField]private GameObject cardDisplayPrefab;
+        [SerializeField]private Canvas cardDisplayCanvas;
         
         [Header("Damage Spawn Point References")]
         public Transform damageSpawnPointPlayer;
@@ -69,6 +74,14 @@ namespace ShabuStudio.Gameplay
                 self = _enemyUnit;
                 damageSpawnPoint = damageSpawnPointPlayer;
             }
+            
+            //Show card played
+            Vector3 cardDisplayPosition = new Vector3(376, 739, 0);
+            GameObject showCard = Instantiate(cardDisplayPrefab, new Vector3(376, 739, 0), Quaternion.identity);
+            showCard.GetComponent<CardDisplay>().InitializeCard(card, 0);
+            showCard.transform.SetParent(cardDisplayCanvas.transform);
+            showCard.transform.localScale = Vector3.zero;
+            showCard.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack).WithCancellation(token);
 
             if (card.canInflictBuff)
             {
@@ -126,6 +139,8 @@ namespace ShabuStudio.Gameplay
             if (!card.canDealDamage) totalDamage = 0;
             float[] hitPattern = card.hitRatio;
             _damageTextManager.PrepareNumber(totalDamage, damageSpawnPoint, target, hitPattern);
+            
+            
 
 
             //Play VFX
@@ -140,6 +155,8 @@ namespace ShabuStudio.Gameplay
             finally
             {
                 _damageTextManager.FlushRemainingDamage();
+                await showCard.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.OutBack)
+                    .OnComplete(() => Destroy(showCard));
             }
 
             //Apply Damage

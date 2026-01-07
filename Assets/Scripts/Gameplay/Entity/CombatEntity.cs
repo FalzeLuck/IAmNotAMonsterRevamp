@@ -23,9 +23,10 @@ namespace ShabuStudio.Gameplay
         private DoTsHolder doTsHolder;
         private List<Buff> OnStartTurnBuffs;
         
+        
         public System.Action<int, int> OnHealthChanged; // Current, Max
         public System.Action<Buff> OnStatusChanged; // When buffs are added/removed
-        
+        public System.Action OnTurnEndAction;
         
         [Header("References")]
         public Transform vfxSpawnPoint;
@@ -184,6 +185,7 @@ namespace ShabuStudio.Gameplay
             DecreaseBuffTurn(1);
             doTsHolder.TriggerDoT();
             doTsHolder.ReduceTurnsDoT();
+            OnTurnEndAction?.Invoke();
         }
         
         // -------------

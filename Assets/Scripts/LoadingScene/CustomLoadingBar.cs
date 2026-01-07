@@ -24,7 +24,7 @@ public class CustomLoadingBar : MonoBehaviour
         // Update the shader value
         if (_dynamicMaterial != null && SceneLoader.Instance != null)
         {
-            _dynamicMaterial.SetFloat(FillProperty, 1 - SceneLoader.Instance.currentLoadingProgress);
+            _dynamicMaterial.SetFloat(FillProperty, 1 - SceneLoader.Instance.CurrentLoadingProgress);
         }
     }
 }

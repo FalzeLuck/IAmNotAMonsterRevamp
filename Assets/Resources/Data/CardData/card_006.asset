@@ -16,7 +16,7 @@ MonoBehaviour:
   cardType: 2
   buffsToApply:
     list:
-    - rid: 3437170452582629468
+    - rid: 1705690148462395507
   cardImage: {fileID: 21300000, guid: 22824dc2a1fcb604b9bcd643e397ee3c, type: 3}
   cardIcon: {fileID: 21300000, guid: 789d687f790a4bd46b0b37235f415851, type: 3}
   cardFloatIcon: {fileID: 21300000, guid: eb6e6f796e43c3d428fe31d899d302ed, type: 3}
@@ -49,23 +49,56 @@ MonoBehaviour:
   haveConditionalDamageBonus: 0
   conditionalDamageBonus: []
   canInflictBuff: 1
-  vfxPrefab: {fileID: 0}
+  vfxPrefab: {fileID: 6791587590779341261, guid: 0689131fdc3da0948bea375ce2fe05a5, type: 3}
   hitRatio:
   - 1
   references:
     version: 2
     RefIds:
-    - rid: 3437170452582629468
-      type: {class: CostModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
+    - rid: 1705690148462395507
+      type: {class: ConditionBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
       data:
-        buffName: Increase Cost
-        buffDescription: 
+        buffName: Check cost vunerable
+        buffDescription: Increase vunerable according to condition.
         buffIcon: {fileID: 0}
-        buffValue: -3
+        buffValue: 0
         buffTurnsToEnd: 0
         target: 1
-        buffType: 1
-        vfxPrefab: {fileID: 6791587590779341261, guid: 0689131fdc3da0948bea375ce2fe05a5, type: 3}
+        buffType: 0
+        vfxPrefab: {fileID: 0}
+        buffsToApplyOnConditionMet:
+          list:
+          - rid: 1705690148462395508
+        buffsToApplyOnConditionNotMet:
+          list:
+          - rid: 1705690148462395509
+        condition: {fileID: 11400000, guid: 4ba229c94eb146f4c9765b70ce825248, type: 2}
+    - rid: 1705690148462395508
+      type: {class: StatsModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
+      data:
+        buffName: 
+        buffDescription: Increase Taken Damage
+        buffIcon: {fileID: 0}
+        buffValue: 10
+        buffTurnsToEnd: 0
+        target: 0
+        buffType: 0
+        vfxPrefab: {fileID: 0}
+        type: 2
+        operatorType: 0
+    - rid: 1705690148462395509
+      type: {class: StatsModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
+      data:
+        buffName: 
+        buffDescription: Increase Taken Damage
+        buffIcon: {fileID: 0}
+        buffValue: 5
+        buffTurnsToEnd: 0
+        target: 0
+        buffType: 0
+        vfxPrefab: {fileID: 0}
+        type: 2
+        operatorType: 0
     - rid: 5898636456408908135
       type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:

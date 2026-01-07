@@ -8,35 +8,26 @@ namespace ShabuStudio.Chapter
     {
         public static ChapterSelectManager Instance { get; private set; }
         
+        
         private void Awake()
         {
             if (Instance != null && Instance != this) Destroy(gameObject);
             else Instance = this;
         }
         
-        [SerializeField]private ChapterPanelController chapterPanelController;
-        private ChapterData currentChapterData;
+        public Canvas transitionCanvas;
 
 
 
         public void SelectChapter(ChapterData chapterData, Transform lookAtPoint)
         {
             //Update Data
-            currentChapterData = chapterData;
-            chapterPanelController.PanelSetup(currentChapterData);
+            GameManager.Instance.currentChapterData = chapterData;
             
-            //Update Camera
-            CameraManager.Instance.SwitchCamera("Selected Chapter Camera");
-            CameraManager.Instance.ChangeCameraTarget(lookAtPoint);
+            //Load Scene
+            SceneLoader.LoadSceneWithTransitionCanvas(chapterData.chapterSceneName, transitionCanvas);
         }
         
-        public void DeselectChapter()
-        {
-            //Update Camera
-            CameraManager.Instance.SwitchCamera("Chapter Camera");
-            currentChapterData = null;
-            chapterPanelController.ClosePanel();
-        }
         
     }
 }
