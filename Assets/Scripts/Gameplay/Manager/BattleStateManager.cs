@@ -148,6 +148,9 @@ namespace ShabuStudio.Gameplay
             Time.timeScale = 1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             
+            //Set PlayerPref for this stage to clear
+            PlayerPrefs.SetInt("StageComplete_" + GameManager.Instance.currentStageData.stageID, 1);
+            
             SceneManager.LoadScene("Scene_Win");
         }
         

@@ -32,7 +32,7 @@ namespace ShabuStudio.Chapter
 
         private void OnSelectThisChapter()
         {
-            ChapterSelectManager.Instance.SelectChapter(chapterData, transform);
+            ChapterSelectManager.Instance.SelectChapter(chapterData);
         }
         
     }

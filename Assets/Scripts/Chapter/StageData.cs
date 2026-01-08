@@ -14,5 +14,7 @@ namespace ShabuStudio.Chapter
     
         [Header("Requirement")]
         public StageData prerequisiteStage;
+        
+        
     }
 }

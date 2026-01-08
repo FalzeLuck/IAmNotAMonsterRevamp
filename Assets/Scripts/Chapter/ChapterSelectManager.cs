@@ -19,7 +19,7 @@ namespace ShabuStudio.Chapter
 
 
 
-        public void SelectChapter(ChapterData chapterData, Transform lookAtPoint)
+        public void SelectChapter(ChapterData chapterData)
         {
             //Update Data
             GameManager.Instance.currentChapterData = chapterData;

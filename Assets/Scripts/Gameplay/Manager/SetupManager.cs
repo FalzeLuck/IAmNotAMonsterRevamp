@@ -18,6 +18,11 @@ namespace ShabuStudio.Gameplay
                 enemyData = enemyObject.GetComponentInChildren<EnemyCombatEntity>();
             }
             BattleStateManager.Instance.enemyUnit = enemyData;
+
+            
+            GameObject objectToSpawn = GameManager.Instance.currentChapterData?.chapterBg3DObject;
+            if (objectToSpawn != null)
+                Instantiate(objectToSpawn, Vector3.zero, Quaternion.identity);
             
             await UniTask.NextFrame();
         }

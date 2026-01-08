@@ -5,8 +5,8 @@ namespace ShabuStudio.Camera
     [ExecuteAlways]
     public class ProjectionSetup : MonoBehaviour
     {
-        public UnityEngine.Camera projectorCamera; // Assign the "Ghost Camera" here
-        public Material targetMaterial; // Assign the Floor Material here
+        public UnityEngine.Camera projectorCamera; // Assign the "Projection Camera" here
+        public Material targetMaterial; // Assign the Projection Material
         public string matrixPropertyName = "_ProjectorVP"; // Must match Shader Graph property name
 
         void Update()

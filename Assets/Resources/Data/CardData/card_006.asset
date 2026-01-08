@@ -49,7 +49,7 @@ MonoBehaviour:
   haveConditionalDamageBonus: 0
   conditionalDamageBonus: []
   canInflictBuff: 1
-  vfxPrefab: {fileID: 6791587590779341261, guid: 0689131fdc3da0948bea375ce2fe05a5, type: 3}
+  vfxPrefab: {fileID: 0}
   hitRatio:
   - 1
   references:
@@ -65,7 +65,7 @@ MonoBehaviour:
         buffTurnsToEnd: 0
         target: 1
         buffType: 0
-        vfxPrefab: {fileID: 0}
+        vfxPrefab: {fileID: 6791587590779341261, guid: 0689131fdc3da0948bea375ce2fe05a5, type: 3}
         buffsToApplyOnConditionMet:
           list:
           - rid: 1705690148462395508
