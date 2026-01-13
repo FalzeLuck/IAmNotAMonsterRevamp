@@ -665,7 +665,9 @@ MonoBehaviour:
     deckName: Enemy Deck
     deckID: enemy_deck_001
     allCards:
+    - {fileID: 11400000, guid: fa52a0d5faf12914e8e1d3e92e96cc13, type: 2}
     - {fileID: 11400000, guid: 3a382626e3cd89743b7e803d1faac28a, type: 2}
+    - {fileID: 11400000, guid: b77377cc82e409949a8f8022ca65d4ed, type: 2}
     availableCards: []
     droppedCards: []
   availableCards: []

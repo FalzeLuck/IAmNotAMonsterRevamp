@@ -772,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5732b7edb31d47caab99f2405e758621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentChapterData: {fileID: 0}
+  currentChapterData: {fileID: 11400000, guid: d0179d51f06584a44a3cd090bba487f7, type: 2}
   currentStageData: {fileID: 11400000, guid: bd57225559e28ee49aa696d3aa461c94, type: 2}
 --- !u!4 &469856000
 Transform:
@@ -4603,7 +4603,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b77377cc82e409949a8f8022ca65d4ed, type: 2}
     availableCards: []
     droppedCards: []
-  currentDeckIndex: 2
+  currentDeckIndex: 0
 --- !u!4 &1431697610
 Transform:
   m_ObjectHideFlags: 0
