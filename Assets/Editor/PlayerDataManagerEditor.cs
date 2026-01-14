@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace ShabuStudio.Data
 {
-    [CustomEditor(typeof(PlayerDataManager))]
+    [CustomEditor(typeof(PlayerDeckDataManager))]
     [InitializeOnLoad]
     public class PlayerDataManagerEditor : Editor
     {
@@ -14,7 +14,7 @@ namespace ShabuStudio.Data
         {
             DrawDefaultInspector();
             
-            PlayerDataManager playerData = target as PlayerDataManager;
+            PlayerDeckDataManager playerDeckData = target as PlayerDeckDataManager;
             
             //Show only when playing
             if (Application.isPlaying)
@@ -23,11 +23,11 @@ namespace ShabuStudio.Data
 
                 if (GUILayout.Button("Save All Decks"))
                 {
-                    playerData.SaveAllDecks();
+                    playerDeckData.SaveAllDecks();
                 }
                 if (GUILayout.Button("Load All Decks"))
                 {
-                    playerData.LoadAllDecks();
+                    playerDeckData.LoadAllDecks();
                 }
             }
             else
@@ -35,11 +35,11 @@ namespace ShabuStudio.Data
                 GUILayout.Space(10);
                 if (GUILayout.Button("Save All Decks"))
                 {
-                    playerData.SaveAllDecks(Path.Combine(Application.persistentDataPath, "playerData.json"));
+                    playerDeckData.SaveAllDecks(Path.Combine(Application.persistentDataPath, SaveSystem.DeckPath));
                 }
                 if (GUILayout.Button("Load All Decks"))
                 {
-                    playerData.LoadAllDecks(Path.Combine(Application.persistentDataPath, "playerData.json"));
+                    playerDeckData.LoadAllDecks(Path.Combine(Application.persistentDataPath, SaveSystem.DeckPath));
                 }
             }
         }

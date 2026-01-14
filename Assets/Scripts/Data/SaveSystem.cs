@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Cysharp.Threading.Tasks;
+using DeckBuild;
 using UnityEngine;
 
 namespace ShabuStudio.Data
@@ -15,27 +17,57 @@ namespace ShabuStudio.Data
     }
     //List of decks to save.
     [System.Serializable]
-    public class PlayerSaveData
+    public class DeckSaveData
     {
         public List<SavedDeck> savedDecks = new List<SavedDeck>();
     }
     
-    public class SaveSystem : MonoBehaviour
+    [System.Serializable]
+    public class InventorySaveData
     {
-        private string saveFilePath;
+        public List<InventorySaveEntry> inventoryItems = new List<InventorySaveEntry>();
+    }
+    
+    public static class SaveSystem
+    {
+        public static string DeckPath => Path.Combine(Application.persistentDataPath, "deckData.json");
+        public static string InventoryPath => Path.Combine(Application.persistentDataPath, "inventoryData.json");
 
-        private void Awake()
+
+
+        public static void SaveInventory(List<InventorySaveEntry> inventoryData)
         {
-            // Set save file path
-            saveFilePath = Path.Combine(Application.persistentDataPath, "playerData.json");
+            // Wrap the list in the class
+            InventorySaveData wrapper = new InventorySaveData();
+            wrapper.inventoryItems = inventoryData;
+
+            string json = JsonUtility.ToJson(wrapper, true);
+
+            // Write to disk
+            File.WriteAllText(InventoryPath, json);
+            
+            Debug.Log($"Inventory saved to {InventoryPath}");
         }
-
-
-        //Main Save Function.
-        //Saves all player's decks in the game.
-        public void SaveAllDecks(List<DeckDataHolder> runtimeDecks)
+        
+        public static List<InventorySaveEntry> LoadInventory()
         {
-            PlayerSaveData saveData = new PlayerSaveData();
+            if (!File.Exists(InventoryPath))
+            {
+                Debug.LogWarning("No inventory save found. Starting fresh.");
+                return new List<InventorySaveEntry>();
+            }
+            
+            string json = File.ReadAllText(InventoryPath);
+            
+            InventorySaveData wrapper = JsonUtility.FromJson<InventorySaveData>(json);
+            
+            return wrapper.inventoryItems;
+        }
+        
+        //Saves all player's decks in the game.
+        public static async UniTask SaveAllDecks(List<DeckDataHolder> runtimeDecks)
+        {
+            DeckSaveData saveData = new DeckSaveData();
 
             // Loop through every deck currently in the game
             foreach (DeckDataHolder runtimeDeck in runtimeDecks)
@@ -43,7 +75,7 @@ namespace ShabuStudio.Data
                 // Create a "Save Format" deck
                 SavedDeck diskDeck = new SavedDeck();
                 diskDeck.deckName = runtimeDeck.deckName;
-                diskDeck.deckID = runtimeDeck.deckID;
+                diskDeck.deckID = runtimeDecks.IndexOf(runtimeDeck).ToString();
 
                 // Convert the Card objects into String IDs
                 foreach (CardData card in runtimeDeck.allCards)
@@ -57,22 +89,22 @@ namespace ShabuStudio.Data
 
             // Write to JSON
             string json = JsonUtility.ToJson(saveData, true);
-            File.WriteAllText(saveFilePath, json);
+            await File.WriteAllTextAsync(DeckPath, json);
             
-            Debug.Log($"Saved {runtimeDecks.Count} decks to {saveFilePath}");
+            Debug.Log($"Saved {runtimeDecks.Count} decks to {DeckPath}");
         }
         
         // Main load function.
-        public List<DeckDataHolder> LoadAllDecks()
+        public static async UniTask<List<DeckDataHolder>> LoadAllDecks()
         {
-            if (!File.Exists(saveFilePath))
+            if (!File.Exists(DeckPath))
             {
                 Debug.LogWarning("No save file found. Returning empty list.");
                 return new List<DeckDataHolder>(); 
             }
 
-            string json = File.ReadAllText(saveFilePath);
-            PlayerSaveData saveData = JsonUtility.FromJson<PlayerSaveData>(json);
+            string json = await File.ReadAllTextAsync(DeckPath);
+            DeckSaveData saveData = JsonUtility.FromJson<DeckSaveData>(json);
             
             List<DeckDataHolder> loadedDecks = new List<DeckDataHolder>();
 
@@ -95,14 +127,14 @@ namespace ShabuStudio.Data
                 loadedDecks.Add(newDeck);
             }
 
-            Debug.Log("Decks loaded successfully.");
+            Debug.Log($"Decks loaded successfully. Loaded {loadedDecks.Count} decks");
             return loadedDecks;
         }
         
         #if UNITY_EDITOR
-        public void SaveAllDecks(List<DeckDataHolder> runtimeDecks,string customPath)
+        public static void SaveAllDecks(List<DeckDataHolder> runtimeDecks,string customPath)
         {
-            PlayerSaveData saveData = new PlayerSaveData();
+            DeckSaveData saveData = new DeckSaveData();
 
             // Loop through every deck currently in the game
             foreach (DeckDataHolder runtimeDeck in runtimeDecks)
@@ -110,7 +142,7 @@ namespace ShabuStudio.Data
                 // Create a "Save Format" deck
                 SavedDeck diskDeck = new SavedDeck();
                 diskDeck.deckName = runtimeDeck.deckName;
-                diskDeck.deckID = runtimeDeck.deckID;
+                diskDeck.deckID = runtimeDecks.IndexOf(runtimeDeck).ToString();
 
                 // Convert the Card objects into String IDs
                 foreach (CardData card in runtimeDeck.allCards)
@@ -128,7 +160,7 @@ namespace ShabuStudio.Data
             
             Debug.Log($"Saved {runtimeDecks.Count} decks to {customPath}");
         }
-        public List<DeckDataHolder> LoadAllDecks(string customPath)
+        public static List<DeckDataHolder> LoadAllDecks(string customPath)
         {
             if (!File.Exists(customPath))
             {
@@ -137,7 +169,7 @@ namespace ShabuStudio.Data
             }
 
             string json = File.ReadAllText(customPath);
-            PlayerSaveData saveData = JsonUtility.FromJson<PlayerSaveData>(json);
+            DeckSaveData saveData = JsonUtility.FromJson<DeckSaveData>(json);
             
             List<DeckDataHolder> loadedDecks = new List<DeckDataHolder>();
 

@@ -57,7 +57,7 @@ namespace ShabuStudio.Gameplay
         {
             if (unitType == ActionOwner.Player) //If player
             {
-                deckDataHolder = PlayerDataManager.Instance.savedDecks[PlayerDataManager.Instance.currentDeckIndex];
+                deckDataHolder = PlayerDeckDataManager.Instance.savedDecks[PlayerDeckDataManager.Instance.currentDeckIndex];
             }
 
             if (deckDataHolder == null)
