@@ -19,9 +19,9 @@ namespace ShabuStudio.Gameplay
             else Instance = this;
         }
         
-        private CombatEntity _playerUnit;
-        private CombatEntity _enemyUnit;
-        private DamageTextManager _damageTextManager;
+        protected CombatEntity _playerUnit;
+        protected CombatEntity _enemyUnit;
+        protected DamageTextManager _damageTextManager;
         
         [Header("References")]
         [SerializeField]private GameObject cardDisplayPrefab;
@@ -32,12 +32,12 @@ namespace ShabuStudio.Gameplay
         public Transform damageSpawnPointEnemy;
 
         [Header("Unit HealthBar")] 
-        [SerializeField]private UnitHealthbar playerHealthbar;
+        [SerializeField]protected UnitHealthbar playerHealthbar;
         
         [Header("VFX References")]
         public VFXManager vfxManager;
 
-        public void Initialize(DamageTextManager damageTextManager)
+        public virtual void Initialize(DamageTextManager damageTextManager)
         {
             _playerUnit = BattleStateManager.Instance.playerUnit;
             _enemyUnit = BattleStateManager.Instance.enemyUnit;

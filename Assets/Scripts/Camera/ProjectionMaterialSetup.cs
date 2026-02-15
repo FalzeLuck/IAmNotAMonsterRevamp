@@ -15,5 +15,10 @@ namespace ShabuStudio.Camera
                 targetMaterial.SetTexture(mainTexPropertyName,GameManager.Instance.currentChapterData.chapterBgImage);
             }
         }
+
+        public void UpdateMaterial(Texture2D texture)
+        {
+            targetMaterial.SetTexture(mainTexPropertyName,texture);
+        }
     }
 }

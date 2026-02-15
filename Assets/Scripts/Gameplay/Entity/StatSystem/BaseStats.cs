@@ -6,6 +6,7 @@ namespace ShabuStudio.Gameplay
     public class BaseStats : ScriptableObject
     {
         public int maxHealth;
+        public int maxHandSize;
         public int additionalDamage;
         public int additionalTakenDamage;
     }

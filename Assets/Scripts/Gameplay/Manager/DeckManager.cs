@@ -11,7 +11,7 @@ namespace ShabuStudio.Gameplay
         public DeckDataHolder playerDeck;
         public DeckDataHolder enemyDeck;
 
-        public void Initialize()
+        public virtual void Initialize()
         {
             BattleStateManager.Instance.playerUnit.InitializeDeck();
             playerDeck = BattleStateManager.Instance.playerUnit.deckDataHolder;

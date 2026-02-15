@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Roguelite;
 using ShabuStudio.Data;
 using TMPro;
 using UnityEngine;
@@ -278,7 +279,7 @@ namespace ShabuStudio.Gameplay
             }
         }
 
-        public void UpdateUI()
+        public virtual void UpdateUI()
         {
             UpdateText(BattleStateManager.Instance.playerUnit);
             UpdateText(BattleStateManager.Instance.enemyUnit);

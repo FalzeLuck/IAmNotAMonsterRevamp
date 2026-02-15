@@ -18,7 +18,17 @@ namespace ShabuStudio
             DontDestroyOnLoad(gameObject);
         }
         
+        public enum GameMode { Story,Roguelite }
+        public GameMode currentGameMode;
+        public Canvas transitionCanvas;
+        
         public ChapterData currentChapterData;
         public StageData currentStageData;
+
+        public void StartRogueliteMode()
+        {
+            currentGameMode = GameMode.Roguelite;
+            SceneLoader.LoadSceneWithTransitionCanvas("Scene_RogueliteGameplay", transitionCanvas);
+        }
     }
 }

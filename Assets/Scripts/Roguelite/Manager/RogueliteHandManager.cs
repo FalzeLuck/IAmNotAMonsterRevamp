@@ -3,50 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Roguelite;
 using ShabuStudio.Data;
 using UnityEngine;
 using UnityEngine.Splines;
 
 namespace ShabuStudio.Gameplay
 {
-    public class HandManager : MonoBehaviour
+    public class RogueliteHandManager : HandManager
     {
-        [SerializeField] protected CardDisplay cardPrefab;
-        [SerializeField] protected SplineContainer splineContainer;
-        [SerializeField] protected Transform cardSpawnPoint;
-        
-        protected List<GameObject> handCards = new List<GameObject>();
-        [Tooltip("True: Last card is on top. False: First card is on top.")]
-        public bool lastCardOnTop = true;
-        
-        [Header("Hide Hand Settings")]
-        protected Vector3 defaultHandPostion;
-        [SerializeField] protected Vector3 hideHandOffset;
-        
-
-        //For exchanging Data from deck.
-        protected DeckManager deckManager;
-
-        //Tween to wait for draw card.
-        protected Tween drawCardTween;
-
-        private void Start()
-        {
-            defaultHandPostion = splineContainer.transform.position;
-        }
-
-        public void Initialize(DeckManager deckManager)
-        {
-            this.deckManager = deckManager;
-            
-            SetHandCardInteractable(false);
-        }
-
-        
         //Draw Card to hand.
-        protected virtual void DrawCard()
+        protected override void DrawCard()
         {
-            if(handCards.Count >= BattleStateManager.Instance.playerUnit.Stats.MaxHandSize) return;
+            if(handCards.Count >= RogueliteBattleStateManager.Instance.playerUnit.Stats.MaxHandSize) return;
             CardDisplay newCard = Instantiate(cardPrefab, cardSpawnPoint.position, cardSpawnPoint.rotation,splineContainer.transform);
             handCards.Add(newCard.gameObject);
             
@@ -63,11 +32,11 @@ namespace ShabuStudio.Gameplay
         }
 
         //Draw Card to hand until max hand size reached.
-        public virtual async UniTask DrawCardToMax()
+        public override async UniTask DrawCardToMax()
         {
-            if(handCards.Count >= BattleStateManager.Instance.playerUnit.Stats.MaxHandSize) return;
+            if(handCards.Count >= RogueliteBattleStateManager.Instance.playerUnit.Stats.MaxHandSize) return;
 
-            while (handCards.Count < BattleStateManager.Instance.playerUnit.Stats.MaxHandSize)
+            while (handCards.Count < RogueliteBattleStateManager.Instance.playerUnit.Stats.MaxHandSize)
             {
                 DrawCard();
                 await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
@@ -77,11 +46,11 @@ namespace ShabuStudio.Gameplay
         }
         
         //Update Card Position in hand.
-        protected virtual void UpdateCardPositions()
+        protected override void UpdateCardPositions()
         {
             if(handCards.Count <= 0) return;
 
-            float cardSpacing = 1f / BattleStateManager.Instance.playerUnit.Stats.MaxHandSize;
+            float cardSpacing = 1f / RogueliteBattleStateManager.Instance.playerUnit.Stats.MaxHandSize;
             float firstCardPosition = 0.5f - (handCards.Count - 1) * cardSpacing / 2;
             Spline spline = splineContainer.Spline;
             for (int i = 0; i < handCards.Count; i++)

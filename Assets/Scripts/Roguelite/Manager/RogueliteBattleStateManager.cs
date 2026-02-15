@@ -1,13 +1,14 @@
 using Cysharp.Threading.Tasks;
-using Roguelite;
+using ShabuStudio;
+using ShabuStudio.Gameplay;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ShabuStudio.Gameplay
+namespace Roguelite
 {
-    public class BattleStateManager : MonoBehaviour
+    public class RogueliteBattleStateManager : MonoBehaviour
     {
-        public static BattleStateManager Instance { get; private set; }
+        public static RogueliteBattleStateManager Instance { get; private set; }
 
         private void Awake()
         {
@@ -20,23 +21,26 @@ namespace ShabuStudio.Gameplay
         [Header("References")]
         public CombatEntity playerUnit;
         public EnemyCombatEntity enemyUnit;
-        [SerializeField] private SetupManager setupManager;
-        [SerializeField] private ActionBar actionBar;
-        [SerializeField] private ActionManager actionManager;
-        [SerializeField] private HandManager handManager;
-        [SerializeField] private DeckManager deckManager;
-        [SerializeField] private CombatManager combatManager;
+        [SerializeField] private RogueliteSetupManager setupManager;
+        [SerializeField] private RogueliteActionBar actionBar;
+        [SerializeField] private RogueliteActionManager actionManager;
+        [SerializeField] private RogueliteHandManager handManager;
+        [SerializeField] private RogueliteDeckManager deckManager;
+        [SerializeField] private RogueliteCombatManager combatManager;
         [SerializeField] private DamageTextManager damageTextManager;
+        
+        private UniTaskCompletionSource<bool> _activeBattleSource;
 
 
         private async void Start()
         {
-            StartInitialize();
+            RogueliteRunManager.Instance.StartRogueliteRun().Forget();
         }
 
-        async void StartInitialize()
+        public async UniTaskVoid StartInitialize(RogueliteStageData stageData,UniTaskCompletionSource<bool> source)
         {
-            await setupManager.StartSetup(GameManager.Instance.currentStageData);
+            _activeBattleSource = source;
+            await setupManager.StartSetup(stageData);
             ChangeState(BattleState.Initialize).Forget();
         }
 
@@ -146,10 +150,7 @@ namespace ShabuStudio.Gameplay
             Time.timeScale = 1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             
-            //Set PlayerPref for this stage to clear
-            PlayerPrefs.SetInt("StageComplete_" + GameManager.Instance.currentStageData.stageID, 1);
-            
-            SceneManager.LoadScene("Scene_Win");
+            _activeBattleSource?.TrySetResult(true);
         }
         
         private void HandleLose()
@@ -157,7 +158,7 @@ namespace ShabuStudio.Gameplay
             Time.timeScale = 1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
             
-            SceneManager.LoadScene("Scene_Lose");
+            _activeBattleSource?.TrySetResult(false);
         }
 
         public void StartActionSequence()
@@ -176,18 +177,6 @@ namespace ShabuStudio.Gameplay
             enemyUnit.UpdateUI();
             actionBar.UpdateUI();
         }
-    }
-
-    public enum BattleState
-    {
-        Initialize, //First Time Scene load setup
-        Start, //Setup object, Reduce cooldown, Apply any start turn effect
-        DrawPhase,
-        ActionSetupPhase,
-        ActionPhase,
-        EndPhase,
-        Win,
-        Lose
     }
     
 }

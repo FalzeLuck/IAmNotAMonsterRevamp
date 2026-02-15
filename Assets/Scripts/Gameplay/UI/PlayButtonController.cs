@@ -1,4 +1,5 @@
 using System;
+using Roguelite;
 using ShabuStudio.Gameplay;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -42,6 +43,13 @@ public class PlayButtonController : MonoBehaviour , IPointerEnterHandler, IPoint
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        BattleStateManager.Instance.StartActionSequence();
+        if (BattleStateManager.Instance != null)
+        {
+            BattleStateManager.Instance.StartActionSequence();
+        }
+        if (RogueliteBattleStateManager.Instance != null)
+        {
+            RogueliteBattleStateManager.Instance.StartActionSequence();
+        }
     }
 }

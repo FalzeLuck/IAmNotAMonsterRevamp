@@ -1,5 +1,6 @@
 using System;
 using DG.Tweening;
+using Roguelite;
 using ShabuStudio.Data;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -76,7 +77,7 @@ namespace ShabuStudio.Gameplay
                 cardDisplay.UpdateCardOrder(999 + defaultCardOrder);
                 transform.DOScale(_hoverLocalScale, _transitionSpeed).SetEase(Ease.OutBack);
 
-                if (BattleStateManager.Instance.playerUnit.currentCost - cardData.cardCost >= 0)
+                if (BattleStateManager.Instance?.playerUnit.currentCost - cardData.cardCost >= 0 || RogueliteBattleStateManager.Instance?.playerUnit.currentCost - cardData.cardCost >= 0)
                 {
                     cardHighlight.color = canSelectColor;
                 }
@@ -120,7 +121,12 @@ namespace ShabuStudio.Gameplay
             if (!isInteractable) return;
             
             //Get player Reference
-            CombatEntity playerUnit = BattleStateManager.Instance.playerUnit;
+            CombatEntity playerUnit = BattleStateManager.Instance?.playerUnit;
+
+            if (playerUnit == null)
+            {
+                playerUnit = RogueliteBattleStateManager.Instance.playerUnit;
+            }
             
             if (!_isLocked)
             {

@@ -210,7 +210,7 @@ namespace ShabuStudio.Gameplay
             OnStatusChanged?.Invoke(buff);
         }
 
-        void Die()
+        protected virtual void Die()
         {
             isDead = true;
         }

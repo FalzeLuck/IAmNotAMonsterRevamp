@@ -14,7 +14,6 @@ namespace ShabuStudio.Gameplay
         public int fixedCost = 3;
         [Header("Enemy Hand")]
         public List<CardData> hand;
-        public int handSize = 5;
 
 
         protected override void Start()
@@ -30,12 +29,18 @@ namespace ShabuStudio.Gameplay
             DrawCardToMax();
             await InsertCardToActionBar(actionBar);
         }
+        
+        public async UniTask StartActionSetup(RogueliteActionBar actionBar)
+        {
+            DrawCardToMax();
+            await InsertCardToActionBar(actionBar);
+        }
 
         void DrawCardToMax()
         {
-            if(hand.Count >= handSize) return;
+            if(hand.Count >= Stats.MaxHandSize) return;
             
-            while (hand.Count < handSize)
+            while (hand.Count < Stats.MaxHandSize)
             {
                 DrawCard();
             }
@@ -81,6 +86,31 @@ namespace ShabuStudio.Gameplay
             }
 
             await UniTask.NextFrame();
+        }
+        
+        async UniTask InsertCardToActionBar(RogueliteActionBar actionBar)
+        {
+            while (hand.Count > 0)
+            {
+                int index = Random.Range(0, hand.Count);
+                CardData card = hand[index];
+                int speed = card.cardSpeed;
+
+                if (!actionBar.InsertCard(card, speed, this, out _))
+                {
+                    return;
+                }
+
+                hand.RemoveAt(index);
+            }
+
+            await UniTask.NextFrame();
+        }
+
+        protected override void Die()
+        {
+            base.Die();
+            Destroy(gameObject);
         }
     }
 }

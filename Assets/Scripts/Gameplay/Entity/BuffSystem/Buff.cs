@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Roguelite;
 using ShabuStudio.Gameplay.DoTSystem;
 using UnityEngine;
 using UnityEngine.UI;
@@ -165,6 +166,10 @@ namespace ShabuStudio.Gameplay
             else if (condition.target == CardCondition.ConditionTarget.Target && buffTarget is PlayerCombatEntity)
             {
                 conditionCheckTarget = BattleStateManager.Instance.enemyUnit;
+                if (conditionCheckTarget == null)
+                {
+                    conditionCheckTarget = RogueliteBattleStateManager.Instance.enemyUnit;
+                }
             }
             else if (condition.target == CardCondition.ConditionTarget.Self && buffTarget is EnemyCombatEntity)
             {
@@ -173,6 +178,10 @@ namespace ShabuStudio.Gameplay
             else if (condition.target == CardCondition.ConditionTarget.Target && buffTarget is EnemyCombatEntity)
             {
                 conditionCheckTarget = BattleStateManager.Instance.playerUnit;
+                if (conditionCheckTarget == null)
+                {
+                    conditionCheckTarget = RogueliteBattleStateManager.Instance.playerUnit;
+                }
             }
 
             if (conditionCheckTarget != null)

@@ -6,27 +6,9 @@ using UnityEngine;
 
 namespace ShabuStudio.Gameplay
 {
-    public class SetupManager : MonoBehaviour
+    public class RogueliteSetupManager : MonoBehaviour
     {
         public Transform enemySpawnPoint;
-
-        public async UniTask StartSetup(StageData stageData)
-        {
-            GameObject enemyObject = Instantiate(stageData.enemyPrefab, enemySpawnPoint,false);
-            EnemyCombatEntity enemyData = enemyObject.GetComponent<EnemyCombatEntity>();
-            if (enemyData == null)
-            {
-                enemyData = enemyObject.GetComponentInChildren<EnemyCombatEntity>();
-            }
-            BattleStateManager.Instance.enemyUnit = enemyData;
-
-            
-            GameObject objectToSpawn = GameManager.Instance.currentChapterData?.chapterBg3DObject;
-            if (objectToSpawn != null)
-                Instantiate(objectToSpawn, Vector3.zero, Quaternion.identity);
-            
-            await UniTask.NextFrame();
-        }
         
         public async UniTask StartSetup(RogueliteStageData stageData)
         {
@@ -36,7 +18,7 @@ namespace ShabuStudio.Gameplay
             {
                 enemyData = enemyObject.GetComponentInChildren<EnemyCombatEntity>();
             }
-            BattleStateManager.Instance.enemyUnit = enemyData;
+            RogueliteBattleStateManager.Instance.enemyUnit = enemyData;
 
             
             GameObject objectToSpawn = stageData?.chapterBg3DObject;
