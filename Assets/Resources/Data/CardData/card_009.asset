@@ -61,11 +61,11 @@ MonoBehaviour:
         buffName: Decrease Speed
         buffDescription: 
         buffIcon: {fileID: 0}
-        buffValue: -5
+        buffValue: -2
         buffTurnsToEnd: 0
         target: 1
         buffType: 0
-        vfxPrefab: {fileID: 1907840061664400773, guid: 84c604aa226b7f44d969895b9fc51261, type: 3}
+        vfxPrefab: {fileID: 6791587590779341261, guid: 9e49f8e92aeb5c741bbdaf28c7868c6c, type: 3}
     - rid: 5898636456408908135
       type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:

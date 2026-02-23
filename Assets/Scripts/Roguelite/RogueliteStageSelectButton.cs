@@ -22,19 +22,19 @@ namespace Roguelite
         private void LoadData()
         {
             _stageDatas = new List<RogueliteStageData>(Resources.LoadAll<RogueliteStageData>("Data/Roguelite/SetupData"));
-            _tempBuffDatas = new List<RogueliteRuntimeSelectData>(Resources.LoadAll<RogueliteRuntimeSelectData>("Data/Roguelite/TempBuffData"));
         }
 
-        public async UniTask Setup()
+        public async UniTask Setup(RogueliteRuntimeBuffSet buffSet)
         {
             if (_stageDatas == null || _stageDatas.Count == 0)
             {
                 LoadData(); 
             }
             
+            
             _nextStageData = new NextStageData(
                 _stageDatas[Random.Range(0, _stageDatas.Count)],
-                _tempBuffDatas[Random.Range(0, _tempBuffDatas.Count)]
+                buffSet.tempBuffDatas[Random.Range(0, buffSet.tempBuffDatas.Count)]
             );
         }
 

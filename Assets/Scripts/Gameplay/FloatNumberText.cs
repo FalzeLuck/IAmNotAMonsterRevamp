@@ -36,7 +36,7 @@ namespace ShabuStudio.Gameplay
             Vector3 targetPos = transform.position + new Vector3(xOffset, floatDistance, 0);
 
             // Create the DoTween Sequence
-            Sequence sequence = DOTween.Sequence();
+            Sequence sequence = DOTween.Sequence().SetUpdate(true);
 
             // Makes it pop out
             sequence.Append(transform.DOPunchScale(punchScale, 0.3f));

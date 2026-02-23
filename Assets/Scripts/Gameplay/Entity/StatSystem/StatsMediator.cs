@@ -54,9 +54,9 @@ namespace ShabuStudio.Gameplay
     public class Query
     {
         public readonly StatsType StatsType;
-        public int Value;
+        public float Value;
         
-        public Query(StatsType statsType, int value)
+        public Query(StatsType statsType, float value)
         {
             StatsType = statsType;
             Value = value;

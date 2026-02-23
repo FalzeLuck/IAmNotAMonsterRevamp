@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: Player Base Stats
   m_EditorClassIdentifier: 
   maxHealth: 100
-  maxCost: 6
+  maxHandSize: 5
+  additionalDamage: 0
+  additionalTakenDamage: 0
+  damageMultiplier: 1

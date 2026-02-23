@@ -123,7 +123,7 @@ namespace ShabuStudio.Gameplay
 
         public int CalculateDamageDealt(int rawDamage)
         {
-            return rawDamage + Stats.AdditionalDamage;
+            return (int)((rawDamage + Stats.AdditionalDamage) * Stats.DamageMultiplier);
         }
 
         public int CalculateDamageTaken(int dealtDamage)

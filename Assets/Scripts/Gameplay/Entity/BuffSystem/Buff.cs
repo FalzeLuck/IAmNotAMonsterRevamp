@@ -109,10 +109,15 @@ namespace ShabuStudio.Gameplay
     {
         public override async UniTask ApplyBuff(CombatEntity buffTarget,CancellationToken token)
         {
-            if(buffValue < 0) return;
             await base.ApplyBuff(buffTarget, token);
-            
-            buffTarget.Heal(buffValue);
+            if (buffValue >= 0)
+            {
+                buffTarget.Heal(buffValue);
+            }
+            else
+            {
+                buffTarget.TakeDamage(Math.Abs(buffValue));
+            }
         }
     }
 
@@ -165,7 +170,7 @@ namespace ShabuStudio.Gameplay
             }
             else if (condition.target == CardCondition.ConditionTarget.Target && buffTarget is PlayerCombatEntity)
             {
-                conditionCheckTarget = BattleStateManager.Instance.enemyUnit;
+                conditionCheckTarget = BattleStateManager.Instance?.enemyUnit;
                 if (conditionCheckTarget == null)
                 {
                     conditionCheckTarget = RogueliteBattleStateManager.Instance.enemyUnit;
@@ -177,7 +182,7 @@ namespace ShabuStudio.Gameplay
             }
             else if (condition.target == CardCondition.ConditionTarget.Target && buffTarget is EnemyCombatEntity)
             {
-                conditionCheckTarget = BattleStateManager.Instance.playerUnit;
+                conditionCheckTarget = BattleStateManager.Instance?.playerUnit;
                 if (conditionCheckTarget == null)
                 {
                     conditionCheckTarget = RogueliteBattleStateManager.Instance.playerUnit;

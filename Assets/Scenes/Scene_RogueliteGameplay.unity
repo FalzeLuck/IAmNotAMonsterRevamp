@@ -2665,7 +2665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1239867244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4799,12 +4799,10 @@ MonoBehaviour:
   - deckName: TestingDeck
     deckID: deck_003
     allCards:
-    - {fileID: 11400000, guid: ea838e9508e7fd14c837b83a094daaa5, type: 2}
-    - {fileID: 11400000, guid: 04d260263b3163d46adfe50c629b6f84, type: 2}
-    - {fileID: 11400000, guid: b77377cc82e409949a8f8022ca65d4ed, type: 2}
+    - {fileID: 11400000, guid: ae08d7d288b4b0a47ac2f2d5681ff02f, type: 2}
     availableCards: []
     droppedCards: []
-  currentDeckIndex: 0
+  currentDeckIndex: 2
 --- !u!4 &1431697610
 Transform:
   m_ObjectHideFlags: 0
@@ -5659,6 +5657,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9506dc9b2718490c82d99eeb6eff89a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Roguelite.Manager.RogueliteSelectManager
+  buffSet1: {fileID: 11400000, guid: e119c4e5cd2e29d4da76894e532e3b9d, type: 2}
+  buffSet2: {fileID: 11400000, guid: e119c4e5cd2e29d4da76894e532e3b9d, type: 2}
+  buffSet3: {fileID: 11400000, guid: e119c4e5cd2e29d4da76894e532e3b9d, type: 2}
+  buffSet4: {fileID: 11400000, guid: e119c4e5cd2e29d4da76894e532e3b9d, type: 2}
+  buffSet5: {fileID: 11400000, guid: e119c4e5cd2e29d4da76894e532e3b9d, type: 2}
   stageButtons:
   - {fileID: 1205372240}
   selectPanel: {fileID: 1239867243}

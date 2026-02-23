@@ -10,7 +10,7 @@ namespace ShabuStudio.Gameplay
     {
         [Header("UI")] public Sprite enemyIcon;
         [Header("Enemy References")]
-        public Animator animator;
+        public List<Animator> animators;
         public int fixedCost = 3;
         [Header("Enemy Hand")]
         public List<CardData> hand;
@@ -65,7 +65,10 @@ namespace ShabuStudio.Gameplay
 
         public void PlayTrigger(string trigger)
         {
-            animator.SetTrigger(trigger);
+            foreach (var animator in animators)
+            {
+                animator.SetTrigger(trigger);
+            }
         }
 
 

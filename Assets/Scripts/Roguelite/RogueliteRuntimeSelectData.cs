@@ -19,6 +19,7 @@ namespace Roguelite
                     runState.currentPlayerEntity.Heal(amount);
                     break;
                 case RogueliteStatsType.MaxHandCard: runState.currentPlayerEntity.Stats.MaxHandSize += amount; break;
+                case RogueliteStatsType.AddingDamage: runState.currentPlayerEntity.Stats.AdditionalDamage += amount; break;
                 default:break;
             }
             
@@ -28,6 +29,7 @@ namespace Roguelite
     public enum RogueliteStatsType
     {
         MaxHealth,
-        MaxHandCard
+        MaxHandCard,
+        AddingDamage
     }
 }

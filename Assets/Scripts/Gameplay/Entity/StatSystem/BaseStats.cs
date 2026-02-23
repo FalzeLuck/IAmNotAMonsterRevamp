@@ -9,5 +9,6 @@ namespace ShabuStudio.Gameplay
         public int maxHandSize;
         public int additionalDamage;
         public int additionalTakenDamage;
+        public float damageMultiplier;
     }
 }

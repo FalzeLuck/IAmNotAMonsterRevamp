@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using Random = UnityEngine.Random;
 
 namespace ShabuStudio.Gameplay
 {
@@ -67,6 +70,17 @@ namespace ShabuStudio.Gameplay
                     ProcessOnHitDamage();
                 }
             }
+
+            if (notification is FloatSignalEmitter floatSignal)
+            {
+                if (floatSignal.asset.name == "Signal_OnHit")
+                {
+                    float receivedValue = floatSignal.floatValue;
+                    
+                    ProcessOnHitDamage();
+                    TriggerHitStop(receivedValue).Forget();
+                }
+            }
             
         }
 
@@ -98,6 +112,15 @@ namespace ShabuStudio.Gameplay
             
             SpawnText(damagePos.position,damageInfo.damageAmount,damageColor,false, "-");
             
+        }
+
+        public async UniTaskVoid TriggerHitStop(float duration)
+        {
+            Time.timeScale = 0;
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(duration),ignoreTimeScale:true);
+            
+            Time.timeScale = 1;
         }
 
         

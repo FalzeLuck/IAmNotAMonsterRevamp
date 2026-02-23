@@ -7,7 +7,8 @@ namespace ShabuStudio.Gameplay
         MaxHealth,
         MaxHandSize,
         AdditionalDamage,
-        AdditionalTakenDamage
+        AdditionalTakenDamage,
+        DamageMultiplier
     }
     
     public class Stats
@@ -16,7 +17,7 @@ namespace ShabuStudio.Gameplay
         readonly BaseStats baseStats;
         
         // This dictionary stores the "Current Base" values for this specific run.
-        private Dictionary<StatsType, int> runtimeBaseValues = new Dictionary<StatsType, int>();
+        private Dictionary<StatsType, float> runtimeBaseValuesFloat = new Dictionary<StatsType, float>();
 
         public StatsMediator Mediator => statsMediator;
         
@@ -26,10 +27,11 @@ namespace ShabuStudio.Gameplay
             this.baseStats = baseStats;
 
             // COPY values from ScriptableObject to Local Dictionary on initialization
-            runtimeBaseValues[StatsType.MaxHealth] = baseStats.maxHealth;
-            runtimeBaseValues[StatsType.MaxHandSize] = baseStats.maxHandSize;
-            runtimeBaseValues[StatsType.AdditionalDamage] = baseStats.additionalDamage;
-            runtimeBaseValues[StatsType.AdditionalTakenDamage] = baseStats.additionalTakenDamage;
+            runtimeBaseValuesFloat[StatsType.MaxHealth] = baseStats.maxHealth;
+            runtimeBaseValuesFloat[StatsType.MaxHandSize] = baseStats.maxHandSize;
+            runtimeBaseValuesFloat[StatsType.AdditionalDamage] = baseStats.additionalDamage;
+            runtimeBaseValuesFloat[StatsType.AdditionalTakenDamage] = baseStats.additionalTakenDamage;
+            runtimeBaseValuesFloat[StatsType.DamageMultiplier] = baseStats.damageMultiplier;
         }
 
         // --- PROPERTIES ---
@@ -57,13 +59,31 @@ namespace ShabuStudio.Gameplay
             get => GetStat(StatsType.AdditionalTakenDamage);
             set => SetBaseStat(StatsType.AdditionalTakenDamage, value);
         }
+
+        public float DamageMultiplier
+        {
+            get => GetStatFloat(StatsType.DamageMultiplier);
+            set => SetBaseStat(StatsType.DamageMultiplier, value);
+        }
         
         // --- HELPER METHODS ---
 
         private int GetStat(StatsType type)
         {
             // 1. Get the local runtime base value (e.g., 100 + 10 upgrade = 110)
-            int baseValue = runtimeBaseValues[type];
+            float baseValue = runtimeBaseValuesFloat[type];
+
+            // 2. Apply temporary modifiers via Mediator (e.g., "Weak" debuff reduces damage)
+            var q = new Query(type, baseValue);
+            statsMediator.PerformQuery(this, q);
+            
+            return (int)q.Value;
+        }
+        
+        private float GetStatFloat(StatsType type)
+        {
+            // 1. Get the local runtime base value (e.g., 100 + 10 upgrade = 110)
+            float baseValue = runtimeBaseValuesFloat[type];
 
             // 2. Apply temporary modifiers via Mediator (e.g., "Weak" debuff reduces damage)
             var q = new Query(type, baseValue);
@@ -72,17 +92,17 @@ namespace ShabuStudio.Gameplay
             return q.Value;
         }
 
-        private void SetBaseStat(StatsType type, int newValue)
+        private void SetBaseStat(StatsType type, float newValue)
         {
             // This only modifies the dictionary in memory. 
             // The ScriptableObject file remains untouched.
-            if (runtimeBaseValues.ContainsKey(type))
+            if (runtimeBaseValuesFloat.ContainsKey(type))
             {
-                runtimeBaseValues[type] = newValue;
+                runtimeBaseValuesFloat[type] = newValue;
             }
             else
             {
-                runtimeBaseValues.Add(type, newValue);
+                runtimeBaseValuesFloat.Add(type, newValue);
             }
         }
     }

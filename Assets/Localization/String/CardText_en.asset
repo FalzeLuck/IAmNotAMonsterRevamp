@@ -85,7 +85,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5898636456408908140
   - m_Id: 9802805477031936
-    m_Localized: High Speed Damage
+    m_Localized: Air Slash
     m_Metadata:
       m_Items: []
   - m_Id: 9802809054773248
@@ -101,11 +101,11 @@ MonoBehaviour:
       m_Items:
       - rid: 5898636456408908140
   - m_Id: 9802860476940288
-    m_Localized: Increase speed
+    m_Localized: Feather Wind
     m_Metadata:
       m_Items: []
   - m_Id: 12930435264987136
-    m_Localized: Decrease speed
+    m_Localized: Shadow Feather
     m_Metadata:
       m_Items: []
   - m_Id: 12930479217098752
@@ -115,7 +115,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5898636456408908140
   - m_Id: 13348457477750784
-    m_Localized: Fire vortex
+    m_Localized: Inferno Strike
     m_Metadata:
       m_Items: []
   - m_Id: 13348655511814144
@@ -126,7 +126,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5898636456408908140
   - m_Id: 13348677523521536
-    m_Localized: Flame weapon
+    m_Localized: Blazing Focus
     m_Metadata:
       m_Items: []
   - m_Id: 13348703406571520
@@ -137,7 +137,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5898636456408908140
   - m_Id: 13348719613362176
-    m_Localized: Ignite
+    m_Localized: Burning
     m_Metadata:
       m_Items: []
   - m_Id: 13348739708272640

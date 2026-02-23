@@ -5,9 +5,9 @@ namespace ShabuStudio.Gameplay
     public class BasicStatModifier : StatsModifier
     {
         public readonly StatsType type;
-        readonly Func<int, int> operation;
+        readonly Func<float, float> operation;
 
-        public BasicStatModifier(StatsType type, int countdownTurn, Func<int, int> operation) : base(countdownTurn)
+        public BasicStatModifier(StatsType type, int countdownTurn, Func<float, float> operation) : base(countdownTurn)
         {
             this.type = type;
             this.operation = operation;

@@ -65,7 +65,7 @@ MonoBehaviour:
         buffTurnsToEnd: 0
         target: 0
         buffType: 0
-        vfxPrefab: {fileID: 0}
+        vfxPrefab: {fileID: 6791587590779341261, guid: 94a66cbfcc4868a4ca4f9f20406db629, type: 3}
         buffsToApplyOnConditionMet:
           list:
           - rid: 1705690100566065239
