@@ -17,8 +17,8 @@ MonoBehaviour:
   buffsToApply:
     list:
     - rid: 1705690100566065237
-  cardImage: {fileID: 0}
-  cardIcon: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: 21783528157e6534aa9c211907ca7c07, type: 3}
+  cardIcon: {fileID: 21300000, guid: 63d369f0bd0891a4a8aa5edbb7966532, type: 3}
   cardFloatIcon: {fileID: 0}
   cardFloatIconPosition: {x: 0, y: 0}
   cardName:
@@ -65,7 +65,7 @@ MonoBehaviour:
         buffTurnsToEnd: 2
         target: 1
         buffType: 0
-        vfxPrefab: {fileID: 0}
+        vfxPrefab: {fileID: 6791587590779341261, guid: b94a9a31f709b404597d5e25658f5404, type: 3}
         dotColor: {r: 1, g: 0.5203068, b: 0, a: 1}
         dotType: 0
     - rid: 1705690100566065243

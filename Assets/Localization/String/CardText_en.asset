@@ -147,6 +147,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908140
+  - m_Id: 32143937292648448
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Deal {card.damage} Damage'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 32143827896811520
+    m_Localized: Basic Attack
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -167,3 +177,4 @@ MonoBehaviour:
         - id: 13348655511814144
         - id: 13348703406571520
         - id: 13348739708272640
+        - id: 32143937292648448

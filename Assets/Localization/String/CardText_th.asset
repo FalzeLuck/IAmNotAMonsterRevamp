@@ -127,7 +127,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5898636456408908141
   - m_Id: 13348457477750784
-    m_Localized: "\u0E40\u0E1E\u0E25\u0E34\u0E07\u0E19\u0E23\u0E01"
+    m_Localized: "\u0E40\u0E1E\u0E25\u0E34\u0E07\u0E1C\u0E25\u0E32\u0E0D"
     m_Metadata:
       m_Items: []
   - m_Id: 13348655511814144
@@ -166,6 +166,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908141
+  - m_Id: 32143827896811520
+    m_Localized: "\u0E42\u0E08\u0E21\u0E15\u0E35\u0E1B\u0E01\u0E15\u0E34"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32143937292648448
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E17\u0E33\u0E14\u0E32\u0E40\u0E21\u0E08 {card.damage} \u0E2B\u0E19\u0E48\u0E27\u0E22"
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
   references:
     version: 2
     RefIds:
@@ -186,3 +196,4 @@ MonoBehaviour:
         - id: 13348655511814144
         - id: 13348703406571520
         - id: 13348739708272640
+        - id: 32143937292648448

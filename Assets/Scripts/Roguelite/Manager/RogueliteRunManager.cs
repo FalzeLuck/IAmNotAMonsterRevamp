@@ -31,12 +31,13 @@ namespace Roguelite
                 
                 var battleFinishSource = new UniTaskCompletionSource<bool>();
                 
-                RogueliteBattleStateManager.Instance.StartInitialize(selection.stageSetupData,battleFinishSource).Forget();
+                RogueliteBattleStateManager.Instance.StartInitialize(abyssFloor,selection.stageSetupData,battleFinishSource).Forget();
                 
                 bool isWin = await battleFinishSource.Task;
                 
                 if(isWin)
                 {
+                    Destroy(RogueliteBattleStateManager.Instance.enemyUnit.gameObject);
                     abyssFloor++;
                 }
                 else

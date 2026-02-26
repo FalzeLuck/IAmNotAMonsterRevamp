@@ -15,6 +15,16 @@ MonoBehaviour:
   m_TableCollectionName: CardText
   m_TableCollectionNameGuidString: f38864a57a88e8142993c2fac4e7fcb8
   m_Entries:
+  - m_Id: 32143937292648448
+    m_Key: 'card.000.desc
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32143827896811520
+    m_Key: card.000.name
+    m_Metadata:
+      m_Items: []
   - m_Id: 392033386496
     m_Key: card.001.desc
     m_Metadata:
@@ -31,84 +41,84 @@ MonoBehaviour:
     m_Key: card.002.name
     m_Metadata:
       m_Items: []
-  - m_Id: 1474355586580480
-    m_Key: card.003.name
-    m_Metadata:
-      m_Items: []
   - m_Id: 1474376264499200
     m_Key: card.003.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 5704039362904064
-    m_Key: card.004.name
+  - m_Id: 1474355586580480
+    m_Key: card.003.name
     m_Metadata:
       m_Items: []
   - m_Id: 5704090210451456
     m_Key: card.004.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 5706423145250816
-    m_Key: card.005.name
+  - m_Id: 5704039362904064
+    m_Key: card.004.name
     m_Metadata:
       m_Items: []
   - m_Id: 5706425766690816
     m_Key: card.005.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 5706937043959808
-    m_Key: card.006.name
+  - m_Id: 5706423145250816
+    m_Key: card.005.name
     m_Metadata:
       m_Items: []
   - m_Id: 5706987237195776
     m_Key: card.006.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 9802805477031936
-    m_Key: card.007.name
+  - m_Id: 5706937043959808
+    m_Key: card.006.name
     m_Metadata:
       m_Items: []
   - m_Id: 9802809054773248
     m_Key: card.007.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 9802860476940288
-    m_Key: card.008.name
+  - m_Id: 9802805477031936
+    m_Key: card.007.name
     m_Metadata:
       m_Items: []
   - m_Id: 9802897915297792
     m_Key: card.008.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 12930435264987136
-    m_Key: card.009.name
+  - m_Id: 9802860476940288
+    m_Key: card.008.name
     m_Metadata:
       m_Items: []
   - m_Id: 12930479217098752
     m_Key: card.009.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 13348457477750784
-    m_Key: card.010.name
+  - m_Id: 12930435264987136
+    m_Key: card.009.name
     m_Metadata:
       m_Items: []
   - m_Id: 13348655511814144
     m_Key: card.010.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 13348677523521536
-    m_Key: card.011.name
+  - m_Id: 13348457477750784
+    m_Key: card.010.name
     m_Metadata:
       m_Items: []
   - m_Id: 13348703406571520
     m_Key: card.011.desc
     m_Metadata:
       m_Items: []
-  - m_Id: 13348719613362176
-    m_Key: card.012.name
+  - m_Id: 13348677523521536
+    m_Key: card.011.name
     m_Metadata:
       m_Items: []
   - m_Id: 13348739708272640
     m_Key: card.012.desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13348719613362176
+    m_Key: card.012.name
     m_Metadata:
       m_Items: []
   m_Metadata:

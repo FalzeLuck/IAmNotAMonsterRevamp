@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 namespace Roguelite
@@ -8,6 +9,10 @@ namespace Roguelite
     public class RogueliteSelectManager : MonoBehaviour
     {
         public static RogueliteSelectManager Instance;
+        
+        
+        public TextMeshProUGUI stageText;
+        [Header("Buff Sets")]
         
         public RogueliteRuntimeBuffSet buffSet1;
         public RogueliteRuntimeBuffSet buffSet2;
@@ -46,13 +51,26 @@ namespace Roguelite
             
             //Setup all Button
             List<UniTask> tasks = new List<UniTask>();
-            foreach (var button in stageButtons)
+            if (stageIndex % 10 != 0)
             {
-                UniTask task = button.Setup(setHolder);
-                tasks.Add(task);
+                foreach (var button in stageButtons)
+                {
+                    UniTask task = button.Setup(setHolder);
+                    tasks.Add(task);
+                }
             }
-            
+            else
+            {
+                foreach (var button in stageButtons)
+                {
+                    UniTask task = button.Setup(setHolder,isBoss:true);
+                    tasks.Add(task);
+                }
+            }
+
             await UniTask.WhenAll(tasks);
+            //Setup Text
+            stageText.text = $"Stage {stageIndex}";
             
             selectPanel.SetActive(true);
             

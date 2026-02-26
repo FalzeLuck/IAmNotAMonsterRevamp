@@ -113,7 +113,6 @@ namespace ShabuStudio.Gameplay
         protected override void Die()
         {
             base.Die();
-            Destroy(gameObject);
         }
     }
 }

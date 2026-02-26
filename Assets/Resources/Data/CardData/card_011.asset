@@ -17,8 +17,8 @@ MonoBehaviour:
   buffsToApply:
     list:
     - rid: 1705690100566065238
-  cardImage: {fileID: 0}
-  cardIcon: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: ced0811d4c0770b4284f418252c02ddc, type: 3}
+  cardIcon: {fileID: 21300000, guid: 5508c9b3f85d29242b65dc82fb0d3767, type: 3}
   cardFloatIcon: {fileID: 0}
   cardFloatIconPosition: {x: 0, y: 0}
   cardName:
@@ -84,7 +84,7 @@ MonoBehaviour:
         target: 0
         buffType: 0
         vfxPrefab: {fileID: 0}
-        type: 1
+        type: 2
         operatorType: 0
     - rid: 1705690100566065240
       type: {class: StatsModifierBuff, ns: ShabuStudio.Gameplay, asm: Assembly-CSharp}
@@ -97,7 +97,7 @@ MonoBehaviour:
         target: 0
         buffType: 0
         vfxPrefab: {fileID: 0}
-        type: 1
+        type: 2
         operatorType: 0
     - rid: 1705690100566065242
       type: {class: ObjectVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}

@@ -37,10 +37,10 @@ namespace Roguelite
             RogueliteRunManager.Instance.StartRogueliteRun().Forget();
         }
 
-        public async UniTaskVoid StartInitialize(RogueliteStageData stageData,UniTaskCompletionSource<bool> source)
+        public async UniTaskVoid StartInitialize(int stageIndex,RogueliteStageData stageData,UniTaskCompletionSource<bool> source)
         {
             _activeBattleSource = source;
-            await setupManager.StartSetup(stageData);
+            await setupManager.StartSetup(stageData,stageIndex);
             ChangeState(BattleState.Initialize).Forget();
         }
 

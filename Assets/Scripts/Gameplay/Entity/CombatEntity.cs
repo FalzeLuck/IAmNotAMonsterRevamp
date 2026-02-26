@@ -35,18 +35,28 @@ namespace ShabuStudio.Gameplay
         public DeckDataHolder deckDataHolder;
         public List<CardData> availableCards = new List<CardData>();
         public List<CardData> droppedCards = new List<CardData>();
+        
+        private bool isInitialized = false;
 
         void Awake()
         {
             Stats = new Stats(new StatsMediator(), baseStats);
             doTsHolder = new DoTsHolder(this);
         }
+
+        public void Initialize(int startingHealth)
+        {
+            OnStartTurnBuffs = new List<Buff>();
+            SetHealth(startingHealth);
+            isInitialized = true;
+        }
         
         protected virtual void Start()
         {
-            OnStartTurnBuffs = new List<Buff>();
-            currentHealth = baseStats.maxHealth;
-            UpdateUI();
+            if (!isInitialized)
+            {
+                Initialize(baseStats.maxHealth);
+            }
         }
         
         // ----------------------------------------------
@@ -213,6 +223,17 @@ namespace ShabuStudio.Gameplay
         protected virtual void Die()
         {
             isDead = true;
+        }
+        
+        //-------
+        // Change Stats to fixed number
+        //-------
+
+        public void SetHealth(int health)
+        {
+            currentHealth = health;
+            Stats.MaxHealth = health;
+            UpdateUI();
         }
     }
 }

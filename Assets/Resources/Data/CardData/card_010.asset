@@ -16,8 +16,8 @@ MonoBehaviour:
   cardType: 0
   buffsToApply:
     list: []
-  cardImage: {fileID: 0}
-  cardIcon: {fileID: 0}
+  cardImage: {fileID: 21300000, guid: f5e158c2e63a65b42937ee98e0c0e163, type: 3}
+  cardIcon: {fileID: 21300000, guid: 48dd7cd727d74ad4fb5915072ee4a40a, type: 3}
   cardFloatIcon: {fileID: 0}
   cardFloatIconPosition: {x: 0, y: 0}
   cardName:
@@ -51,7 +51,7 @@ MonoBehaviour:
     bonusDamageAmount: 20
     condition: {fileID: 11400000, guid: cb7bf8f59a2712b43a12d8608eae26dd, type: 2}
   canInflictBuff: 0
-  vfxPrefab: {fileID: 0}
+  vfxPrefab: {fileID: 6791587590779341261, guid: 86328156c4488e64db403348d375e5e7, type: 3}
   hitRatio:
   - 1
   references:

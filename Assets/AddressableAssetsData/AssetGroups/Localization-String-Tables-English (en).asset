@@ -27,6 +27,7 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d445116068c2bcd4083e988dff35625a
     m_Address: IntroStringTable_en
