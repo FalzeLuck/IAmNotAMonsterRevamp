@@ -101,6 +101,17 @@ namespace Roguelite
             handManager.HideHand(false); //Hide hand after 1 second (1 second = 1 frame)
             
             UpdateAllUI();
+            if (enemyUnit.isDead)
+            {
+                ChangeState(BattleState.Win).Forget();
+                return;
+            }
+
+            if (playerUnit.isDead)
+            {
+                ChangeState(BattleState.Lose).Forget();
+                return;
+            }
             await UniTask.NextFrame();
             ChangeState(BattleState.DrawPhase).Forget();
         }

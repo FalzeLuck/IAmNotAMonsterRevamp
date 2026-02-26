@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7019980755855396184
+--- !u!114 &-5318102355722571700
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -23,7 +23,7 @@ MonoBehaviour:
   m_Clips: []
   m_Markers:
     m_Objects: []
---- !u!114 &-4826772818642515788
+--- !u!114 &-600903282112453079
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -36,35 +36,11 @@ MonoBehaviour:
   m_Name: ControlPlayableAsset
   m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.ControlPlayableAsset
   sourceGameObject:
-    exposedName: c821a468f671d5a4799dda161c6babf0
+    exposedName: c58b843e7248a9e42adffcf7a657a1aa
     defaultValue: {fileID: 0}
   prefabGameObject: {fileID: 0}
   updateParticle: 1
-  particleRandomSeed: 5348
-  updateDirector: 1
-  updateITimeControl: 1
-  searchHierarchy: 0
-  active: 1
-  postPlayback: 2
-  directorOnClipEnd: 0
---- !u!114 &-4660084567267800341
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
-  m_Name: ControlPlayableAsset
-  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.ControlPlayableAsset
-  sourceGameObject:
-    exposedName: 20bb74aecbc07a649893607229a0bf5c
-    defaultValue: {fileID: 0}
-  prefabGameObject: {fileID: 0}
-  updateParticle: 1
-  particleRandomSeed: 2210
+  particleRandomSeed: 4682
   updateDirector: 1
   updateITimeControl: 1
   searchHierarchy: 0
@@ -81,20 +57,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
-  m_Name: VFXPrefab_Card013Timeline
+  m_Name: VFXPrefab_Card015Timeline
   m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.TimelineAsset
   m_Version: 0
   m_Tracks:
-  - {fileID: -7019980755855396184}
-  - {fileID: 7581255349417620613}
-  - {fileID: 9012042427450728004}
+  - {fileID: -5318102355722571700}
+  - {fileID: 2088754833997699662}
+  - {fileID: 8129265837498180476}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
---- !u!114 &7581255349417620613
+--- !u!114 &2088754833997699662
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,10 +94,10 @@ MonoBehaviour:
   - m_Version: 1
     m_Start: 0.016666666666666666
     m_ClipIn: 0
-    m_Asset: {fileID: -4660084567267800341}
+    m_Asset: {fileID: -600903282112453079}
     m_Duration: 2
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 7581255349417620613}
+    m_ParentTrack: {fileID: 2088754833997699662}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -183,10 +159,34 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: BloodFloor
+    m_DisplayName: VFXGraph_BloodFloor
   m_Markers:
     m_Objects: []
---- !u!114 &9012042427450728004
+--- !u!114 &4948542060740784920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48853ae485fa386428341ac1ea122570, type: 3}
+  m_Name: ControlPlayableAsset
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.ControlPlayableAsset
+  sourceGameObject:
+    exposedName: 6133f9c3d07267243807ea0f3a567dfc
+    defaultValue: {fileID: 0}
+  prefabGameObject: {fileID: 0}
+  updateParticle: 1
+  particleRandomSeed: 5217
+  updateDirector: 1
+  updateITimeControl: 1
+  searchHierarchy: 0
+  active: 1
+  postPlayback: 2
+  directorOnClipEnd: 0
+--- !u!114 &8129265837498180476
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -208,12 +208,12 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.016666666666666607
+    m_Start: 0.01666666666666672
     m_ClipIn: 0
-    m_Asset: {fileID: -4826772818642515788}
-    m_Duration: 1.9999999999999998
+    m_Asset: {fileID: 4948542060740784920}
+    m_Duration: 2
     m_TimeScale: 1
-    m_ParentTrack: {fileID: 9012042427450728004}
+    m_ParentTrack: {fileID: 8129265837498180476}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: 0
@@ -275,6 +275,6 @@ MonoBehaviour:
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
-    m_DisplayName: VFXGraph_Card013
+    m_DisplayName: VFXGraph_Card015
   m_Markers:
     m_Objects: []

@@ -69,4 +69,4 @@ MonoBehaviour:
         buffTurnsToEnd: 0
         target: 0
         buffType: 0
-        vfxPrefab: {fileID: 0}
+        vfxPrefab: {fileID: 6791587590779341261, guid: 678769fbd8dc8e14f87cc4d702733b95, type: 3}
