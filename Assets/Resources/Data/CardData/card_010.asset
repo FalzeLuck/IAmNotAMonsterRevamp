@@ -41,8 +41,8 @@ MonoBehaviour:
     - name: card
       variable:
         rid: 1705690100566065241
-  cardCost: 0
-  cardSpeed: 0
+  cardCost: 3
+  cardSpeed: 6
   canDealDamage: 1
   damage: 30
   haveConditionalDamageBonus: 1
@@ -53,6 +53,10 @@ MonoBehaviour:
   canInflictBuff: 0
   vfxPrefab: {fileID: 6791587590779341261, guid: 86328156c4488e64db403348d375e5e7, type: 3}
   hitRatio:
+  - 1
+  - 1
+  - 1
+  - 1
   - 1
   references:
     version: 2

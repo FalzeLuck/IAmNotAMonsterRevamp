@@ -15,7 +15,8 @@ namespace Roguelite
         public enum StageType
         {
             Normal,
-            Boss
+            Boss,
+            Elite
         }
     }
 }

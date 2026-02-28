@@ -20,8 +20,13 @@ namespace ShabuStudio.Audio
         
         private void Awake()
         {
-            if (Instance != null && Instance != this) Destroy(gameObject);
-            else Instance = this;
+            if (Instance != null && Instance != this) {
+                Destroy(gameObject);
+            }
+            else {
+                Instance = this;
+                DontDestroyOnLoad(this);
+            }
             
             masterBus = RuntimeManager.GetBus("bus:/");
             sfxBus = RuntimeManager.GetBus("bus:/SFX");

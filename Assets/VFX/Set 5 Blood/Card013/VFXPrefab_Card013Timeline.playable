@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8389401189119735641
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef6c7eb87470146a7bfa0d84ebaa44, type: 3}
+  m_Name: Float Signal Emitter
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSignalEmitter
+  m_Time: 1.0487048943837483
+  floatValue: 0
+  m_Asset: {fileID: 11400000, guid: 4899fca4f0125ca429e223523de2ee4a, type: 2}
 --- !u!114 &-7019980755855396184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -22,7 +37,60 @@ MonoBehaviour:
   m_Children: []
   m_Clips: []
   m_Markers:
-    m_Objects: []
+    m_Objects:
+    - {fileID: -5243350982206487398}
+    - {fileID: 3381309610782418918}
+    - {fileID: 483315672288919924}
+    - {fileID: -3271458796237667847}
+    - {fileID: -4980344674171557393}
+    - {fileID: -8389401189119735641}
+    - {fileID: -6422911901418508007}
+    - {fileID: -2917066573078854447}
+--- !u!114 &-6422911901418508007
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef6c7eb87470146a7bfa0d84ebaa44, type: 3}
+  m_Name: Float Signal Emitter
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSignalEmitter
+  m_Time: 1.1517792065938313
+  floatValue: 0
+  m_Asset: {fileID: 11400000, guid: 4899fca4f0125ca429e223523de2ee4a, type: 2}
+--- !u!114 &-5243350982206487398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef6c7eb87470146a7bfa0d84ebaa44, type: 3}
+  m_Name: Float Signal Emitter
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSignalEmitter
+  m_Time: 0.5333333333333333
+  floatValue: 0
+  m_Asset: {fileID: 11400000, guid: 4899fca4f0125ca429e223523de2ee4a, type: 2}
+--- !u!114 &-4980344674171557393
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef6c7eb87470146a7bfa0d84ebaa44, type: 3}
+  m_Name: Float Signal Emitter
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSignalEmitter
+  m_Time: 0.9456305821736654
+  floatValue: 0
+  m_Asset: {fileID: 11400000, guid: 4899fca4f0125ca429e223523de2ee4a, type: 2}
 --- !u!114 &-4826772818642515788
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,6 +139,36 @@ MonoBehaviour:
   active: 1
   postPlayback: 2
   directorOnClipEnd: 0
+--- !u!114 &-3271458796237667847
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef6c7eb87470146a7bfa0d84ebaa44, type: 3}
+  m_Name: Float Signal Emitter
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSignalEmitter
+  m_Time: 0.8425562699635823
+  floatValue: 0
+  m_Asset: {fileID: 11400000, guid: 4899fca4f0125ca429e223523de2ee4a, type: 2}
+--- !u!114 &-2917066573078854447
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef6c7eb87470146a7bfa0d84ebaa44, type: 3}
+  m_Name: Float Signal Emitter
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSignalEmitter
+  m_Time: 1.2548535188039143
+  floatValue: 0
+  m_Asset: {fileID: 11400000, guid: 4899fca4f0125ca429e223523de2ee4a, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +192,36 @@ MonoBehaviour:
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
+--- !u!114 &483315672288919924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef6c7eb87470146a7bfa0d84ebaa44, type: 3}
+  m_Name: Float Signal Emitter
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSignalEmitter
+  m_Time: 0.7394819577534993
+  floatValue: 0
+  m_Asset: {fileID: 11400000, guid: 4899fca4f0125ca429e223523de2ee4a, type: 2}
+--- !u!114 &3381309610782418918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ef6c7eb87470146a7bfa0d84ebaa44, type: 3}
+  m_Name: Float Signal Emitter
+  m_EditorClassIdentifier: Assembly-CSharp::FloatSignalEmitter
+  m_Time: 0.6364076455434163
+  floatValue: 0
+  m_Asset: {fileID: 11400000, guid: 4899fca4f0125ca429e223523de2ee4a, type: 2}
 --- !u!114 &7581255349417620613
 MonoBehaviour:
   m_ObjectHideFlags: 1

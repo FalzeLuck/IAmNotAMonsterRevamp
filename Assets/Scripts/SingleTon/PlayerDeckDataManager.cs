@@ -23,6 +23,8 @@ namespace ShabuStudio.Data
     
         public List<DeckDataHolder> savedDecks = new List<DeckDataHolder>(); // < DeckData>
         public int currentDeckIndex = 0;
+        
+        public DeckDataHolder resetDeck;
 
         public System.Action OnDeckLoad;
 
@@ -31,6 +33,16 @@ namespace ShabuStudio.Data
         {
             await LoadAllDecks();
             OnDeckLoad?.Invoke();
+        }
+
+        public static void TempResetDeck()
+        {
+            PlayerDeckDataManager.Instance.savedDecks.Clear();
+            PlayerDeckDataManager.Instance.currentDeckIndex = 0;
+            PlayerDeckDataManager.Instance.savedDecks.Add(PlayerDeckDataManager.Instance.resetDeck);
+            
+            PlayerDeckDataManager.Instance.SaveAllDecks().Forget();
+            Debug.Log("Reset Deck");
         }
 
         

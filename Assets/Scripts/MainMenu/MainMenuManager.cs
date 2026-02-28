@@ -51,7 +51,7 @@ namespace ShabuStudio.MainMenu
 
         void OnMapButtonClicked()
         {
-            SceneLoader.LoadScene(3);
+            SceneLoader.LoadScene("Scene_ChapterSelect");
         }
         
         void OnSettingButtonClicked()

@@ -42,7 +42,8 @@ namespace Roguelite
                 }
                 else
                 {
-                    
+                    SceneLoader.LoadSceneWithTransitionCanvas("Scene_MainMenu",
+                        SceneLoader.Instance.defaultTransitionCanvas);
                 }
             }
         }

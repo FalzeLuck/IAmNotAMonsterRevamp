@@ -157,6 +157,37 @@ MonoBehaviour:
     m_Localized: Basic Attack
     m_Metadata:
       m_Items: []
+  - m_Id: 32851756019007488
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      If player HP is less than 25%, add 30 damage to this attack.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 32851771869282304
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Add overall damage 10 point to player this turn. If player HP is less than
+      50%, Add 20 point instead.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 32851792668835840
+    m_Localized: '{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      Decrease player health 20 point. You can die from this card.'
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908140
+  - m_Id: 32851670039969792
+    m_Localized: Last Blood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32851685114298368
+    m_Localized: Bleeding Will
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32851701295923200
+    m_Localized: Life for Power
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -178,3 +209,6 @@ MonoBehaviour:
         - id: 13348703406571520
         - id: 13348739708272640
         - id: 32143937292648448
+        - id: 32851756019007488
+        - id: 32851771869282304
+        - id: 32851792668835840

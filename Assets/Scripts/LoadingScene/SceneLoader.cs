@@ -15,7 +15,7 @@ public class SceneLoader : MonoBehaviour
 
     [Header("Settings")]
     public float minLoadTime = 1.0f;            // Minimum wait time
-    public float introDuration = 1.0f;          // Time to wait before loading (Intro Animation length)
+    public Canvas defaultTransitionCanvas;
 
     private void Awake()
     {
@@ -59,7 +59,7 @@ public class SceneLoader : MonoBehaviour
         }
 
         // Wait for the Intro animation to finish covering the screen
-        await UniTask.Delay(TimeSpan.FromSeconds(introDuration));
+        await UniTask.Delay(TimeSpan.FromSeconds(transitionTimeline.duration));
 
         // 2. Pause Timeline (Hold the black screen)
         if (transitionTimeline != null)

@@ -42,8 +42,8 @@ MonoBehaviour:
     - name: card
       variable:
         rid: 1705690100566065243
-  cardCost: 0
-  cardSpeed: 10
+  cardCost: 2
+  cardSpeed: 9
   canDealDamage: 0
   damage: 0
   haveConditionalDamageBonus: 0

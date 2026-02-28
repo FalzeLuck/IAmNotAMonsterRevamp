@@ -176,6 +176,41 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5898636456408908141
+  - m_Id: 32851756019007488
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E2B\u0E32\u0E01\u0E40\u0E25\u0E37\u0E2D\u0E14\u0E15\u0E48\u0E33\u0E01\u0E27\u0E48\u0E32
+      25 % \u0E40\u0E1E\u0E34\u0E48\u0E21\u0E14\u0E32\u0E40\u0E21\u0E08 30 \u0E2B\u0E19\u0E48\u0E27\u0E22"
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
+  - m_Id: 32851771869282304
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E40\u0E1E\u0E34\u0E48\u0E21\u0E14\u0E32\u0E40\u0E21\u0E08\u0E01\u0E32\u0E23\u0E42\u0E08\u0E21\u0E15\u0E35\u0E43\u0E19\u0E40\u0E17\u0E34\u0E23\u0E4C\u0E19\u0E19\u0E35\u0E49\u0E02\u0E2D\u0E07\u0E1C\u0E39\u0E49\u0E40\u0E25\u0E48\u0E19
+      10 \u0E2B\u0E19\u0E48\u0E27\u0E22 \u0E2B\u0E32\u0E01\u0E1C\u0E39\u0E49\u0E40\u0E25\u0E48\u0E19\u0E21\u0E35\u0E40\u0E25\u0E37\u0E2D\u0E14\u0E19\u0E49\u0E2D\u0E22\u0E01\u0E27\u0E48\u0E32
+      50% \u0E40\u0E1E\u0E34\u0E48\u0E21\u0E14\u0E32\u0E40\u0E21\u0E08\u0E40\u0E1B\u0E47\u0E19
+      20 \u0E2B\u0E19\u0E48\u0E27\u0E22\u0E41\u0E17\u0E19"
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
+  - m_Id: 32851792668835840
+    m_Localized: "{card.buffsToApply.list.Count:choose(0):|({card.buffsToApply.list.0.buffType})}
+      \u0E25\u0E14\u0E40\u0E25\u0E37\u0E2D\u0E14\u0E1C\u0E39\u0E49\u0E40\u0E25\u0E48\u0E19
+      20 \u0E2B\u0E19\u0E48\u0E27\u0E22 \u0E2A\u0E32\u0E21\u0E32\u0E23\u0E16\u0E15\u0E32\u0E22\u0E08\u0E32\u0E01\u0E01\u0E32\u0E23\u0E4C\u0E14\u0E43\u0E1A\u0E19\u0E35\u0E49\u0E44\u0E14\u0E49"
+    m_Metadata:
+      m_Items:
+      - rid: 5898636456408908141
+  - m_Id: 32851670039969792
+    m_Localized: "\u0E40\u0E25\u0E37\u0E2D\u0E14\u0E2B\u0E22\u0E14\u0E2A\u0E38\u0E14\u0E17\u0E49\u0E32\u0E22"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32851685114298368
+    m_Localized: "\u0E2D\u0E32\u0E1A\u0E42\u0E25\u0E2B\u0E34\u0E15"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32851701295923200
+    m_Localized: "\u0E1E\u0E25\u0E31\u0E07\u0E08\u0E32\u0E01\u0E42\u0E25\u0E2B\u0E34\u0E15"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
@@ -197,3 +232,6 @@ MonoBehaviour:
         - id: 13348703406571520
         - id: 13348739708272640
         - id: 32143937292648448
+        - id: 32851756019007488
+        - id: 32851771869282304
+        - id: 32851792668835840
