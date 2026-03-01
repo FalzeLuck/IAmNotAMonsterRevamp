@@ -51,7 +51,7 @@ namespace Roguelite
 
             switch (newState)
             {
-                case  BattleState.Initialize:
+                case BattleState.Initialize:
                     HandleInitialize();
                     break;
                 case BattleState.Start:
@@ -71,6 +71,9 @@ namespace Roguelite
                     break;
                 case BattleState.Win:
                     HandleWin();
+                    break;
+                case BattleState.Lose:
+                    HandleLose();
                     break;
             }
         }
@@ -160,6 +163,8 @@ namespace Roguelite
         {
             Time.timeScale = 1f;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            
+            playerUnit.OnTurnEnd();
             
             _activeBattleSource?.TrySetResult(true);
         }

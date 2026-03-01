@@ -49,7 +49,7 @@ MonoBehaviour:
   conditionalDamageBonus:
   - editorDescription: Add Damage if self cost = 0
     bonusDamageAmount: 20
-    condition: {fileID: 11400000, guid: 4ba229c94eb146f4c9765b70ce825248, type: 2}
+    condition: {fileID: 11400000, guid: d07530b8ad7192f4db498f7f7ccb0bf5, type: 2}
   canInflictBuff: 0
   vfxPrefab: {fileID: 1345078675182571299, guid: 704ba4fe68c03a445afdf59b20697aaa, type: 3}
   hitRatio:

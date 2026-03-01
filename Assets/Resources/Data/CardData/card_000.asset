@@ -48,7 +48,7 @@ MonoBehaviour:
   haveConditionalDamageBonus: 0
   conditionalDamageBonus: []
   canInflictBuff: 0
-  vfxPrefab: {fileID: 0}
+  vfxPrefab: {fileID: 1345078675182571299, guid: bac7878054fbfcb43aefac9a36dc2a38, type: 3}
   hitRatio:
   - 1
   references:

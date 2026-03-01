@@ -282,9 +282,7 @@ MonoBehaviour:
     deckName: Enemy Deck
     deckID: enemy_deck_001
     allCards:
-    - {fileID: 11400000, guid: fa52a0d5faf12914e8e1d3e92e96cc13, type: 2}
-    - {fileID: 11400000, guid: 3a382626e3cd89743b7e803d1faac28a, type: 2}
-    - {fileID: 11400000, guid: ea838e9508e7fd14c837b83a094daaa5, type: 2}
+    - {fileID: 11400000, guid: 719e7d8268228ac4ca0ac6baff26433f, type: 2}
     availableCards: []
     droppedCards: []
   availableCards: []
@@ -292,7 +290,7 @@ MonoBehaviour:
   enemyIcon: {fileID: 21300000, guid: 9830c898ca818b749b6d46fd896437fe, type: 3}
   animators:
   - {fileID: 2435034669566574799}
-  fixedCost: 3
+  fixedCost: 5
   hand: []
 --- !u!1 &3472465019883811104
 GameObject:

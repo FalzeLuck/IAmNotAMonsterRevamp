@@ -59,7 +59,7 @@ public class SceneLoader : MonoBehaviour
         }
 
         // Wait for the Intro animation to finish covering the screen
-        await UniTask.Delay(TimeSpan.FromSeconds(transitionTimeline.duration));
+        await UniTask.Delay(TimeSpan.FromSeconds(transitionTimeline.duration/2));
 
         // 2. Pause Timeline (Hold the black screen)
         if (transitionTimeline != null)

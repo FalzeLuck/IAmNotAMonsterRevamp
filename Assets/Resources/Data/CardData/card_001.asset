@@ -42,10 +42,10 @@ MonoBehaviour:
     - name: card
       variable:
         rid: 5898636456408908135
-  cardCost: 1
+  cardCost: 2
   cardSpeed: 5
   canDealDamage: 1
-  damage: 10
+  damage: 20
   haveConditionalDamageBonus: 0
   conditionalDamageBonus: []
   canInflictBuff: 1

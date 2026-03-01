@@ -1,0 +1,521 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!200 &20000000
+ShaderVariantCollection:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Preload
+  m_Shaders:
+  - first: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: UNITY_UI_ALPHACLIP
+        passType: 0
+  - first: {fileID: 66, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9000, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9001, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9002, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9003, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9004, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9007, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 9100, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: _UIE_FORCE_GAMMA
+        passType: 0
+  - first: {fileID: 9101, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 19011, guid: 0000000000000000f000000000000000, type: 0}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+      - keywords: 
+        passType: 13
+      - keywords: DECALS_4RT PROBE_VOLUMES_L1 RENDERING_LAYERS _MASKMAP _NORMALMAP
+          _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: DECALS_4RT PROBE_VOLUMES_L1 RENDERING_LAYERS _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
+        passType: 13
+      - keywords: _NORMALMAP_TANGENT_SPACE
+        passType: 13
+  - first: {fileID: 4800000, guid: 035941b63024d1943af48811c1db20d9, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 02ae56f4306413c4a96dcf005cde1971, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 8ea49ef16606acd489439e676ab84040, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 42dfcc8fe803ece4096c58630689982f, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: e22fc1942c664490980b8793dd4a163d, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: DISABLE_TEXTURE2D_X_ARRAY
+        passType: 0
+  - first: {fileID: 4800000, guid: 67d6171b0acc6554aad48c845ec7e67f, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 2ad7ce40f0dbaf64dadef1f58d8524d3, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: NEAREST_DEPTH
+        passType: 0
+  - first: {fileID: 4800000, guid: 2e37131331fbdca449b1a2bc47a639ca, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 32f724728cf19904291226f239ec16f0, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+      - keywords: NO_WATER
+        passType: 0
+  - first: {fileID: 4800000, guid: 9bd32a6ece529fd4f9408b8d7e00c10d, type: 3}
+    second:
+      variants:
+      - keywords: AREA_SHADOW_MEDIUM DIRECTIONAL_SHADOW_HIGH DISTORTION_PROCEDURAL
+          PUNCTUAL_SHADOW_HIGH USE_FPTL_LIGHTLIST
+        passType: 0
+      - keywords: AREA_SHADOW_MEDIUM DIRECTIONAL_SHADOW_HIGH PUNCTUAL_SHADOW_HIGH
+          USE_FPTL_LIGHTLIST
+        passType: 0
+  - first: {fileID: 4800000, guid: a06934a4863e778498be65d8f865b7a4, type: 3}
+    second:
+      variants:
+      - keywords: LOCAL_SKY
+        passType: 0
+  - first: {fileID: 4800000, guid: 123f13d52852ef547b2962de4bd9eaad, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 3b3bf235775cf8b4baae7f3306787ab0, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: d279c46a545b0af4f9f0c4fa82cd489e, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: a6402c19b020b4a4fb7073aaa2e26aba, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 123ed592ad5c2494b8aed301fd609e7b, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: e3cab24f27741f44d8af1e94d006267c, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: fd532bf1795188c4daaa66ea798b8b0a, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 5ac9ef0c50282754b93c7692488e7ee7, type: 3}
+    second:
+      variants:
+      - keywords: APPLY_AFTER_POST
+        passType: 0
+      - keywords: APPLY_AFTER_POST DITHER
+        passType: 0
+  - first: {fileID: 4800000, guid: 3dd9fd928fdb83743b1f27d15df22179, type: 3}
+    second:
+      variants:
+      - keywords: MEDIUM_QUALITY
+        passType: 0
+  - first: {fileID: 4800000, guid: eb607f5e8fc16e140b732f33d26c8c31, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 13
+  - first: {fileID: 4800000, guid: 1d64af84bdc970c4fae0c1e06dd95b73, type: 3}
+    second:
+      variants:
+      - keywords: DECALS_4RT INSTANCING_ON _MATERIAL_AFFECTS_ALBEDO
+        passType: 13
+  - first: {fileID: -6465566751694194690, guid: ab372ae61c105ab48af91f7da6f9de44, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: fd95e970d4ca792439bbdf1fbd4ac6e6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 9a172bef81cc617449f2aaed95c23a6e, type: 3}
+    second:
+      variants:
+      - keywords: _ALPHATEST_ON
+        passType: 8
+      - keywords: _ALPHATEST_ON _DOUBLESIDED_ON
+        passType: 8
+      - keywords: DECALS_4RT PROBE_VOLUMES_L1 RENDERING_LAYERS _ALPHATEST_ON
+        passType: 13
+      - keywords: DECALS_4RT PROBE_VOLUMES_L1 RENDERING_LAYERS _ALPHATEST_ON _DOUBLESIDED_ON
+        passType: 13
+      - keywords: _ALPHATEST_ON
+        passType: 13
+      - keywords: _ALPHATEST_ON _DOUBLESIDED_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: bf95e4690ea6f3949a516643ebb49e43, type: 3}
+    second:
+      variants:
+      - keywords: _DOUBLESIDED_ON
+        passType: 8
+      - keywords: DECALS_4RT PROBE_VOLUMES_L1 RENDERING_LAYERS _DOUBLESIDED_ON
+        passType: 13
+      - keywords: _DOUBLESIDED_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 5df6daab6a21e1b4a8730bacdb8bdeec, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: -6465566751694194690, guid: 416fcea77ebb93842bff58065702fb79, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 8
+  - first: {fileID: 4800000, guid: 38f62d38eebe79c418d9572823b61386, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800002, guid: 5938c8eca78333e4c81ecff44ed53c34, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800004, guid: 5938c8eca78333e4c81ecff44ed53c34, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 5938c8eca78333e4c81ecff44ed53c34, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800006, guid: 5938c8eca78333e4c81ecff44ed53c34, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800000, guid: a4dabca3cdd9d194cbb34853edd380b8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: a4dabca3cdd9d194cbb34853edd380b8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800004, guid: a4dabca3cdd9d194cbb34853edd380b8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800006, guid: a4dabca3cdd9d194cbb34853edd380b8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: 4e0d9cc36fe4cac42ad1517df9093f74, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800004, guid: 4e0d9cc36fe4cac42ad1517df9093f74, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 4e0d9cc36fe4cac42ad1517df9093f74, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: fd6811e3af78f6f43ad89687f2ae971c, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800004, guid: fd6811e3af78f6f43ad89687f2ae971c, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: fd6811e3af78f6f43ad89687f2ae971c, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: 56e4789488a6b8f48a1f5123efa3bbdc, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800004, guid: 56e4789488a6b8f48a1f5123efa3bbdc, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 56e4789488a6b8f48a1f5123efa3bbdc, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: 63601a3e4eac93049b00954661de1580, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800004, guid: 63601a3e4eac93049b00954661de1580, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 63601a3e4eac93049b00954661de1580, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800006, guid: 63601a3e4eac93049b00954661de1580, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800008, guid: 63601a3e4eac93049b00954661de1580, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 6db995951bbd46249b1c25b108739ab8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: 6db995951bbd46249b1c25b108739ab8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800004, guid: 6db995951bbd46249b1c25b108739ab8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800006, guid: 6db995951bbd46249b1c25b108739ab8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800008, guid: 6db995951bbd46249b1c25b108739ab8, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800006, guid: 56e4789488a6b8f48a1f5123efa3bbdc, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: b006bd90c2327a840b1e0378be9dce14, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: b006bd90c2327a840b1e0378be9dce14, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: d05625d1b0be355479da4c2ba14ddb6b, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: d05625d1b0be355479da4c2ba14ddb6b, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800004, guid: d05625d1b0be355479da4c2ba14ddb6b, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 793ead70336d1214babd87b77d65c989, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 556e89b026082364287a5cbda46d60c9, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 7412f4741b9eaed4480d5ae43bb0e510, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800002, guid: 589e79dd2ad07634ea9dea7f0f25df4c, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800000, guid: 94de335bdcaa9c64faf377a686fb199b, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800000, guid: 18b9ede07b9048049a5d96db246685c2, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: 18b9ede07b9048049a5d96db246685c2, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800004, guid: 18b9ede07b9048049a5d96db246685c2, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800006, guid: 18b9ede07b9048049a5d96db246685c2, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _ALPHATEST_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800008, guid: 18b9ede07b9048049a5d96db246685c2, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _ALPHATEST_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800000, guid: 77648dd91cafc6846bc773d078313117, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: d7a899d98152b4149ba4fa65d568a5f9, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800000, guid: d7727ef997ce47c43a65a78f61d3fb1f, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800000, guid: 589e0834f7c383c498cf43b3650c453f, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+        passType: 13
+  - first: {fileID: 4800000, guid: 55a2e8b48b39cef4cb8dbbce57ae3a41, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13
+  - first: {fileID: 4800002, guid: 55a2e8b48b39cef4cb8dbbce57ae3a41, type: 3}
+    second:
+      variants:
+      - keywords: INSTANCING_ON
+        passType: 13

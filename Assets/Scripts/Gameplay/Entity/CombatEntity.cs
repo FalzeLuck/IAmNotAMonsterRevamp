@@ -113,7 +113,7 @@ namespace ShabuStudio.Gameplay
             
             
             //Future Calculate Damage method HERE...
-            int finalDamage = CalculateDamageTaken(damage);
+            int finalDamage = damage;
             
             currentHealth -= finalDamage;
             if(currentHealth < 0) currentHealth = 0;

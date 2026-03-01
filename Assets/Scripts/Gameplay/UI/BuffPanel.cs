@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ShabuStudio.Gameplay.UI
 {
@@ -18,8 +19,12 @@ namespace ShabuStudio.Gameplay.UI
             {
                 BuffDataForShow showingBuff = new BuffDataForShow(buffForShow.buffName,buffForShow.buffDescription,buffForShow.buffTurnsToEnd,buffForShow.buffIcon);
                 GameObject buffIcon = Instantiate(buffPrefab, transform);
-                
                 ActiveBuff activeBuff = new ActiveBuff(showingBuff,buffIcon);
+                
+                Image buffIconImage = buffIcon.GetComponent<Image>();
+                if(buffIconImage != null)
+                    buffIconImage.sprite = activeBuff.buffData.icon;
+                
                 activeBuffs.Add(activeBuff);
                 
             }

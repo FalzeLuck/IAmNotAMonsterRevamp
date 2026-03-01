@@ -78,7 +78,7 @@ MonoBehaviour:
       data:
         buffName: Add damage 12
         buffDescription: 
-        buffIcon: {fileID: 0}
+        buffIcon: {fileID: 21300000, guid: e4aece658ddbc794caa3487f9145a837, type: 3}
         buffValue: 12
         buffTurnsToEnd: 0
         target: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
       data:
         buffName: Add damage 8
         buffDescription: 
-        buffIcon: {fileID: 0}
+        buffIcon: {fileID: 21300000, guid: e4aece658ddbc794caa3487f9145a837, type: 3}
         buffValue: 8
         buffTurnsToEnd: 0
         target: 0

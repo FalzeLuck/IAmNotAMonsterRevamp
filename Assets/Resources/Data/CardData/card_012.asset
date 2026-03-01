@@ -60,7 +60,7 @@ MonoBehaviour:
       data:
         buffName: Burning
         buffDescription: Just a regular burn
-        buffIcon: {fileID: 0}
+        buffIcon: {fileID: 21300000, guid: 7d3b9810e617a8941ad205e8804a5b88, type: 3}
         buffValue: 10
         buffTurnsToEnd: 2
         target: 1
