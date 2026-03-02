@@ -14,6 +14,7 @@ namespace ShabuStudio.MainMenu
         public Button settingButton;
         public Button shopButton;
         public Button buildButton;
+        public Button exitButton;
         
         
 
@@ -35,6 +36,9 @@ namespace ShabuStudio.MainMenu
             
             buildButton = ui.Q<Button>("BuildButton");
             buildButton.clicked += OnBuildButtonClicked;
+            
+            exitButton = ui.Q<Button>("ExitButton");
+            exitButton.clicked += OnExitButtonClicked;
         }
 
         
@@ -45,13 +49,14 @@ namespace ShabuStudio.MainMenu
             settingButton.clicked -= OnSettingButtonClicked;
             shopButton.clicked -= OnShopButtonClicked;
             buildButton.clicked -= OnBuildButtonClicked;
+            exitButton.clicked -= OnExitButtonClicked;
         }
 
         
 
         void OnMapButtonClicked()
         {
-            SceneLoader.LoadScene("Scene_ChapterSelect");
+            SceneLoader.LoadSceneWithTransitionCanvas("Scene_ChapterSelect",SceneLoader.Instance.defaultTransitionCanvas);
         }
         
         void OnSettingButtonClicked()
@@ -69,7 +74,10 @@ namespace ShabuStudio.MainMenu
         {
             
         }
-        
-        
+
+        void OnExitButtonClicked()
+        {
+            Application.Quit();
+        }
     }
 }

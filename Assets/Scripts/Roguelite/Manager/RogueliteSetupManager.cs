@@ -18,7 +18,16 @@ namespace ShabuStudio.Gameplay
             {
                 enemyData = enemyObject.GetComponentInChildren<EnemyCombatEntity>();
             }
-            enemyData.Initialize(GetNormalEnemyHP(stageIndex));
+
+            if (stageIndex % 10 != 0)
+            {
+                enemyData.Initialize(GetNormalEnemyHP(stageIndex));
+            }
+            else
+            {
+                int baseHP = 150;
+                enemyData.Initialize(baseHP * (stageIndex / 10));
+            }
             RogueliteBattleStateManager.Instance.enemyUnit = enemyData;
 
             
@@ -32,7 +41,7 @@ namespace ShabuStudio.Gameplay
         //Calculate Fixed Enemy HP according to roguelite stage
         int GetNormalEnemyHP(int stageIndex)
         {
-            int baseHP = 80;
+            int baseHP = 40;
             float baseMultiplier = 1.0f;
             float stageMultiplier = 0.05f;
 

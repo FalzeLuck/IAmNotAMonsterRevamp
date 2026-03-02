@@ -74,8 +74,6 @@ namespace ShabuStudio.Gameplay
             {
                 Debug.LogError($"Deck Data of {unitName} is null!");
             }
-            
-            deckDataHolder.ResetAvailableCards();
         }
         
         // -----------------------------------------

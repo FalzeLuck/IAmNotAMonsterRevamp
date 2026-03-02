@@ -16,4 +16,4 @@ MonoBehaviour:
   chapterBgImage: {fileID: 21300000, guid: 7a66fbc96d759ab4e892e97ccafd3f3c, type: 3}
   chapterBg3DObject: {fileID: 8927378990985427437, guid: f5a0ab04a608288418dd1c2a00cc86f9, type: 3}
   enemyPrefab: {fileID: 206198227935772668, guid: e743cba41eedf824fa564f286529ffcd, type: 3}
-  enemySpriteArt: {fileID: -244309299530713035, guid: 972511ab8fbe25c44abd05dc3802cd05, type: 3}
+  enemySpriteArt: {fileID: 6741743963840932067, guid: f9eb452ceca9e1346b35703cc7cd653e, type: 3}

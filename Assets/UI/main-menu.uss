@@ -1,0 +1,8 @@
+.mapButton {
+    transition-duration: 0.2s;
+}
+
+.mapButton:hover {
+    rotate: 8deg;
+    transition-duration: 0.2s;
+}

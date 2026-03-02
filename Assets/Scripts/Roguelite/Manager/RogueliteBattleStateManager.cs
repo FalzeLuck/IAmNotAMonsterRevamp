@@ -96,7 +96,7 @@ namespace Roguelite
 
         async UniTask HandleStart()
         {
-            playerUnit.AddCost(3);
+            playerUnit.AddCost(5);
             enemyUnit.SetCost(enemyUnit.fixedCost);
             
             //OnStartTurnEffect

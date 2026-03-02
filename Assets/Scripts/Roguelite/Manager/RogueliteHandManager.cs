@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Roguelite;
 using ShabuStudio.Data;
 using UnityEngine;
 using UnityEngine.Splines;
+using Random = UnityEngine.Random;
 
 namespace ShabuStudio.Gameplay
 {
@@ -16,19 +18,61 @@ namespace ShabuStudio.Gameplay
         protected override void DrawCard()
         {
             if(handCards.Count >= RogueliteBattleStateManager.Instance.playerUnit.Stats.MaxHandSize) return;
+
+            bool haveAttack = IsHandCardsHaveType(CardType.Attack);
+            bool haveBuff = IsHandCardsHaveType(CardType.Buff);
+            bool haveDebuff = IsHandCardsHaveType(CardType.Debuff);
+
+            CardType fixedType;
+
+            if (!haveAttack)
+            {
+                fixedType = CardType.Attack;
+            }else if (!haveBuff)
+            {
+                fixedType = CardType.Buff;
+            }
+            else if (!haveDebuff)
+            {
+                fixedType = CardType.Debuff;
+            }
+            else
+            {
+                Array values = Enum.GetValues(typeof(CardType));
+                int randomIndex = UnityEngine.Random.Range(0, values.Length);
+                fixedType = (CardType) values.GetValue(randomIndex);
+            }
+            
+            //Prepare card to initialize
             CardDisplay newCard = Instantiate(cardPrefab, cardSpawnPoint.position, cardSpawnPoint.rotation,splineContainer.transform);
             handCards.Add(newCard.gameObject);
             
             //Set Sort Order
             if (lastCardOnTop)
             {
-                newCard.InitializeCard(deckManager.playerDeck.DrawRandomCard(),newCard.transform.GetSiblingIndex());
+                newCard.InitializeCard(deckManager.playerDeck.DrawRandomCardFixedType(fixedType),newCard.transform.GetSiblingIndex());
             }
             else
             {
-                newCard.InitializeCard(deckManager.playerDeck.DrawRandomCard(),-newCard.transform.GetSiblingIndex());
+                newCard.InitializeCard(deckManager.playerDeck.DrawRandomCardFixedType(fixedType),-newCard.transform.GetSiblingIndex());
             }
             UpdateCardPositions();
+        }
+
+        private bool IsHandCardsHaveType(CardType type)
+        {
+            if (handCards.Count <= 0) return false;
+            bool handHaveType = false;
+            foreach (GameObject card in handCards)
+            {
+                CardDisplay cardDisplay = card.GetComponent<CardDisplay>();
+                if (cardDisplay != null)
+                {
+                    if (cardDisplay.cardData.cardType == type) handHaveType = true;
+                }
+            }
+            
+            return handHaveType;
         }
 
         //Draw Card to hand until max hand size reached.
