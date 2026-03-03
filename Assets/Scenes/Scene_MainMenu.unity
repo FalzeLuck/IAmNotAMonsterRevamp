@@ -247,6 +247,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 396d9e893faf11945856744dddcb17ee, type: 2}
     - {fileID: 11400000, guid: 178e06f742445154f8e97be5da36f1f9, type: 2}
     - {fileID: 11400000, guid: 096a08da2248bb642b3a1f461426850b, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
     availableCards: []
     droppedCards: []
   currentDeckIndex: 0
@@ -273,6 +278,11 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 396d9e893faf11945856744dddcb17ee, type: 2}
     - {fileID: 11400000, guid: 178e06f742445154f8e97be5da36f1f9, type: 2}
     - {fileID: 11400000, guid: 096a08da2248bb642b3a1f461426850b, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
+    - {fileID: 11400000, guid: 6634be176098b4a4998ed63e02d9acf5, type: 2}
     availableCards: []
     droppedCards: []
 --- !u!114 &336902929

@@ -1,0 +1,14 @@
+.customSlider {
+    font-size: 100px;
+    -unity-font-definition: url("project://database/Assets/Font/GFSDidot-Regular.ttf?fileID=12800000&guid=636971fb2817c2048b8d3818a4d8167a&type=3#GFSDidot-Regular");
+    color: rgb(231, 202, 121);
+    margin-left: 43px;
+    margin-right: 53px;
+    justify-content: flex-start;
+    align-self: stretch;
+    align-content: flex-start;
+}
+
+.customSlider .unity-base-field__label {
+    min-width: 342px;
+}
