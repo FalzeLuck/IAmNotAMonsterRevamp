@@ -9,6 +9,8 @@ namespace ShabuStudio.Gameplay
 {
     public class RogueliteDeckManager : DeckManager
     {
+        private bool isInitialized;
+        
         public override void Initialize()
         {
             RogueliteBattleStateManager.Instance.playerUnit.InitializeDeck();
@@ -16,6 +18,13 @@ namespace ShabuStudio.Gameplay
             
             RogueliteBattleStateManager.Instance.enemyUnit.InitializeDeck();
             enemyDeck = RogueliteBattleStateManager.Instance.enemyUnit.deckDataHolder;
+
+            if (!isInitialized)
+            {
+                RogueliteBattleStateManager.Instance.playerUnit.deckDataHolder.ResetAvailableCards();
+                RogueliteBattleStateManager.Instance.enemyUnit.deckDataHolder.ResetAvailableCards();
+                isInitialized = true;
+            }
         }
     }
 }

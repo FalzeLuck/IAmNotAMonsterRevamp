@@ -16,7 +16,7 @@ namespace ShabuStudio.Gameplay
         public enum BuffType
         {
             OnAction,
-            OnTurnStart,
+            NextTurn,
         }
         
         public enum BuffTarget

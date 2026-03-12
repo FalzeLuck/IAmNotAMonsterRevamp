@@ -82,7 +82,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6254927896712583229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -168,7 +168,9 @@ PlayableDirector:
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
-  m_SceneBindings: []
+  m_SceneBindings:
+  - key: {fileID: -4518413840316720828, guid: 5d559f5a18c137549b8d9ea116024639, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - d661708149023c042920c294c39ca05e: {fileID: 5240533482793943488, guid: 84c604aa226b7f44d969895b9fc51261, type: 3}

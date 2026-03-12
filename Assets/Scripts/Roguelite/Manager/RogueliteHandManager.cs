@@ -20,28 +20,7 @@ namespace ShabuStudio.Gameplay
             if(handCards.Count >= RogueliteBattleStateManager.Instance.playerUnit.Stats.MaxHandSize) return;
 
             bool haveAttack = IsHandCardsHaveType(CardType.Attack);
-            bool haveBuff = IsHandCardsHaveType(CardType.Buff);
-            bool haveDebuff = IsHandCardsHaveType(CardType.Debuff);
-
-            CardType fixedType;
-
-            if (!haveAttack)
-            {
-                fixedType = CardType.Attack;
-            }else if (!haveBuff)
-            {
-                fixedType = CardType.Buff;
-            }
-            else if (!haveDebuff)
-            {
-                fixedType = CardType.Debuff;
-            }
-            else
-            {
-                Array values = Enum.GetValues(typeof(CardType));
-                int randomIndex = UnityEngine.Random.Range(0, values.Length);
-                fixedType = (CardType) values.GetValue(randomIndex);
-            }
+            Debug.Log(haveAttack);
             
             //Prepare card to initialize
             CardDisplay newCard = Instantiate(cardPrefab, cardSpawnPoint.position, cardSpawnPoint.rotation,splineContainer.transform);
@@ -50,11 +29,29 @@ namespace ShabuStudio.Gameplay
             //Set Sort Order
             if (lastCardOnTop)
             {
-                newCard.InitializeCard(deckManager.playerDeck.DrawRandomCardFixedType(fixedType),newCard.transform.GetSiblingIndex());
+                if(!haveAttack)
+                {
+                    newCard.InitializeCard(deckManager.playerDeck.DrawRandomCardFixedType(CardType.Attack),
+                        newCard.transform.GetSiblingIndex());
+                }
+                else
+                {
+                    newCard.InitializeCard(deckManager.playerDeck.DrawRandomCard(),
+                        newCard.transform.GetSiblingIndex());
+                }
             }
             else
             {
-                newCard.InitializeCard(deckManager.playerDeck.DrawRandomCardFixedType(fixedType),-newCard.transform.GetSiblingIndex());
+                if(!haveAttack)
+                {
+                    newCard.InitializeCard(deckManager.playerDeck.DrawRandomCardFixedType(CardType.Attack),
+                        -newCard.transform.GetSiblingIndex());
+                }
+                else
+                {
+                    newCard.InitializeCard(deckManager.playerDeck.DrawRandomCard(),
+                        -newCard.transform.GetSiblingIndex());
+                }
             }
             UpdateCardPositions();
         }
@@ -83,7 +80,7 @@ namespace ShabuStudio.Gameplay
             while (handCards.Count < RogueliteBattleStateManager.Instance.playerUnit.Stats.MaxHandSize)
             {
                 DrawCard();
-                await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+                await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
             }
             
             await drawCardTween.ToUniTask();

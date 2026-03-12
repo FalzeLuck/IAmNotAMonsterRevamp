@@ -153,7 +153,7 @@ namespace ShabuStudio.Gameplay
                 {
                     await buff.ApplyBuff(this,token);
                 }
-                else if(buff.buffType == Buff.BuffType.OnTurnStart)
+                else if(buff.buffType == Buff.BuffType.NextTurn)
                 {
                     OnStartTurnBuffs.Add(buff);
                 }
